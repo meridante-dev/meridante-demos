@@ -254,6 +254,7 @@ function toggle(id,checked){ if(checked){ if(!me()){alert('Enter your name (top 
   else STATE[id]={sent:false,by:'',date:''}; persist(id); render(); }
 function copy(t,btn){ navigator.clipboard.writeText(t).then(()=>{const o=btn.innerHTML;btn.innerHTML='Copied ✓';btn.style.color='var(--ok)';setTimeout(()=>{btn.innerHTML=o;btn.style.color='';},1100);}); }
 const MAIL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+const DL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 21h14"/></svg>';
 function card(c){ const st=STATE[c.id]||{}; const sent=st.sent;
   const init=esc((c.company.trim()[0]||'M').toUpperCase());
   const hasSite=c.website&&!/^none/i.test(c.website);
@@ -269,7 +270,10 @@ function card(c){ const st=STATE[c.id]||{}; const sent=st.sent;
      <div class=email><span class=v>${esc(c.email)}</span><button class=cp onclick='copy(${JSON.stringify(c.email)},this)'>Copy</button></div>
      <div class=actions>
        <button class="btn primary" onclick="gmail('${c.id}')" title="Creates a Gmail draft (meridante.pt@gmail.com) — email + mockup shown inline and attached, ready to review &amp; send">${MAIL} Open in Gmail</button>
+     </div>
+     <div class=actions>
        <button class=btn onclick='copy(${JSON.stringify(draft)},this)'>Copy draft</button>
+       <a class=btn href="shots/${c.id}.jpg" download="${c.id}-meridante-mockup.jpg" target=_blank rel=noopener title="Open / download the website mockup image">${DL} Save PNG</a>
      </div>
      <details><summary><span class=ar>▸</span> View / edit draft</summary><textarea readonly>${esc(draft)}</textarea></details>
      <div class=foot>

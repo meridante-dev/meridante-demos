@@ -4,7 +4,7 @@ This makes the dashboard's **"Open in Gmail"** button create a real Gmail **draf
 **meridante.pt@gmail.com** with:
 - the approved email text,
 - the website mockup **shown inline** in the body (clearly formatted preview section),
-- the same mockup **attached** as `mockup.png`,
+- the same mockup **attached** as `mockup.jpg`,
 - a line in the body that mentions the attachment.
 
 The team member just opens **Drafts**, reviews, and hits Send.
@@ -42,12 +42,12 @@ function doPost(e) {
     var fr = (p.lang === 'fr');
 
     // fetch the mockup image from the public dashboard and use it inline + attached
-    var blob = UrlFetchApp.fetch(p.image).getBlob().setName('mockup.png');
+    var blob = UrlFetchApp.fetch(p.image).getBlob().setName('mockup.jpg');
 
     var head = fr ? 'Aperçu de votre nouveau site' : 'Pré-visualização do seu novo site';
     var note = fr
-      ? 'La maquette est jointe à cet e-mail (mockup.png) et présentée ci-dessous :'
-      : 'A maqueta está em anexo a este e-mail (mockup.png) e apresentada em baixo:';
+      ? 'La maquette est jointe à cet e-mail (mockup.jpg) et présentée ci-dessous :'
+      : 'A maqueta está em anexo a este e-mail (mockup.jpg) e apresentada em baixo:';
 
     var bodyHtml = (p.body || '')
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -60,12 +60,12 @@ function doPost(e) {
           '<div style="font:600 16px Georgia,serif;color:#0c1322;margin-bottom:4px">' + head + '</div>' +
           '<div style="font-size:13px;color:#666;margin-bottom:14px">' + note + '</div>' +
           '<img src="cid:mockup" style="display:block;width:100%;max-width:600px;border:1px solid #ddd;border-radius:8px"/>' +
-          '<div style="font-size:12px;color:#999;margin-top:7px">📎 mockup.png</div>' +
+          '<div style="font-size:12px;color:#999;margin-top:7px">📎 mockup.jpg</div>' +
         '</div>' +
       '</div>';
 
     // plain-text fallback (clients that don't render HTML) — also mentions the attachment
-    var plain = (p.body || '') + '\n\n— ' + head + ' —\n' + note + '\n[' + (fr ? 'voir la pièce jointe mockup.png' : 'ver o anexo mockup.png') + ']';
+    var plain = (p.body || '') + '\n\n— ' + head + ' —\n' + note + '\n[' + (fr ? 'voir la pièce jointe mockup.jpg' : 'ver o anexo mockup.jpg') + ']';
 
     GmailApp.createDraft(p.to, p.subject, plain, {
       htmlBody: html,
@@ -95,6 +95,6 @@ function doGet() {
 1. Pick your name in the top bar (Sajid / Lucas / João).
 2. On a lead, click **✉ Open in Gmail** → a draft is created in meridante.pt@gmail.com and a Gmail
    **Drafts** tab opens.
-3. The newest draft (top of the list) has the email + the mockup shown inline + `mockup.png` attached.
+3. The newest draft (top of the list) has the email + the mockup shown inline + `mockup.jpg` attached.
    Review and **Send**.
 4. Flip the **Mark as sent** toggle on the card — it stamps your name + date for the team.
