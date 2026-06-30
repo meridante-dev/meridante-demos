@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Villa Sapori — Ristorante &amp; Pizzeria · Luxembourg</title>
+<meta name="description" content="Villa Sapori — ristorante-pizzeria italien au cœur de Luxembourg. Cuisine de saison, pâtes fraîches et pizzas au feu de bois, dans une atmosphère chaleureuse." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant" />
+<meta property="og:title" content="Villa Sapori — Ristorante &amp; Pizzeria · Luxembourg" />
+<meta property="og:description" content="Cuisine italienne de saison, pâtes fraîches et pizzas au feu de bois, au cœur de Luxembourg." />
+<meta property="og:locale" content="fr_LU" />
+<meta property="og:image" content="https://picsum.photos/id/1080/1200/630" />
+<meta name="theme-color" content="#1A120B" />
+
+<!-- Inline SVG favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231A120B'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23C9962F' text-anchor='middle'%3EVS%3C/text%3E%3C/svg%3E" />
+
+<!-- External: Google Fonts only -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,ital,wght@6..96,0,400;6..96,0,500;6..96,0,700;6..96,1,400;6..96,0,900&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --espresso:#1A120B;     /* deep base */
+    --espresso-2:#221710;
+    --terracotta:#B5462E;   /* warm appetizing red, not pure red */
+    --terracotta-2:#C9562F;
+    --gold:#C9962F;         /* antique gold */
+    --gold-soft:#E0BE7C;
+    --cream:#F4EBDD;        /* warm paper */
+    --cream-2:#EADCC6;
+    --ink:#2A1D13;
+    --muted:#9C8C79;
+    --glass:rgba(244,235,221,.06);
+    --maxw:1180px;
+    --r:18px;
+    --shadow:0 22px 60px -24px rgba(0,0,0,.65);
+    --shadow-soft:0 12px 40px -18px rgba(0,0,0,.45);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--espresso);
+    color:var(--cream);
+    font-family:'Hanken Grotesk',system-ui,sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--gold);color:var(--espresso)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
+
+  .display{font-family:'Bodoni Moda',Georgia,serif;line-height:1.04;letter-spacing:-.01em}
+  .eyebrow{
+    font-size:.74rem;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    transition:background .4s ease, box-shadow .4s ease, padding .4s ease, backdrop-filter .4s ease;
+    padding:22px 0;
+  }
+  header.nav.scrolled{
+    background:rgba(26,18,11,.72);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    box-shadow:0 1px 0 rgba(244,235,221,.08), 0 18px 40px -28px rgba(0,0,0,.8);
+    padding:14px 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .mark{
+    width:40px;height:40px;border-radius:11px;flex:0 0 auto;
+    display:grid;place-items:center;
+    background:linear-gradient(150deg,#2c1d12,#160e07);
+    border:1px solid rgba(201,150,47,.4);
+    color:var(--gold);font-family:'Bodoni Moda',serif;font-weight:700;font-size:1.1rem;
+    box-shadow:inset 0 1px 0 rgba(224,190,124,.25);
+  }
+  .brand .word{display:flex;flex-direction:column;line-height:1}
+  .brand .word b{font-family:'Bodoni Moda',serif;font-weight:700;font-size:1.18rem;letter-spacing:.01em}
+  .brand .word span{font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+  nav.links{display:flex;align-items:center;gap:34px}
+  nav.links a.nlink{
+    font-size:.86rem;font-weight:500;letter-spacing:.04em;color:var(--cream);
+    opacity:.82;position:relative;transition:opacity .25s;
+  }
+  nav.links a.nlink::after{
+    content:"";position:absolute;left:0;bottom:-6px;height:1.5px;width:0;
+    background:var(--gold);transition:width .3s ease;
+  }
+  nav.links a.nlink:hover{opacity:1}
+  nav.links a.nlink:hover::after{width:100%}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+    font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:.9rem;letter-spacing:.02em;
+    padding:13px 24px;border-radius:999px;border:0;
+    transition:transform .25s ease, box-shadow .3s ease, background .3s ease;
+  }
+  .btn-gold{
+    background:linear-gradient(135deg,var(--gold),#a9791f);
+    color:#231405;box-shadow:0 14px 30px -12px rgba(201,150,47,.65);
+  }
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 20px 40px -12px rgba(201,150,47,.8)}
+  .btn-ghost{
+    background:var(--glass);color:var(--cream);
+    border:1px solid rgba(244,235,221,.22);backdrop-filter:blur(8px);
+  }
+  .btn-ghost:hover{transform:translateY(-2px);border-color:var(--gold);color:var(--gold-soft)}
+
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{width:24px;height:2px;background:var(--cream);border-radius:2px;transition:.3s}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+  .hero-media{position:absolute;inset:0;z-index:0}
+  .hero-media img{width:100%;height:100%;object-fit:cover;filter:saturate(.85) contrast(1.05) brightness(.62) sepia(.18)}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 78% 18%, rgba(201,150,47,.16), transparent 55%),
+      linear-gradient(180deg, rgba(26,18,11,.55) 0%, rgba(26,18,11,.35) 35%, rgba(26,18,11,.92) 100%),
+      linear-gradient(90deg, rgba(26,18,11,.78) 0%, rgba(26,18,11,.15) 60%);
+  }
+  .hero-inner{position:relative;z-index:2;width:100%;padding:120px 0 70px}
+  .hero-inner .eyebrow{opacity:0}
+  .hero h1{
+    font-size:clamp(3.1rem,8.5vw,7rem);font-weight:700;margin:18px 0 8px;
+    text-shadow:0 4px 30px rgba(0,0,0,.5);
+  }
+  .hero h1 em{font-style:italic;color:var(--gold-soft);font-weight:400}
+  .hero .tagline{
+    font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
+    font-size:clamp(1.25rem,2.6vw,1.85rem);color:var(--cream);opacity:.92;
+    max-width:36ch;margin-bottom:18px;
+  }
+  .hero .support{font-size:1.02rem;color:#d9c9b3;max-width:48ch;margin-bottom:34px;opacity:.9}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-meta{
+    position:absolute;bottom:34px;right:26px;z-index:2;text-align:right;
+    font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);opacity:.85;
+  }
+  .scroll-cue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;color:var(--cream);opacity:.6;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase}
+  .scroll-cue span{display:block;width:1px;height:34px;background:linear-gradient(var(--gold),transparent);margin:8px auto 0}
+
+  .reveal{opacity:0;transform:translateY(28px)}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative}
+  .pad{padding:clamp(80px,11vw,140px) 0}
+  .sec-head{max-width:60ch}
+  .sec-head h2{font-size:clamp(2rem,4.6vw,3.4rem);font-weight:700;margin:14px 0 18px}
+  .sec-head h2 em{font-style:italic;color:var(--gold-soft);font-weight:400}
+  .sec-head p{color:#cbb89f;font-size:1.05rem;max-width:54ch}
+
+  /* ---------- ABOUT / NOTRE MAISON ---------- */
+  .about{background:
+    radial-gradient(80% 60% at 10% 0%, rgba(181,70,46,.10), transparent 60%),
+    var(--espresso-2);
+  }
+  .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,80px);align-items:center;margin-top:50px}
+  .about-copy p.lead{font-family:'Bodoni Moda',serif;font-size:1.4rem;line-height:1.5;color:var(--cream);margin-bottom:20px}
+  .about-copy p{color:#cbb89f;margin-bottom:16px}
+  .about-stats{display:flex;gap:38px;margin-top:30px;flex-wrap:wrap}
+  .about-stats .s b{font-family:'Bodoni Moda',serif;font-size:2.1rem;color:var(--gold);display:block;line-height:1}
+  .about-stats .s span{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .about-media{position:relative}
+  .about-media .frame{
+    border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);
+    border:1px solid rgba(244,235,221,.08);
+  }
+  .about-media .frame img{width:100%;height:520px;object-fit:cover;filter:saturate(.9) contrast(1.04) brightness(.9) sepia(.12)}
+  .about-media .pill{
+    position:absolute;left:-22px;bottom:38px;
+    background:rgba(26,18,11,.82);backdrop-filter:blur(12px);
+    border:1px solid rgba(201,150,47,.35);border-radius:14px;
+    padding:16px 22px;box-shadow:var(--shadow-soft);
+  }
+  .about-media .pill b{font-family:'Bodoni Moda',serif;color:var(--gold-soft);display:block;font-size:1.1rem}
+  .about-media .pill span{font-size:.76rem;color:var(--muted);letter-spacing:.1em}
+
+  /* ---------- MENU HIGHLIGHTS ---------- */
+  .menu{background:var(--espresso)}
+  .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:54px}
+  .dish{
+    position:relative;border-radius:var(--r);overflow:hidden;
+    background:linear-gradient(180deg,var(--espresso-2),#190f08);
+    border:1px solid rgba(244,235,221,.07);
+    box-shadow:var(--shadow-soft);
+    transition:transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s, border-color .4s;
+  }
+  .dish:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:rgba(201,150,47,.45)}
+  .dish .ph{height:230px;overflow:hidden;position:relative}
+  .dish .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(1) contrast(1.05) brightness(.92) sepia(.1);transition:transform .6s ease}
+  .dish:hover .ph img{transform:scale(1.07)}
+  .dish .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(25,15,8,.85))}
+  .dish .body{padding:22px 24px 26px}
+  .dish .body .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .dish .body h3{font-family:'Bodoni Moda',serif;font-size:1.32rem;font-weight:500}
+  .dish .body .price{font-family:'Bodoni Moda',serif;color:var(--gold);font-size:1.1rem;white-space:nowrap}
+  .dish .body p{color:#bfae96;font-size:.92rem;margin-top:8px}
+  .dish .tag{
+    position:absolute;top:16px;left:16px;z-index:2;
+    font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+    background:rgba(181,70,46,.92);color:var(--cream);padding:6px 12px;border-radius:999px;
+    backdrop-filter:blur(4px);
+  }
+  .menu-note{text-align:center;margin-top:46px;color:var(--muted);font-size:.9rem}
+  .menu-note a{color:var(--gold-soft);border-bottom:1px solid rgba(201,150,47,.4)}
+
+  /* ---------- CONTACT / VISITE ---------- */
+  .contact{position:relative;overflow:hidden}
+  .contact-bg{position:absolute;inset:0;z-index:0}
+  .contact-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) saturate(.8) sepia(.2)}
+  .contact-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(26,18,11,.86),rgba(26,18,11,.96))}
+  .contact .wrap{position:relative;z-index:2}
+  .contact-card{
+    margin-top:48px;display:grid;grid-template-columns:1.1fr .9fr;gap:0;
+    border-radius:22px;overflow:hidden;box-shadow:var(--shadow);
+    border:1px solid rgba(244,235,221,.1);
+    background:rgba(34,23,16,.7);backdrop-filter:blur(14px);
+  }
+  .contact-info{padding:clamp(30px,4vw,52px)}
+  .contact-info .line{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid rgba(244,235,221,.09)}
+  .contact-info .line:last-child{border-bottom:0}
+  .contact-info .ic{
+    width:42px;height:42px;flex:0 0 auto;border-radius:11px;display:grid;place-items:center;
+    background:linear-gradient(150deg,#2c1d12,#160e07);border:1px solid rgba(201,150,47,.3);color:var(--gold);
+  }
+  .contact-info .ic svg{width:20px;height:20px}
+  .contact-info h4{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .contact-info p{font-size:1.02rem;color:var(--cream)}
+  .contact-info .ph-flag{color:var(--terracotta-2);font-size:.74rem;font-style:italic;letter-spacing:.02em}
+  .contact-side{
+    padding:clamp(30px,4vw,52px);
+    background:linear-gradient(160deg,rgba(181,70,46,.22),rgba(201,150,47,.10));
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .contact-side .display{font-size:1.9rem;margin-bottom:10px}
+  .contact-side p{color:#e3d3bb;margin-bottom:24px}
+  .hours{font-size:.92rem;color:#cbb89f}
+  .hours div{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed rgba(244,235,221,.12)}
+  .hours div:last-child{border-bottom:0}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#130c06;padding:40px 0;border-top:1px solid rgba(244,235,221,.08)}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .foot-inner .fbrand{font-family:'Bodoni Moda',serif;font-size:1.2rem;color:var(--cream)}
+  .foot-inner .fbrand span{color:var(--gold)}
+  .foot-inner small{color:var(--muted);font-size:.82rem}
+  .social{display:flex;gap:14px}
+  .social a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(244,235,221,.15);color:var(--cream);opacity:.8;transition:.25s}
+  .social a:hover{opacity:1;border-color:var(--gold);color:var(--gold)}
+  .social svg{width:17px;height:17px}
+
+  /* ---------- MOBILE ---------- */
+  #mobnav{
+    position:fixed;inset:0;z-index:99;background:rgba(19,12,6,.97);backdrop-filter:blur(14px);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px;
+    transform:translateY(-100%);transition:transform .45s cubic-bezier(.2,.7,.2,1);
+  }
+  #mobnav.open{transform:translateY(0)}
+  #mobnav a{font-family:'Bodoni Moda',serif;font-size:2rem;color:var(--cream)}
+  #mobnav a:hover{color:var(--gold-soft)}
+
+  @media(max-width:880px){
+    nav.links{display:none}
+    header.nav .btn-gold{display:none}
+    .burger{display:flex}
+    .about-grid{grid-template-columns:1fr}
+    .about-media{order:-1}
+    .about-media .frame img{height:380px}
+    .menu-grid{grid-template-columns:1fr;gap:20px}
+    .contact-card{grid-template-columns:1fr}
+    .about-media .pill{left:14px}
+    .hero-meta{display:none}
+  }
+  @media(max-width:480px){
+    .wrap{padding:0 20px}
+    .hero-cta{width:100%}
+    .hero-cta .btn{flex:1;justify-content:center}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal,.hero-inner .eyebrow{opacity:1!important;transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Villa Sapori, accueil">
+      <span class="mark">VS</span>
+      <span class="word"><b>Villa Sapori</b><span>Ristorante · Pizzeria</span></span>
+    </a>
+    <nav class="links" aria-label="Navigation principale">
+      <a class="nlink" href="#maison">Notre Maison</a>
+      <a class="nlink" href="#carte">La Carte</a>
+      <a class="nlink" href="#visite">Nous Trouver</a>
+    </nav>
+    <a class="btn btn-gold" href="#visite">Réserver une table</a>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav id="mobnav" aria-label="Menu mobile">
+  <a href="#maison">Notre Maison</a>
+  <a href="#carte">La Carte</a>
+  <a href="#visite">Nous Trouver</a>
+  <a href="#visite" style="font-size:1.1rem;color:var(--gold)">Réserver une table</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <!-- PLACEHOLDER: picsum #1080 — warm rustic table/produce mood for an Italian trattoria hero; replace with real Villa Sapori interior/dish -->
+    <img src="https://picsum.photos/id/1080/1920/1280" alt="Ambiance chaleureuse d'un restaurant italien" fetchpriority="high" />
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow" id="he">Trattoria moderne · Luxembourg-Ville</p>
+    <h1 class="display">Villa <em>Sapori</em></h1>
+    <p class="tagline reveal">« La cucina che sa di casa » — la cuisine qui a le goût de chez soi.</p>
+    <p class="support reveal">Pâtes fraîches tirées à la main, pizzas au feu de bois et produits de saison venus d'Italie, servis dans une salle où l'on s'attarde volontiers.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-gold" href="#visite">Réserver une table</a>
+      <a class="btn btn-ghost" href="#carte">Découvrir la carte</a>
+    </div>
+  </div>
+  <div class="hero-meta">Aperto · Mar — Dim<br/>Luxembourg-Ville</div>
+  <div class="scroll-cue" aria-hidden="true">Scorri<span></span></div>
+</section>
+
+<!-- ============ NOTRE MAISON ============ -->
+<section class="about pad" id="maison">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Notre Maison</p>
+      <h2 class="display">Une <em>vraie</em> table italienne, au cœur de la ville.</h2>
+      <p>Villa Sapori n'est pas un décor : c'est une cuisine ouverte, des recettes de famille et une équipe qui croit qu'un bon repas se partage sans se presser.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-copy reveal">
+        <p class="lead">Nous travaillons comme une vraie cucina italiana — peu d'ingrédients, mais les bons, traités avec respect.</p>
+        <p>Notre pâte à pizza repose 48 heures avant de rencontrer le four à bois. Nos pâtes sont façonnées chaque matin. Les huiles d'olive, les fromages et les charcuteries arrivent directement de petits producteurs de la péninsule.</p>
+        <p>Le résultat : une assiette franche, généreuse et sincère — exactement ce que l'on attend d'une maison italienne que l'on a envie de retrouver.</p>
+        <div class="about-stats">
+          <div class="s"><b>48h</b><span>Repos de la pâte</span></div>
+          <div class="s"><b>100%</b><span>Pâtes maison</span></div>
+          <div class="s"><b>Feu de bois</b><span>Four traditionnel</span></div>
+        </div>
+      </div>
+      <div class="about-media reveal">
+        <div class="frame">
+          <!-- PLACEHOLDER: picsum #326 — warm food/kitchen mood; replace with real Villa Sapori chef/plating photo -->
+          <img src="https://picsum.photos/id/326/900/1040" alt="Préparation en cuisine chez Villa Sapori" loading="lazy" />
+        </div>
+        <div class="pill">
+          <b>Cucina aperta</b>
+          <span>Cuisine ouverte sur la salle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA CARTE / MENU HIGHLIGHTS ============ -->
+<section class="menu pad" id="carte">
+  <div class="wrap">
+    <div class="sec-head reveal" style="margin-inline:auto;text-align:center">
+      <p class="eyebrow">La Carte</p>
+      <h2 class="display">Quelques <em>signatures</em> de la maison</h2>
+      <p style="margin-inline:auto">Une sélection qui change au fil des saisons. La carte complète vous attend à table.</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="dish reveal">
+        <div class="ph">
+          <span class="tag">Au feu de bois</span>
+          <!-- PLACEHOLDER: picsum #429 — replace with real pizza Margherita photo -->
+          <img src="https://picsum.photos/id/429/700/560" alt="Pizza Margherita au feu de bois" loading="lazy" />
+        </div>
+        <div class="body">
+          <div class="row"><h3>Margherita D.O.P.</h3><span class="price">14 €</span></div>
+          <p>San Marzano, mozzarella di bufala, basilic frais, filet d'huile d'olive extra vierge.</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="ph">
+          <span class="tag">Fait maison</span>
+          <!-- PLACEHOLDER: picsum #312 — replace with real fresh pasta photo -->
+          <img src="https://picsum.photos/id/312/700/560" alt="Tagliatelles fraîches" loading="lazy" />
+        </div>
+        <div class="body">
+          <div class="row"><h3>Tagliatelle al Ragù</h3><span class="price">18 €</span></div>
+          <p>Pâtes fraîches du jour, ragù bolognese mijoté lentement, parmesan affiné 24 mois.</p>
+        </div>
+      </article>
+
+      <article class="dish reveal">
+        <div class="ph">
+          <span class="tag">Dolce</span>
+          <!-- PLACEHOLDER: picsum #1060 — replace with real tiramisù photo -->
+          <img src="https://picsum.photos/id/1060/700/560" alt="Tiramisù maison" loading="lazy" />
+        </div>
+        <div class="body">
+          <div class="row"><h3>Tiramisù della Casa</h3><span class="price">9 €</span></div>
+          <p>Mascarpone, savoiardi imbibés d'espresso, cacao amer — la recette de la nonna.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="menu-note reveal">Allergènes, plats du jour et menu enfant disponibles en salle. <a href="#visite">Voir les horaires &amp; réserver →</a></p>
+  </div>
+</section>
+
+<!-- ============ VISITE / CONTACT ============ -->
+<section class="contact pad" id="visite">
+  <div class="contact-bg" aria-hidden="true">
+    <!-- PLACEHOLDER: picsum #211 — dim warm dining-room ambience; replace with real Villa Sapori dining room -->
+    <img src="https://picsum.photos/id/211/1600/1000" alt="" loading="lazy" />
+  </div>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">Nous Trouver</p>
+      <h2 class="display">Réservez votre <em>table</em></h2>
+      <p>Au cœur de Luxembourg-Ville. Réservation conseillée le week-end et pour les groupes.</p>
+    </div>
+
+    <div class="contact-card">
+      <div class="contact-info reveal">
+        <div class="line">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-5.7-7-11a7 7 0 1 1 14 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div><h4>Adresse</h4><p>Luxembourg-Ville, Luxembourg<br/><span class="ph-flag">(adresse exacte à confirmer — espace réservé)</span></p></div>
+        </div>
+        <div class="line">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-3 2a13 13 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+          <div><h4>Téléphone</h4><p>+352 00 00 00 00 <span class="ph-flag">(numéro fictif — espace réservé)</span></p></div>
+        </div>
+        <div class="line">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <div><h4>E-mail</h4><p>reservation@villasapori.lu <span class="ph-flag">(adresse fictive — espace réservé)</span></p></div>
+        </div>
+      </div>
+
+      <div class="contact-side reveal">
+        <p class="display">Horaires</p>
+        <p>Service midi &amp; soir. Cuisine au feu de bois jusqu'à la fermeture.</p>
+        <div class="hours">
+          <div><span>Mardi — Jeudi</span><span>12h — 14h · 18h — 22h</span></div>
+          <div><span>Vendredi — Samedi</span><span>12h — 14h · 18h — 23h</span></div>
+          <div><span>Dimanche</span><span>12h — 15h</span></div>
+          <div><span>Lundi</span><span>Fermé · Chiuso</span></div>
+        </div>
+        <a class="btn btn-gold" style="margin-top:26px;align-self:flex-start" href="#visite">Réserver maintenant</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-inner">
+    <div>
+      <div class="fbrand">Villa <span>Sapori</span></div>
+      <small>Ristorante · Pizzeria — Luxembourg-Ville</small>
+    </div>
+    <div class="social" aria-label="Réseaux sociaux">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1z"/></svg></a>
+    </div>
+    <small>© 2026 Villa Sapori · Concept de présentation</small>
+  </div>
+</footer>
+
+<!-- External: GSAP only -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  // Nav scroll state
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>40);
+  onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+
+  // Mobile menu
+  const burger=document.getElementById('burger'), mob=document.getElementById('mobnav');
+  const toggle=open=>{mob.classList.toggle('open',open);burger.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':''};
+  burger.addEventListener('click',()=>toggle(!mob.classList.contains('open')));
+  mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggle(false)));
+
+  // Motion (reduced-motion aware)
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(!reduce && window.gsap){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.set('.reveal',{opacity:0,y:28});
+    // hero in
+    const t=gsap.timeline({delay:.25});
+    t.to('#he',{opacity:1,y:0,duration:.8,ease:'power3.out'},0)
+     .to('.hero .reveal',{opacity:1,y:0,duration:.9,stagger:.13,ease:'power3.out'},.1);
+    // hero parallax
+    gsap.to('.hero-media img',{yPercent:14,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+    // section reveals
+    gsap.utils.toArray('.reveal').forEach(el=>{
+      if(el.closest('.hero'))return;
+      gsap.to(el,{opacity:1,y:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 86%'}});
+    });
+  }else{
+    document.querySelectorAll('.reveal,#he').forEach(el=>{el.style.opacity=1;el.style.transform='none'});
+  }
+</script>
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Villa Sapori",
+  "description":"Ristorante-pizzeria italien au cœur de Luxembourg : pâtes fraîches, pizzas au feu de bois et produits de saison.",
+  "servesCuisine":["Italienne","Pizza","Pâtes"],
+  "priceRange":"€€",
+  "image":"https://picsum.photos/id/1080/1200/630",
+  "address":{
+    "@type":"PostalAddress",
+    "addressLocality":"Luxembourg",
+    "addressCountry":"LU"
+  },
+  "telephone":"+352-00-00-00-00",
+  "email":"reservation@villasapori.lu",
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday"],"opens":"12:00","closes":"22:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"12:00","closes":"23:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday"],"opens":"12:00","closes":"15:00"}
+  ],
+  "acceptsReservations":true
+}
+</script>
+</body>
+</html>

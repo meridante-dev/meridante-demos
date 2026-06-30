@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Pivoine · Sushi & Cuisine Asiatique à Pétange</title>
+<meta name="description" content="La Pivoine — table sushi et cuisine asiatique à Pétange, Luxembourg. Poisson du jour, gestes précis, salle feutrée. Réservez votre soirée." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant" />
+<meta property="og:title" content="La Pivoine · Sushi & Cuisine Asiatique à Pétange" />
+<meta property="og:description" content="Table sushi et cuisine asiatique à Pétange, Luxembourg. Poisson du jour, gestes précis, salle feutrée." />
+<meta property="og:locale" content="fr_LU" />
+<meta property="og:image" content="https://picsum.photos/id/999/1200/630" />
+<meta name="theme-color" content="#14100d" />
+
+<!-- Inline SVG favicon: peony mark -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2314100d'/%3E%3Cg fill='none' stroke='%23c9692e' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M16 8c3.2 0 5 2.4 5 5.6 0 3.6-2.6 6.4-5 8.4-2.4-2-5-4.8-5-8.4C11 10.4 12.8 8 16 8z'/%3E%3Cpath d='M16 11c1.7 0 2.7 1.4 2.7 3.2 0 2-1.5 3.6-2.7 4.8-1.2-1.2-2.7-2.8-2.7-4.8C13.3 12.4 14.3 11 16 11z'/%3E%3C/g%3E%3C/svg%3E" />
+
+<!-- External (allowed): Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "La Pivoine",
+  "servesCuisine": ["Japonaise", "Sushi", "Asiatique"],
+  "priceRange": "€€",
+  "image": "https://picsum.photos/id/999/1200/630",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Pétange",
+    "addressCountry": "LU"
+  },
+  "telephone": "+352 00 00 00 00",
+  "email": "contact@lapivoine.lu",
+  "areaServed": "Pétange, Luxembourg",
+  "acceptsReservations": "True"
+}
+</script>
+
+<style>
+  :root{
+    --ink:#14100d;          /* deep lacquer */
+    --ink-2:#1d1814;
+    --ivory:#f4ede1;        /* warm ivory */
+    --ivory-soft:#e9dfce;
+    --brass:#c9692e;        /* persimmon / brass */
+    --brass-soft:#e0a05a;
+    --jade:#5c6b4a;         /* muted tea-leaf green accent */
+    --muted:#9c9286;
+    --hair:rgba(244,237,225,.14);
+    --glass:rgba(20,16,13,.55);
+    --shadow:0 30px 70px -30px rgba(0,0,0,.7);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --display:'Cormorant Garamond', Georgia, serif;
+    --sans:'Jost', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--ivory);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--brass);color:var(--ink)}
+
+  .wrap{width:min(1180px,90vw);margin-inline:auto}
+  .eyebrow{
+    font-size:.74rem;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--brass-soft);font-weight:500;
+  }
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.04;letter-spacing:.01em}
+
+  /* ============ NAV ============ */
+  header{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    transition:background .5s var(--ease), box-shadow .5s var(--ease), border-color .5s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:var(--glass);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    backdrop-filter:blur(16px) saturate(140%);
+    border-bottom:1px solid var(--hair);
+    box-shadow:0 10px 40px -24px rgba(0,0,0,.8);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:1.15rem 0}
+  .brand{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-size:1.55rem;letter-spacing:.04em}
+  .brand svg{width:26px;height:26px;flex:none}
+  .brand b{font-weight:600}
+  .nav-links{display:flex;align-items:center;gap:2.4rem}
+  .nav-links a{font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ivory-soft);position:relative;padding:.2rem 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--brass-soft);transition:width .4s var(--ease)}
+  .nav-links a:hover{color:var(--ivory)}
+  .nav-links a:hover::after{width:100%}
+  .btn{
+    font-family:var(--sans);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+    padding:.78rem 1.5rem;border-radius:999px;cursor:pointer;border:1px solid var(--brass);
+    background:linear-gradient(180deg,var(--brass-soft),var(--brass));
+    color:#1a0f06;transition:transform .35s var(--ease), box-shadow .35s var(--ease), filter .35s;
+    box-shadow:0 12px 30px -14px rgba(201,105,46,.8);display:inline-block;
+  }
+  .btn:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 18px 38px -14px rgba(201,105,46,.95)}
+  .btn.ghost{background:transparent;border-color:var(--hair);color:var(--ivory);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--brass-soft);background:rgba(244,237,225,.04)}
+  .nav-cta{display:inline-block}
+  .burger{display:none;background:none;border:0;color:var(--ivory);cursor:pointer;width:30px;height:22px;position:relative}
+  .burger span{position:absolute;left:0;height:1.6px;width:100%;background:var(--ivory);transition:.35s var(--ease)}
+  .burger span:nth-child(1){top:2px}.burger span:nth-child(2){top:10px}.burger span:nth-child(3){top:18px}
+
+  /* ============ HERO ============ */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero-media{position:absolute;inset:0;z-index:0}
+  .hero-media img{width:100%;height:120%;object-fit:cover;filter:saturate(.92) contrast(1.04) brightness(.66);transform:scale(1.08)}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(120% 90% at 80% 10%, rgba(201,105,46,.18), transparent 55%),
+      linear-gradient(180deg, rgba(20,16,13,.55) 0%, rgba(20,16,13,.2) 35%, rgba(20,16,13,.92) 100%);
+  }
+  .hero-inner{position:relative;z-index:2;padding-bottom:8vh;padding-top:16vh;width:100%}
+  .hero h1{font-size:clamp(3.4rem,11vw,8.6rem);letter-spacing:-.01em}
+  .hero h1 em{font-style:italic;color:var(--brass-soft);font-weight:400}
+  .hero .tagline{font-family:var(--display);font-style:italic;font-size:clamp(1.3rem,3vw,2rem);color:var(--ivory-soft);margin-top:.4rem}
+  .hero .support{max-width:46ch;color:var(--muted);margin:1.4rem 0 2rem;font-size:1.02rem}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .hero-meta{
+    position:absolute;right:0;bottom:8vh;z-index:2;text-align:right;
+    font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory-soft);line-height:2
+  }
+  .hero-meta span{display:block;color:var(--muted)}
+  .scroll-cue{
+    position:absolute;left:50%;bottom:2.2rem;transform:translateX(-50%);z-index:2;
+    font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:.5rem
+  }
+  .scroll-cue i{display:block;width:1px;height:34px;background:linear-gradient(var(--brass-soft),transparent);animation:cue 2.4s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(.2);transform-origin:top;opacity:.3}50%{transform:scaleY(1);opacity:1}100%{transform:scaleY(.2);transform-origin:bottom;opacity:.3}}
+
+  /* ============ MAISON ============ */
+  section{position:relative;padding:clamp(5rem,11vw,9rem) 0}
+  .maison{background:linear-gradient(180deg,var(--ink),var(--ink-2))}
+  .maison-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,6vw,5.5rem);align-items:center}
+  .maison h2{font-size:clamp(2.4rem,5.5vw,4.2rem);margin:.8rem 0 1.4rem}
+  .maison h2 em{font-style:italic;color:var(--brass-soft)}
+  .maison p{color:var(--ivory-soft);max-width:50ch;margin-bottom:1.2rem;font-weight:300}
+  .maison p.lead{color:var(--ivory)}
+  .stat-row{display:flex;gap:2.6rem;margin-top:2.4rem;border-top:1px solid var(--hair);padding-top:1.8rem}
+  .stat b{font-family:var(--display);font-size:2.2rem;color:var(--brass-soft);display:block;line-height:1}
+  .stat span{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .maison-figure{position:relative}
+  .maison-figure .frame{position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+  .maison-figure img{width:100%;height:clamp(340px,52vw,560px);object-fit:cover;filter:saturate(.95) brightness(.86);transition:transform 1.2s var(--ease)}
+  .maison-figure:hover img{transform:scale(1.05)}
+  .maison-figure .badge{
+    position:absolute;left:-1.4rem;bottom:-1.4rem;z-index:3;background:var(--glass);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--hair);
+    border-radius:12px;padding:1rem 1.3rem;font-family:var(--display);font-style:italic;font-size:1.1rem;color:var(--ivory);box-shadow:var(--shadow)
+  }
+  .maison-figure .badge span{display:block;font-family:var(--sans);font-style:normal;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-soft);margin-top:.2rem}
+
+  /* ============ CARTE ============ */
+  .carte{background:var(--ink-2);border-top:1px solid var(--hair)}
+  .carte-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap}
+  .carte-head h2{font-size:clamp(2.4rem,5.5vw,4.2rem)}
+  .carte-head h2 em{font-style:italic;color:var(--brass-soft)}
+  .carte-head p{color:var(--muted);max-width:40ch}
+  .carte-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .dish{
+    position:relative;border-radius:14px;overflow:hidden;min-height:clamp(320px,38vw,440px);
+    display:flex;align-items:flex-end;box-shadow:var(--shadow);
+    border:1px solid var(--hair);isolation:isolate
+  }
+  .dish img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:saturate(.96) brightness(.78);transition:transform 1.1s var(--ease)}
+  .dish::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 30%,rgba(20,16,13,.4) 60%,rgba(20,16,13,.94) 100%)}
+  .dish:hover img{transform:scale(1.06)}
+  .dish .body{padding:1.6rem;width:100%}
+  .dish .k{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--brass-soft)}
+  .dish h3{font-size:1.55rem;margin:.3rem 0 .4rem}
+  .dish p{font-size:.9rem;color:var(--ivory-soft);max-width:34ch}
+  .dish .price{margin-top:.7rem;font-family:var(--display);font-size:1.2rem;color:var(--ivory)}
+  .carte-note{margin-top:2.6rem;text-align:center;color:var(--muted);font-style:italic;font-family:var(--display);font-size:1.15rem}
+
+  /* ============ CONTACT ============ */
+  .contact{position:relative;overflow:hidden}
+  .contact-bg{position:absolute;inset:0;z-index:0}
+  .contact-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.4) saturate(.9)}
+  .contact-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,16,13,.95) 0%,rgba(20,16,13,.78) 50%,rgba(20,16,13,.6) 100%)}
+  .contact-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,6vw,5rem);align-items:center}
+  .contact h2{font-size:clamp(2.4rem,5.5vw,4.2rem);margin:.8rem 0 1.2rem}
+  .contact h2 em{font-style:italic;color:var(--brass-soft)}
+  .contact p.lead{color:var(--ivory-soft);max-width:46ch;margin-bottom:2rem}
+  .info-card{
+    background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border:1px solid var(--hair);border-radius:16px;padding:2rem;box-shadow:var(--shadow)
+  }
+  .info-row{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--hair)}
+  .info-row:last-child{border-bottom:0;padding-bottom:0}
+  .info-row:first-child{padding-top:0}
+  .info-row .ic{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:rgba(201,105,46,.14);border:1px solid rgba(224,160,90,.3)}
+  .info-row .ic svg{width:18px;height:18px;stroke:var(--brass-soft);fill:none;stroke-width:1.6}
+  .info-row .t{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .info-row .v{font-family:var(--display);font-size:1.2rem;color:var(--ivory)}
+  .info-row .v small{font-family:var(--sans);font-size:.66rem;letter-spacing:.1em;color:var(--brass-soft);display:block;text-transform:uppercase;margin-top:.2rem}
+  .contact .btn{margin-top:1.8rem}
+
+  /* ============ FOOTER ============ */
+  footer{background:var(--ink);border-top:1px solid var(--hair);padding:2.4rem 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap}
+  .foot .brand{font-size:1.3rem}
+  .foot-links{display:flex;gap:1.6rem;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .foot-links a:hover{color:var(--ivory)}
+  .foot .copy{font-size:.74rem;color:var(--muted);letter-spacing:.04em;width:100%;border-top:1px solid var(--hair);padding-top:1.4rem;margin-top:.4rem}
+
+  /* ============ MOTION REVEALS ============ */
+  /* Hidden only when JS confirms motion is allowed (.js-anim on <html>); otherwise always visible (no-JS / failed CDN safe) */
+  .js-anim .reveal{opacity:0;transform:translateY(34px)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:900px){
+    .nav-links{
+      position:fixed;inset:0 0 0 auto;width:min(78vw,330px);flex-direction:column;justify-content:center;
+      gap:2rem;background:rgba(20,16,13,.96);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+      transform:translateX(100%);transition:transform .5s var(--ease);border-left:1px solid var(--hair);z-index:120;padding:2rem
+    }
+    .nav-links.open{transform:translateX(0)}
+    .nav-links a{font-size:1rem}
+    .nav-cta{display:none}
+    .burger{display:block;z-index:130}
+    .burger.open span:nth-child(1){top:10px;transform:rotate(45deg)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){top:10px;transform:rotate(-45deg)}
+    .maison-grid,.contact-inner{grid-template-columns:1fr}
+    .maison-figure{order:-1}
+    .carte-grid{grid-template-columns:1fr}
+    .hero-meta{display:none}
+    .stat-row{flex-wrap:wrap;gap:1.6rem}
+  }
+  @media (max-width:560px){
+    .hero h1{font-size:clamp(2.8rem,15vw,4rem)}
+    .hero-actions .btn{width:100%;text-align:center}
+    .info-card{padding:1.4rem}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    .reveal{opacity:1 !important;transform:none !important}
+    .hero-media img{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header id="hdr">
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top" aria-label="La Pivoine, accueil">
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <g fill="none" stroke="#e0a05a" stroke-width="1.6" stroke-linecap="round">
+            <path d="M16 7c3.4 0 5.4 2.6 5.4 6 0 3.9-2.8 6.9-5.4 9-2.6-2.1-5.4-5.1-5.4-9C10.6 9.6 12.6 7 16 7z"/>
+            <path d="M16 10.4c1.8 0 2.9 1.5 2.9 3.4 0 2.2-1.6 3.9-2.9 5.2-1.3-1.3-2.9-3-2.9-5.2 0-1.9 1.1-3.4 2.9-3.4z"/>
+          </g>
+        </svg>
+        <span>La&nbsp;<b>Pivoine</b></span>
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#maison">La Maison</a>
+        <a href="#carte">La Carte</a>
+        <a href="#contact">Nous Trouver</a>
+        <a class="btn nav-cta" href="#contact">Réserver</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <!-- PLACEHOLDER image (picsum id 999): dark, moody overhead plated dish — reads as fine Asian/sushi plating. Replace with real La Pivoine photography. -->
+  <div class="hero-media">
+    <img src="https://picsum.photos/id/999/2000/1300" alt="Plat dressé sur table sombre, ambiance feutrée" fetchpriority="high" />
+  </div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow reveal">Sushi &amp; Cuisine Asiatique · Pétange</p>
+    <h1 class="reveal">La <em>Pivoine</em></h1>
+    <p class="tagline reveal">Le geste juste, le poisson du jour.</p>
+    <p class="support reveal">Une table asiatique au cœur de Pétange : sushis taillés à la commande, bouillons lents et saveurs nettes, dans une salle feutrée où chaque service se savoure sans hâte.</p>
+    <div class="hero-actions reveal">
+      <a class="btn" href="#contact">Réserver une table</a>
+      <a class="btn ghost" href="#carte">Découvrir la carte</a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    Pétange · Luxembourg
+    <span>Midi &amp; Soir · 7j/7</span>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">Faites défiler<i></i></div>
+</section>
+
+<!-- ===== LA MAISON ===== -->
+<section class="maison" id="maison">
+  <div class="wrap maison-grid">
+    <div class="maison-text">
+      <p class="eyebrow reveal">Notre Maison</p>
+      <h2 class="reveal">Une cuisine de <em>précision</em>, une table sans hâte.</h2>
+      <p class="lead reveal">La Pivoine est née d'une idée simple : retrouver, à Pétange, le calme et la rigueur d'un comptoir à sushi — là où le produit prime et où rien n'est laissé au hasard.</p>
+      <p class="reveal">Nous travaillons le poisson à la commande, sélectionnons nos arrivages chaque matin et dressons chaque assiette comme un petit tableau. Riz tiède, lame affûtée, sauces maison : l'essentiel, fait avec soin.</p>
+      <div class="stat-row reveal">
+        <div class="stat"><b>100%</b><span>Poisson frais du jour</span></div>
+        <div class="stat"><b>7j/7</b><span>Midi &amp; soir</span></div>
+        <div class="stat"><b>À emporter</b><span>&amp; sur place</span></div>
+      </div>
+    </div>
+    <div class="maison-figure reveal">
+      <div class="frame">
+        <!-- PLACEHOLDER image (picsum id 42): warm wooden interior / communal table — reads as a cosy restaurant room. Replace with real interior photo of La Pivoine. -->
+        <img src="https://picsum.photos/id/42/1100/1200" alt="Salle de restaurant chaleureuse, table en bois" loading="lazy" />
+      </div>
+      <div class="badge">Salle feutrée<span>Au cœur de Pétange</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LA CARTE ===== -->
+<section class="carte" id="carte">
+  <div class="wrap">
+    <div class="carte-head">
+      <div>
+        <p class="eyebrow reveal">La Carte</p>
+        <h2 class="reveal">Quelques <em>signatures</em></h2>
+      </div>
+      <p class="reveal">Une sélection courte qui change au gré des arrivages. Sushis, makis, plats chauds et le rituel du thé.</p>
+    </div>
+    <div class="carte-grid">
+      <article class="dish reveal">
+        <!-- PLACEHOLDER image (picsum id 999): dark plated dish — stands in for a sushi/sashimi platter. Replace with real dish photo. -->
+        <img src="https://picsum.photos/id/999/800/900" alt="Assiette dressée, sashimi" loading="lazy" />
+        <div class="body">
+          <p class="k">Le Comptoir</p>
+          <h3>Sashimi du jour</h3>
+          <p>Tranches taillées à la lame selon l'arrivage du matin, wasabi frais et sauce maison.</p>
+          <div class="price">dès 18 €</div>
+        </div>
+      </article>
+      <article class="dish reveal">
+        <!-- PLACEHOLDER image (picsum id 292): fresh ingredients on a board — reads as fresh produce / sourcing. Replace with a real dish photo. -->
+        <img src="https://picsum.photos/id/292/800/900" alt="Ingrédients frais préparés" loading="lazy" />
+        <div class="body">
+          <p class="k">Faits Maison</p>
+          <h3>Makis &amp; California</h3>
+          <p>Rouleaux roulés à la commande, riz tiède et garnitures nettes, par six ou par douze.</p>
+          <div class="price">dès 9 €</div>
+        </div>
+      </article>
+      <article class="dish reveal">
+        <!-- PLACEHOLDER image (picsum id 225): glass teapot of green tea & cup — the tea ritual, very on-subject for an Asian table. Replace with real photo. -->
+        <img src="https://picsum.photos/id/225/800/900" alt="Théière en verre, thé vert" loading="lazy" />
+        <div class="body">
+          <p class="k">Le Rituel</p>
+          <h3>Thé vert &amp; douceurs</h3>
+          <p>Thé infusé minute, mochis et desserts du moment pour clore le repas en douceur.</p>
+          <div class="price">dès 4 €</div>
+        </div>
+      </article>
+    </div>
+    <p class="carte-note reveal">Carte complète, menus du midi et formules à emporter présentés en salle.</p>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <!-- PLACEHOLDER image (picsum id 163): terrace dining with menu board — restaurant ambiance. Replace with real photo of La Pivoine. -->
+  <div class="contact-bg">
+    <img src="https://picsum.photos/id/163/1800/1200" alt="Ambiance de terrasse, ardoise de menu" loading="lazy" />
+  </div>
+  <div class="wrap contact-inner">
+    <div>
+      <p class="eyebrow reveal">Nous Trouver</p>
+      <h2 class="reveal">Réservez votre <em>soirée</em></h2>
+      <p class="lead reveal">Une table pour deux ou une grande tablée — réservez par téléphone ou passez nous voir à Pétange. À midi comme le soir, à emporter ou sur place.</p>
+      <a class="btn reveal" href="tel:+35200000000">Appeler pour réserver</a>
+    </div>
+    <div class="info-card reveal">
+      <div class="info-row">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <div><div class="t">Adresse</div><div class="v">Pétange, Luxembourg<small>Adresse exacte à confirmer</small></div></div>
+      </div>
+      <div class="info-row">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l-1 4a2 2 0 0 1-2 1.5A14 14 0 0 1 4.5 6 2 2 0 0 1 5 4z"/></svg></div>
+        <div><div class="t">Téléphone</div><div class="v">+352 00 00 00 00<small>Numéro fictif — à remplacer</small></div></div>
+      </div>
+      <div class="info-row">
+        <div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+        <div><div class="t">Email</div><div class="v">contact@lapivoine.lu<small>Adresse fictive — à remplacer</small></div></div>
+      </div>
+      <div class="info-row">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div><div class="t">Horaires</div><div class="v">7j/7 · Midi &amp; Soir<small>Horaires détaillés à confirmer</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 32 32" aria-hidden="true" style="width:22px;height:22px">
+        <g fill="none" stroke="#e0a05a" stroke-width="1.6" stroke-linecap="round">
+          <path d="M16 7c3.4 0 5.4 2.6 5.4 6 0 3.9-2.8 6.9-5.4 9-2.6-2.1-5.4-5.1-5.4-9C10.6 9.6 12.6 7 16 7z"/>
+        </g>
+      </svg>
+      <span>La&nbsp;<b>Pivoine</b></span>
+    </a>
+    <div class="foot-links">
+      <a href="#maison">La Maison</a>
+      <a href="#carte">La Carte</a>
+      <a href="#contact">Réserver</a>
+    </div>
+    <p class="copy">© <span id="yr"></span> La Pivoine · Sushi &amp; Cuisine Asiatique · Pétange, Luxembourg — Site de démonstration. Coordonnées fictives à confirmer.</p>
+  </div>
+</footer>
+
+<!-- External (allowed): GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Sticky nav state
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navLinks');
+  const toggle = (open) => {
+    burger.classList.toggle('open', open);
+    links.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+  };
+  burger.addEventListener('click', () => toggle(!links.classList.contains('open')));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+
+  // Motion (reduced-motion safe). Only hide .reveal once we KNOW GSAP loaded and motion is allowed.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && window.gsap) {
+    document.documentElement.classList.add('js-anim');
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    gsap.set('.hero .reveal', {opacity:0, y:34});
+    gsap.to('.hero .reveal', {opacity:1, y:0, duration:1.1, ease:'power3.out', stagger:.12, delay:.15});
+
+    // Hero parallax
+    gsap.to('.hero-media img', {yPercent:12, ease:'none',
+      scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+
+    // Section reveals
+    gsap.utils.toArray('section:not(.hero) .reveal').forEach((el) => {
+      gsap.fromTo(el, {opacity:0, y:34}, {
+        opacity:1, y:0, duration:.95, ease:'power3.out',
+        scrollTrigger:{trigger:el, start:'top 86%'}
+      });
+    });
+  }
+  // No 'else' needed: without .js-anim, .reveal stays fully visible by default (no-JS / failed-CDN / reduced-motion safe).
+</script>
+</body>
+</html>

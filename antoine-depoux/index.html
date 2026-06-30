@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Antoine Depoux — Ostéopathe à Belair, Luxembourg-Ville</title>
+<meta name="description" content="Cabinet d'ostéopathie d'Antoine Depoux à Belair, Luxembourg-Ville. Une approche douce et précise pour soulager les tensions et retrouver l'équilibre du corps." />
+<meta name="theme-color" content="#F6F1EA" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_LU" />
+<meta property="og:title" content="Antoine Depoux — Ostéopathe à Belair, Luxembourg-Ville" />
+<meta property="og:description" content="Une approche douce et précise pour soulager les tensions et retrouver l'équilibre du corps. Cabinet d'ostéopathie à Belair, Luxembourg-Ville." />
+<meta property="og:image" content="https://picsum.photos/id/1059/1200/630?grayscale" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Inline SVG favicon (clay monogram) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B07A57'/%3E%3Ctext x='50%25' y='54%25' font-family='Georgia,serif' font-size='34' fill='%23FBF8F3' text-anchor='middle' dominant-baseline='middle'%3EAD%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Antoine Depoux — Ostéopathe",
+  "description": "Cabinet d'ostéopathie à Belair, Luxembourg-Ville. Approche douce et précise pour soulager les tensions et retrouver l'équilibre du corps.",
+  "image": "https://picsum.photos/id/1059/1200/630?grayscale",
+  "medicalSpecialty": "Osteopathic",
+  "url": "https://antoinedepoux.lu",
+  "telephone": "+352-000-000",
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Quartier Belair",
+    "addressLocality": "Luxembourg-Ville",
+    "postalCode": "L-1450",
+    "addressCountry": "LU"
+  },
+  "areaServed": "Luxembourg-Ville",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "08:30",
+    "closes": "19:00"
+  }]
+}
+</script>
+
+<style>
+  :root{
+    --bone:#F6F1EA;
+    --panel:#FBF8F3;
+    --ink:#1F1B16;
+    --muted:#6B6258;
+    --clay:#B07A57;
+    --clay-deep:#97623F;
+    --sage:#7C8A6E;
+    --line:#E4DBCE;
+    --shadow-sm:0 1px 2px rgba(31,27,22,.05), 0 8px 24px rgba(31,27,22,.06);
+    --shadow-lg:0 24px 60px -24px rgba(31,27,22,.28), 0 8px 24px rgba(31,27,22,.08);
+    --r:18px;
+    --maxw:1180px;
+    --display:"Cormorant Garamond", Georgia, serif;
+    --body:"Hanken Grotesk", system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    background:var(--bone);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--clay);color:var(--panel)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:.74rem;letter-spacing:.28em;text-transform:uppercase;
+    font-weight:600;color:var(--clay);display:inline-flex;align-items:center;gap:.6em;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--clay);display:inline-block}
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.06;letter-spacing:-.01em}
+  .display{font-size:clamp(2.9rem,8vw,6rem)}
+  .h2{font-size:clamp(2rem,4.6vw,3.4rem)}
+  p{color:var(--muted)}
+
+  /* ---------- NAV ---------- */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;transition:transform .4s ease}
+  .nav{
+    margin:14px auto;max-width:var(--maxw);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 18px 12px 24px;
+    background:rgba(251,248,243,.62);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border:1px solid rgba(228,219,206,.8);
+    border-radius:999px;
+    box-shadow:var(--shadow-sm);
+    transition:box-shadow .4s ease, background .4s ease;
+  }
+  header.scrolled .nav{background:rgba(251,248,243,.85);box-shadow:var(--shadow-lg)}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-size:1.35rem;font-weight:600}
+  .brand .mono{
+    width:34px;height:34px;border-radius:10px;background:var(--clay);color:var(--panel);
+    display:grid;place-items:center;font-size:.95rem;letter-spacing:.02em;box-shadow:var(--shadow-sm)
+  }
+  .brand small{display:block;font-family:var(--body);font-size:.6rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:1px}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:.9rem;font-weight:500;color:var(--ink);position:relative;padding:4px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:1.5px;
+    background:var(--clay);transition:width .3s ease}
+  .nav-links a:hover::after{width:100%}
+  .btn{
+    font-family:var(--body);font-size:.86rem;font-weight:600;cursor:pointer;
+    display:inline-flex;align-items:center;gap:.5em;
+    padding:11px 22px;border-radius:999px;border:1px solid transparent;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-primary{background:var(--clay);color:var(--panel);box-shadow:var(--shadow-sm)}
+  .btn-primary:hover{background:var(--clay-deep);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--clay);color:var(--clay)}
+  .nav .btn-primary{padding:10px 20px}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:8px}
+  .menu-toggle span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.3s}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:140px 0 80px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(.95) brightness(1.02)}
+  .hero-bg::after{content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(105deg, rgba(246,241,234,.97) 0%, rgba(246,241,234,.86) 38%, rgba(246,241,234,.40) 70%, rgba(176,122,87,.18) 100%),
+      radial-gradient(120% 90% at 0% 100%, rgba(124,138,110,.20), transparent 55%);
+  }
+  .hero-inner{position:relative;z-index:2;max-width:760px}
+  .hero h1{margin:18px 0 22px}
+  .hero h1 em{font-style:italic;color:var(--clay)}
+  .hero .lede{font-size:1.18rem;max-width:540px;color:var(--ink);opacity:.82}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+  .hero-meta{margin-top:46px;display:flex;gap:34px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--line)}
+  .hero-meta div span{display:block}
+  .hero-meta .n{font-family:var(--display);font-size:1.9rem;color:var(--ink);line-height:1}
+  .hero-meta .l{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+  .reveal{opacity:0;transform:translateY(26px)}
+  .no-js .reveal{opacity:1;transform:none}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative}
+  .pad{padding:clamp(80px,11vw,140px) 0}
+  .lead-row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;margin-bottom:56px}
+  .lead-row p{max-width:420px}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:var(--panel)}
+  .about-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:center}
+  .about-figure{position:relative}
+  .about-figure .frame{border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);position:relative}
+  .about-figure img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:grayscale(100%) contrast(.97) brightness(1.02)}
+  .about-figure .frame::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 50%,rgba(176,122,87,.16))}
+  .about-figure .tag{
+    position:absolute;left:-22px;bottom:34px;background:var(--bone);
+    padding:18px 24px;border-radius:16px;box-shadow:var(--shadow-lg);border:1px solid var(--line);max-width:230px
+  }
+  .about-figure .tag .h{font-family:var(--display);font-size:1.5rem;color:var(--clay);line-height:1}
+  .about-figure .tag p{font-size:.84rem;margin-top:6px}
+  .about-text h2{margin:14px 0 22px}
+  .about-text p + p{margin-top:18px}
+  .sign{margin-top:30px;font-family:var(--display);font-style:italic;font-size:1.6rem;color:var(--ink)}
+  .sign small{display:block;font-family:var(--body);font-style:normal;font-size:.74rem;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+  /* ---------- SOINS ---------- */
+  .soins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .soin{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:34px 30px 32px;box-shadow:var(--shadow-sm);
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    position:relative;overflow:hidden;
+  }
+  .soin::before{content:"";position:absolute;inset:0;
+    background:linear-gradient(160deg, rgba(176,122,87,.06), transparent 60%);opacity:0;transition:opacity .35s}
+  .soin:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(176,122,87,.4)}
+  .soin:hover::before{opacity:1}
+  .soin .ico{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
+    background:rgba(124,138,110,.14);color:var(--sage);margin-bottom:20px}
+  .soin .ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6}
+  .soin h3{font-size:1.55rem;margin-bottom:10px}
+  .soin p{font-size:.95rem}
+  .soin .pos{position:relative;z-index:1}
+
+  /* ---------- HIGHLIGHT / APPROCHE ---------- */
+  .approche{position:relative;overflow:hidden;background:var(--ink);color:var(--panel)}
+  .approche .bg{position:absolute;inset:0;z-index:0}
+  .approche .bg img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) brightness(.55)}
+  .approche .bg::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg, rgba(31,27,22,.92) 0%, rgba(31,27,22,.74) 55%, rgba(31,27,22,.5) 100%)}
+  .approche .wrap{position:relative;z-index:2}
+  .approche .eyebrow{color:#D9B79C}
+  .approche .eyebrow::before{background:#D9B79C}
+  .approche h2{color:var(--panel);margin:16px 0 0;max-width:680px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:60px}
+  .step{padding-top:24px;border-top:1px solid rgba(246,241,234,.22)}
+  .step .num{font-family:var(--display);font-size:1.05rem;color:#D9B79C;letter-spacing:.1em}
+  .step h3{color:var(--panel);font-size:1.45rem;margin:12px 0 8px}
+  .step p{color:rgba(246,241,234,.74);font-size:.94rem}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--panel)}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .contact-card{
+    background:var(--bone);border:1px solid var(--line);border-radius:24px;
+    padding:42px;box-shadow:var(--shadow-lg)
+  }
+  .contact-card h2{margin:14px 0 18px}
+  .info-list{list-style:none;margin-top:30px;display:grid;gap:20px}
+  .info-list li{display:flex;gap:16px;align-items:flex-start}
+  .info-list .ic{width:42px;height:42px;flex:none;border-radius:12px;background:rgba(176,122,87,.12);
+    color:var(--clay);display:grid;place-items:center}
+  .info-list .ic svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.6}
+  .info-list .k{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .info-list .v{font-size:1.06rem;color:var(--ink);font-weight:500}
+  .ph-flag{font-size:.7rem;color:var(--clay-deep);font-style:italic}
+  .hours{margin-top:34px;padding-top:26px;border-top:1px solid var(--line);font-size:.92rem}
+  .hours strong{color:var(--ink);font-weight:600}
+  .map-figure{border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);position:relative;min-height:420px}
+  .map-figure img{width:100%;height:100%;min-height:420px;object-fit:cover;filter:grayscale(100%) contrast(1.02)}
+  .map-figure .pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-100%);
+    color:var(--clay);filter:drop-shadow(0 6px 12px rgba(0,0,0,.3))}
+  .map-figure .pin svg{width:46px;height:46px}
+  .map-figure .loc{position:absolute;left:20px;bottom:20px;background:rgba(251,248,243,.92);
+    backdrop-filter:blur(8px);padding:12px 18px;border-radius:12px;font-size:.86rem;font-weight:600;color:var(--ink);box-shadow:var(--shadow-sm)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(246,241,234,.7);padding:38px 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .foot .brand{color:var(--panel)}
+  .foot .brand small{color:rgba(246,241,234,.55)}
+  .foot a:hover{color:#D9B79C}
+  .foot .legal{font-size:.82rem}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .about-grid{grid-template-columns:1fr;gap:48px}
+    .about-figure{max-width:440px;margin:0 auto}
+    .soins-grid{grid-template-columns:1fr;max-width:460px;margin:0 auto}
+    .steps{grid-template-columns:1fr;gap:0}
+    .step{margin-top:24px}
+    .contact-grid{grid-template-columns:1fr;gap:36px}
+    .nav-links{
+      position:absolute;top:calc(100% + 10px);right:14px;left:14px;
+      flex-direction:column;align-items:stretch;gap:6px;
+      background:rgba(251,248,243,.97);backdrop-filter:blur(16px);
+      border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow-lg);
+      transform:translateY(-12px);opacity:0;pointer-events:none;transition:.3s
+    }
+    .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+    .nav-links a{padding:10px 8px;border-radius:10px}
+    .nav-links a:hover{background:rgba(176,122,87,.08)}
+    .nav-links .btn{justify-content:center;margin-top:6px}
+    .menu-toggle{display:flex}
+    .menu-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .menu-toggle.open span:nth-child(2){opacity:0}
+    .menu-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  }
+  @media(max-width:560px){
+    .hero-meta{gap:24px}
+    .about-figure .tag{left:0}
+    .contact-card{padding:30px}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+    .reveal{opacity:1 !important;transform:none !important}
+  }
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js');</script>
+
+<header id="header">
+  <nav class="nav wrap">
+    <a class="brand" href="#top" aria-label="Antoine Depoux, Ostéopathe — accueil">
+      <span class="mono">AD</span>
+      <span>Antoine Depoux<small>Ostéopathe D.O.</small></span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#cabinet">Le cabinet</a>
+      <a href="#soins">Les soins</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ========== HERO ========== -->
+  <section class="hero">
+    <!-- PLACEHOLDER IMAGE: calm therapeutic / natural-light treatment-room mood (picsum id 1059, grayscale + warm overlay) -->
+    <div class="hero-bg">
+      <img src="https://picsum.photos/id/1059/1600/1100?grayscale" alt="" aria-hidden="true" loading="eager" />
+    </div>
+    <div class="wrap">
+      <div class="hero-inner">
+        <span class="eyebrow reveal">Ostéopathie · Belair, Luxembourg-Ville</span>
+        <h1 class="display reveal">Rendre au corps<br>son <em>juste équilibre</em>.</h1>
+        <p class="lede reveal">Une ostéopathie attentive et précise, où l'on prend le temps d'écouter votre histoire avant de poser les mains. Pour soulager les tensions, retrouver de l'aisance et respirer plus librement.</p>
+        <div class="hero-cta reveal">
+          <a href="#contact" class="btn btn-primary">Prendre rendez-vous</a>
+          <a href="#soins" class="btn btn-ghost">Découvrir les soins</a>
+        </div>
+        <div class="hero-meta reveal">
+          <div><span class="n">15&nbsp;ans</span><span class="l">de pratique</span></div>
+          <div><span class="n">~50&nbsp;min</span><span class="l">par séance</span></div>
+          <div><span class="n">Belair</span><span class="l">Luxembourg-Ville</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LE CABINET / ABOUT ========== -->
+  <section class="about pad" id="cabinet">
+    <div class="wrap about-grid">
+      <div class="about-figure reveal">
+        <div class="frame">
+          <!-- PLACEHOLDER IMAGE: portrait/practitioner mood, warm calm (picsum id 1062, grayscale + warm overlay) -->
+          <img src="https://picsum.photos/id/1062/800/1000?grayscale" alt="Le cabinet d'ostéopathie d'Antoine Depoux à Belair" loading="lazy" />
+        </div>
+        <div class="tag">
+          <span class="h">Belair</span>
+          <p>Un cabinet lumineux et calme, à deux pas du parc.</p>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow reveal">Le cabinet</span>
+        <h2 class="h2 reveal">Une maison du soin,<br>pensée pour le calme.</h2>
+        <p class="reveal">Installé au cœur de Belair, le cabinet d'Antoine Depoux est un espace pensé pour relâcher : lumière douce, matières chaudes, silence. On y vient comme on entre chez quelqu'un — sans précipitation, accueilli, écouté.</p>
+        <p class="reveal">Chaque séance commence par un vrai temps d'échange : votre quotidien, vos gestes, vos douleurs. L'ostéopathie n'est pas une recette ; c'est une attention portée à votre corps tel qu'il est aujourd'hui, pour l'aider à retrouver sa propre mobilité.</p>
+        <div class="sign reveal">Antoine Depoux
+          <small>Ostéopathe D.O. — Diplômé en ostéopathie</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LES SOINS ========== -->
+  <section class="pad" id="soins">
+    <div class="wrap">
+      <div class="lead-row">
+        <div>
+          <span class="eyebrow reveal">Les soins</span>
+          <h2 class="h2 reveal" style="margin-top:14px">Accompagner chaque<br>moment de la vie.</h2>
+        </div>
+        <p class="reveal">Une pratique douce et globale, adaptée à chacun — du nourrisson au sénior, du sportif à la femme enceinte.</p>
+      </div>
+      <div class="soins-grid">
+        <article class="soin reveal">
+          <div class="pos">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8c0 3 3 4 7 4s7-1 7-4M5 8c0-3 3-4 7-4s7 1 7 4"/></svg></div>
+            <h3>Dos &amp; posture</h3>
+            <p>Lombalgies, cervicalgies, tensions liées au bureau ou au stress. On relâche, on redonne de l'amplitude.</p>
+          </div>
+        </article>
+        <article class="soin reveal">
+          <div class="pos">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21c5-4 8-7 8-11a4 4 0 0 0-8-1 4 4 0 0 0-8 1c0 4 3 7 8 11z"/></svg></div>
+            <h3>Femmes &amp; grossesse</h3>
+            <p>Un accompagnement tout en douceur pendant et après la grossesse, pour le confort de la maman et du bébé.</p>
+          </div>
+        </article>
+        <article class="soin reveal">
+          <div class="pos">
+            <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 12a6 6 0 1 1 12 0M9 12v6m6-6v6M9 18h6"/></svg></div>
+            <h3>Sport &amp; mobilité</h3>
+            <p>Préparation, récupération et prévention des blessures pour bouger mieux, plus longtemps.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== APPROCHE (highlight) ========== -->
+  <section class="approche pad">
+    <!-- PLACEHOLDER IMAGE: hands / care / natural texture mood (picsum id 1080, grayscale + dark overlay) -->
+    <div class="bg"><img src="https://picsum.photos/id/1080/1600/1000?grayscale" alt="" aria-hidden="true" loading="lazy" /></div>
+    <div class="wrap">
+      <span class="eyebrow reveal">La séance</span>
+      <h2 class="h2 reveal">Du premier échange au<br>relâchement, un soin sur mesure.</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="num">— 01</span>
+          <h3>Écouter</h3>
+          <p>On prend le temps de comprendre votre histoire, vos douleurs et vos habitudes avant tout geste.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">— 02</span>
+          <h3>Évaluer</h3>
+          <p>Un examen précis de la mobilité pour cibler l'origine des tensions, pas seulement les symptômes.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">— 03</span>
+          <h3>Soulager</h3>
+          <p>Des techniques douces et adaptées, suivies de conseils simples pour prolonger les bienfaits.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="contact pad" id="contact">
+    <div class="wrap contact-grid">
+      <div class="contact-card reveal">
+        <span class="eyebrow">Prendre rendez-vous</span>
+        <h2 class="h2">Réserver votre séance.</h2>
+        <p>Le cabinet vous accueille sur rendez-vous, du lundi au vendredi. N'hésitez pas à appeler ou écrire pour toute question.</p>
+        <ul class="info-list">
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span>
+            <div><span class="k">Téléphone</span><span class="v">+352 00 00 00 00</span><span class="ph-flag">— numéro provisoire (à remplacer)</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="m3 7 9 6 9-6"/></svg></span>
+            <div><span class="k">E-mail</span><span class="v">contact@antoinedepoux.lu</span><span class="ph-flag">— adresse provisoire (à remplacer)</span></div>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <div><span class="k">Adresse</span><span class="v">Quartier Belair, Luxembourg-Ville</span></div>
+          </li>
+        </ul>
+        <div class="hours">
+          <strong>Horaires</strong> — Lun. au Ven. · 08h30 – 19h00<br>
+          Sur rendez-vous uniquement · Week-end fermé
+        </div>
+        <a href="#" class="btn btn-primary" style="margin-top:28px">Réserver un créneau</a>
+      </div>
+      <div class="map-figure reveal">
+        <!-- PLACEHOLDER IMAGE: neighbourhood / city street mood standing in for a map (picsum id 326, grayscale) -->
+        <img src="https://picsum.photos/id/326/900/900?grayscale" alt="Localisation du cabinet à Belair, Luxembourg-Ville" loading="lazy" />
+        <span class="pin"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></span>
+        <span class="loc">Belair · Luxembourg-Ville</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a class="brand" href="#top">
+      <span class="mono">AD</span>
+      <span>Antoine Depoux<small>Ostéopathe D.O. · Belair</small></span>
+    </a>
+    <p class="legal">© <span id="yr"></span> Antoine Depoux — Ostéopathe · Luxembourg-Ville · Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Sticky nav state
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); toggle.classList.remove('open'); toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Motion (reduced-motion safe)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && window.gsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    // Hero stagger
+    gsap.to('.hero .reveal', {opacity:1, y:0, duration:1, ease:'power3.out', stagger:.12, delay:.15});
+    // Section reveals
+    gsap.utils.toArray('section:not(.hero) .reveal').forEach((el) => {
+      gsap.to(el, {
+        opacity:1, y:0, duration:.9, ease:'power3.out',
+        scrollTrigger:{trigger:el, start:'top 86%'}
+      });
+    });
+    // Subtle hero parallax
+    gsap.to('.hero-bg img', {yPercent:12, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => {el.style.opacity=1; el.style.transform='none';});
+  }
+  // Safeguard: if GSAP fails to load (CDN blocked) reveal everything so nothing stays invisible
+  if (!window.gsap) {
+    document.querySelectorAll('.reveal').forEach(el => {el.style.opacity=1; el.style.transform='none';});
+  }
+</script>
+</body>
+</html>

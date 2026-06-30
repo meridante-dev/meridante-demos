@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hôtel de la Sûre · Restaurant Comte Godefroy — Esch-sur-Sûre</title>
+<meta name="description" content="Hôtel-restaurant niché dans la boucle de la Sûre, au cœur du Parc Naturel de la Haute-Sûre. Cuisine du terroir au Restaurant Comte Godefroy, chambres paisibles et grande nature des Ardennes luxembourgeoises." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="fr_LU" />
+<meta property="og:title" content="Hôtel de la Sûre · Restaurant Comte Godefroy — Esch-sur-Sûre" />
+<meta property="og:description" content="L'auberge au bord de la rivière, au cœur des Ardennes luxembourgeoises. Table du terroir, chambres paisibles et grande nature." />
+<meta property="og:site_name" content="Hôtel de la Sûre" />
+<!-- Placeholder OG image (picsum #1018 — misty wooded valley, reads as Ardennes landscape) -->
+<meta property="og:image" content="https://picsum.photos/id/1018/1200/630" />
+
+<!-- Inline SVG favicon: stylised brass "S" monogram on forest field -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f2c22'/%3E%3Cpath d='M40 22c-3-4-16-5-16 3 0 7 16 4 16 12 0 8-14 7-17 2' fill='none' stroke='%23c79a4b' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+<!-- Fonts: Cormorant Garamond (display, characterful high-contrast serif) + Hanken Grotesk (warm grotesk body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Enable reveal-hiding ONLY if animations will run (no reduced-motion). Prevents content stuck at opacity:0. -->
+<script>
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js-anim');
+  }
+  // Safety net: if GSAP never initialises, reveal everything after a short delay.
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      if (!window.__heroAnimated) document.documentElement.classList.remove('js-anim');
+    }, 1200);
+  });
+</script>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["Hotel", "Restaurant"],
+  "name": "Hôtel de la Sûre · Restaurant Comte Godefroy",
+  "description": "Hôtel-restaurant au cœur du Parc Naturel de la Haute-Sûre, à Esch-sur-Sûre. Cuisine du terroir et chambres paisibles au bord de la rivière.",
+  "image": "https://picsum.photos/id/1018/1200/630",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Esch-sur-Sûre",
+    "addressRegion": "Diekirch",
+    "postalCode": "9650",
+    "addressCountry": "LU"
+  },
+  "telephone": "+352 00 00 00",
+  "email": "bonjour@example-hoteldelasure.lu",
+  "priceRange": "€€",
+  "servesCuisine": "Cuisine luxembourgeoise du terroir",
+  "url": "https://www.example-hoteldelasure.lu",
+  "areaServed": "Esch-sur-Sûre, Parc Naturel de la Haute-Sûre"
+}
+</script>
+
+<style>
+  :root{
+    /* Ardennes palette — forest, stone, brass. No blue / no purple. */
+    --forest-900:#16211a;
+    --forest-800:#1f2c22;
+    --forest-700:#2c3d30;
+    --moss:#5d6e54;
+    --parchment:#f4efe4;
+    --stone:#e7ddca;
+    --stone-deep:#cdbfa3;
+    --ink:#23271f;
+    --ink-soft:#4a4f43;
+    --brass:#c79a4b;
+    --brass-deep:#a87f33;
+    --cream:#fbf8f1;
+
+    --maxw:1200px;
+    --r:18px;
+    --shadow-soft:0 18px 50px -22px rgba(22,33,26,.55);
+    --shadow-card:0 22px 60px -28px rgba(22,33,26,.6);
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.05;}
+  img{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  :focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:6px;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-size:.74rem;letter-spacing:.32em;text-transform:uppercase;
+    font-weight:600;color:var(--brass-deep);
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    transition:background .4s var(--ease),backdrop-filter .4s var(--ease),box-shadow .4s var(--ease),padding .4s var(--ease);
+    padding:22px 0;
+  }
+  header.nav.scrolled{
+    background:rgba(28,40,32,.62);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    box-shadow:0 1px 0 rgba(255,255,255,.06),0 14px 40px -24px rgba(0,0,0,.7);
+    padding:14px 0;
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .wordmark{display:flex;align-items:center;gap:13px;color:var(--cream);}
+  .wordmark .mark{
+    width:40px;height:40px;border-radius:11px;flex:none;
+    background:linear-gradient(150deg,var(--forest-700),var(--forest-900));
+    border:1px solid rgba(199,154,75,.5);
+    display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  .wordmark .mark svg{width:22px;height:22px;}
+  .wordmark .txt{line-height:1.05;}
+  .wordmark .txt b{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:1.3rem;letter-spacing:.01em;display:block;}
+  .wordmark .txt span{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brass);font-weight:600;}
+  .nav-links{display:flex;align-items:center;gap:34px;}
+  .nav-links a.link{
+    color:var(--cream);font-size:.84rem;letter-spacing:.13em;text-transform:uppercase;font-weight:500;
+    position:relative;opacity:.88;transition:opacity .3s;
+  }
+  .nav-links a.link::after{
+    content:"";position:absolute;left:0;bottom:-7px;height:1.5px;width:0;background:var(--brass);transition:width .35s var(--ease);
+  }
+  .nav-links a.link:hover{opacity:1;}
+  .nav-links a.link:hover::after{width:100%;}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;cursor:pointer;
+    font-family:"Hanken Grotesk",sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;
+    padding:13px 24px;border-radius:100px;border:1px solid transparent;
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s;
+  }
+  .btn-brass{
+    background:linear-gradient(135deg,var(--brass),var(--brass-deep));
+    color:#241c08;box-shadow:0 12px 30px -12px rgba(168,127,51,.7);
+  }
+  .btn-brass:hover{transform:translateY(-2px);box-shadow:0 18px 40px -14px rgba(168,127,51,.85);}
+  .btn-ghost{border-color:rgba(244,239,228,.4);color:var(--cream);}
+  .btn-ghost:hover{background:rgba(244,239,228,.1);border-color:rgba(244,239,228,.7);}
+  .nav-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:6px;}
+  .nav-toggle span{width:24px;height:2px;background:var(--cream);border-radius:2px;transition:.3s;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;}
+  .hero-media{position:absolute;inset:0;z-index:0;}
+  .hero-media img{width:100%;height:120%;object-fit:cover;will-change:transform;}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(22,33,26,.55) 0%,rgba(22,33,26,.32) 38%,rgba(22,33,26,.78) 100%),
+      radial-gradient(120% 80% at 12% 30%,rgba(22,33,26,.5),transparent 60%);
+  }
+  .hero-content{position:relative;z-index:2;color:var(--cream);max-width:780px;padding-top:60px;}
+  .hero .eyebrow{color:var(--brass);}
+  .hero h1{
+    font-size:clamp(3rem,8.2vw,6.6rem);margin:.28em 0 .2em;letter-spacing:-.01em;
+    text-shadow:0 2px 30px rgba(0,0,0,.4);
+  }
+  .hero h1 em{font-style:italic;color:var(--brass);}
+  .hero .tagline{
+    font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(1.3rem,2.6vw,1.9rem);
+    color:var(--stone);margin-bottom:1.1em;font-weight:400;
+  }
+  .hero .support{max-width:540px;font-size:1.04rem;color:rgba(244,239,228,.86);margin-bottom:2.2em;}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+  .scroll-hint{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;
+    color:rgba(244,239,228,.7);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+  }
+  .scroll-hint .line{width:1px;height:46px;background:linear-gradient(var(--brass),transparent);}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative;}
+  .pad{padding:clamp(80px,11vw,140px) 0;}
+  .lead{font-size:clamp(1.9rem,4vw,3.1rem);max-width:18ch;line-height:1.08;}
+
+  /* ---------- ABOUT ---------- */
+  .maison{background:
+      radial-gradient(110% 120% at 100% 0%,rgba(199,154,75,.10),transparent 55%),
+      var(--cream);}
+  .maison-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(40px,6vw,84px);align-items:center;}
+  .maison-copy p{color:var(--ink-soft);margin-top:1.2em;font-size:1.05rem;max-width:46ch;}
+  .maison-copy h2{margin-top:.45em;color:var(--forest-800);}
+  .stats{display:flex;gap:38px;margin-top:2.4em;flex-wrap:wrap;}
+  .stat b{font-family:"Cormorant Garamond",serif;font-size:2.6rem;color:var(--brass-deep);display:block;line-height:1;}
+  .stat span{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);}
+  .maison-media{position:relative;}
+  .maison-media .frame{
+    border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-card);position:relative;
+  }
+  .maison-media .frame img{width:100%;height:560px;object-fit:cover;transition:transform 1.1s var(--ease);}
+  .maison-media:hover .frame img{transform:scale(1.05);}
+  .maison-media .badge{
+    position:absolute;left:-26px;bottom:38px;z-index:3;
+    background:rgba(251,248,241,.78);backdrop-filter:blur(10px);
+    border:1px solid rgba(199,154,75,.45);border-radius:14px;
+    padding:18px 22px;box-shadow:var(--shadow-soft);max-width:230px;
+  }
+  .maison-media .badge .k{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.25rem;color:var(--forest-800);}
+  .maison-media .badge .v{font-size:.78rem;color:var(--ink-soft);margin-top:3px;}
+
+  /* ---------- RESTAURANT FEATURE ---------- */
+  .table-sec{
+    position:relative;color:var(--cream);overflow:hidden;
+    background:var(--forest-900);
+  }
+  .table-bg{position:absolute;inset:0;z-index:0;opacity:.34;}
+  .table-bg img{width:100%;height:100%;object-fit:cover;}
+  .table-sec::after{content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg,rgba(22,33,26,.78),rgba(22,33,26,.92));}
+  .table-inner{position:relative;z-index:2;}
+  .table-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:54px;}
+  .table-head h2{font-size:clamp(2.2rem,5vw,3.6rem);color:var(--cream);}
+  .table-head h2 em{font-style:italic;color:var(--brass);}
+  .table-head .eyebrow{color:var(--brass);}
+  .table-head p{max-width:38ch;color:rgba(244,239,228,.78);}
+  .menu-list{display:grid;gap:6px;}
+  .menu-row{
+    display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:18px;
+    padding:20px 4px;border-bottom:1px solid rgba(244,239,228,.13);
+    transition:background .35s,padding-left .35s var(--ease);
+  }
+  .menu-row:hover{background:rgba(199,154,75,.07);padding-left:14px;}
+  .menu-row .name{font-family:"Cormorant Garamond",serif;font-size:1.5rem;color:var(--cream);}
+  .menu-row .name small{display:block;font-family:"Hanken Grotesk",sans-serif;font-size:.86rem;color:rgba(244,239,228,.6);margin-top:3px;letter-spacing:0;}
+  .menu-row .price{font-family:"Cormorant Garamond",serif;font-size:1.4rem;color:var(--brass);white-space:nowrap;}
+  .menu-foot{margin-top:46px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;color:rgba(244,239,228,.65);font-size:.9rem;font-style:italic;font-family:"Cormorant Garamond",serif;}
+
+  /* ---------- HIGHLIGHTS / EXPERIENCES ---------- */
+  .exp{background:linear-gradient(180deg,var(--cream),var(--stone));}
+  .exp-head{text-align:center;max-width:620px;margin:0 auto 64px;}
+  .exp-head h2{font-size:clamp(2.2rem,5vw,3.4rem);color:var(--forest-800);margin-top:.3em;}
+  .exp-head h2 em{font-style:italic;color:var(--brass-deep);}
+  .exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .card{
+    position:relative;border-radius:var(--r);overflow:hidden;min-height:420px;
+    display:flex;flex-direction:column;justify-content:flex-end;color:var(--cream);
+    box-shadow:var(--shadow-card);isolation:isolate;
+  }
+  .card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1s var(--ease);}
+  .card::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(22,33,26,0) 30%,rgba(22,33,26,.55) 62%,rgba(22,33,26,.92) 100%);}
+  .card:hover img{transform:scale(1.07);}
+  .card .body{padding:30px 28px;}
+  .card .num{font-family:"Cormorant Garamond",serif;font-style:italic;color:var(--brass);font-size:1rem;}
+  .card h3{font-size:1.85rem;margin:.2em 0 .35em;}
+  .card p{font-size:.94rem;color:rgba(244,239,228,.85);max-width:34ch;}
+  .card.tall{grid-row:span 1;}
+
+  /* ---------- STAY STRIP ---------- */
+  .stay{background:var(--forest-800);color:var(--cream);overflow:hidden;}
+  .stay-grid{display:grid;grid-template-columns:.95fr 1.05fr;align-items:center;gap:clamp(40px,6vw,80px);}
+  .stay-media{border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-card);}
+  .stay-media img{width:100%;height:480px;object-fit:cover;}
+  .stay-copy .eyebrow{color:var(--brass);}
+  .stay-copy h2{font-size:clamp(2rem,4.4vw,3.2rem);margin:.3em 0;color:var(--cream);}
+  .stay-copy h2 em{font-style:italic;color:var(--brass);}
+  .stay-copy p{color:rgba(244,239,228,.82);max-width:46ch;margin-bottom:1.4em;}
+  .stay-feats{list-style:none;display:grid;gap:14px;margin:1.6em 0 2em;}
+  .stay-feats li{display:flex;gap:13px;align-items:flex-start;color:rgba(244,239,228,.9);font-size:.98rem;}
+  .stay-feats svg{flex:none;width:20px;height:20px;margin-top:3px;color:var(--brass);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--cream);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,80px);align-items:center;}
+  .contact-copy h2{font-size:clamp(2.2rem,5vw,3.4rem);color:var(--forest-800);margin:.3em 0 .5em;}
+  .contact-copy h2 em{font-style:italic;color:var(--brass-deep);}
+  .contact-copy>p{color:var(--ink-soft);max-width:42ch;}
+  .info{display:grid;gap:4px;margin-top:2.2em;}
+  .info-row{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px solid rgba(35,39,31,.1);}
+  .info-row svg{flex:none;width:22px;height:22px;color:var(--brass-deep);margin-top:2px;}
+  .info-row .l{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;}
+  .info-row .d{font-size:1.06rem;color:var(--ink);}
+  .info-row .flag{font-size:.7rem;color:var(--brass-deep);font-style:italic;}
+  .map-card{
+    border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-card);position:relative;
+    background:var(--forest-700);min-height:440px;display:flex;flex-direction:column;justify-content:flex-end;
+    isolation:isolate;color:var(--cream);
+  }
+  .map-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.92;}
+  .map-card::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(22,33,26,.15),rgba(22,33,26,.82));}
+  .map-card .pin{padding:28px;}
+  .map-card .pin .eyebrow{color:var(--brass);}
+  .map-card .pin h3{font-size:1.7rem;margin-top:.2em;}
+  .map-card .pin p{font-size:.92rem;color:rgba(244,239,228,.85);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--forest-900);color:rgba(244,239,228,.7);}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;padding:34px 0;}
+  .foot-inner .wordmark .txt b{color:var(--cream);}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:.85rem;letter-spacing:.06em;}
+  .foot-links a:hover{color:var(--brass);}
+  .foot-legal{width:100%;border-top:1px solid rgba(244,239,228,.12);padding:18px 0;font-size:.76rem;color:rgba(244,239,228,.45);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+
+  /* reveal — only hidden when JS confirms it will animate them (avoids stuck-invisible content) */
+  html.js-anim .reveal{opacity:0;transform:translateY(30px);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:980px){
+    .maison-grid,.stay-grid,.contact-grid{grid-template-columns:1fr;}
+    .exp-grid{grid-template-columns:1fr 1fr;}
+    .maison-media .frame img{height:440px;}
+    .maison-media .badge{left:18px;}
+    .stay-grid .stay-media{order:-1;}
+  }
+  @media(max-width:760px){
+    .nav-links{
+      position:fixed;inset:0 0 0 auto;width:min(82vw,340px);
+      background:rgba(20,28,22,.97);backdrop-filter:blur(20px);
+      flex-direction:column;justify-content:center;align-items:flex-start;
+      padding:90px 36px;gap:28px;transform:translateX(110%);transition:transform .45s var(--ease);
+      box-shadow:-30px 0 60px -20px rgba(0,0,0,.6);
+    }
+    .nav-links.open{transform:translateX(0);}
+    .nav-links a.link{font-size:1.05rem;}
+    .nav-toggle{display:flex;z-index:120;}
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+    .exp-grid{grid-template-columns:1fr;}
+    .hero .support{font-size:.98rem;}
+    .hero-cta{width:100%;flex-direction:column;align-items:stretch;}
+    .hero-cta .btn{justify-content:center;width:100%;}
+    .table-head{align-items:flex-start;}
+    .menu-row .name{font-size:1.3rem;}
+    .stats{gap:26px;}
+  }
+  @media(max-width:420px){
+    .wrap{padding:0 20px;}
+    .wordmark .txt b{font-size:1.12rem;}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+    .reveal{opacity:1 !important;transform:none !important;}
+    .hero-media img{height:100% !important;transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="wordmark" aria-label="Hôtel de la Sûre, accueil">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none"><path d="M44 22c-3-5-22-6-22 4 0 9 22 5 22 14 0 9-19 8-23 2" stroke="#c79a4b" stroke-width="4" stroke-linecap="round"/></svg>
+      </span>
+      <span class="txt">
+        <b>Hôtel de la Sûre</b>
+        <span>Restaurant Comte Godefroy</span>
+      </span>
+    </a>
+    <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
+      <a class="link" href="#maison">La Maison</a>
+      <a class="link" href="#table">La Table</a>
+      <a class="link" href="#sejour">Le Séjour</a>
+      <a class="btn btn-brass" href="#contact">Réserver</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero-media" aria-hidden="true">
+    <!-- PLACEHOLDER image (picsum #1018): misty wooded valley with winding road — reads as the forested Sûre valley / Ardennes luxembourgeoises -->
+    <img src="https://picsum.photos/id/1018/2000/1300" alt="" fetchpriority="high" />
+  </div>
+  <div class="wrap hero-content">
+    <p class="eyebrow reveal">Esch-sur-Sûre · Parc Naturel de la Haute-Sûre</p>
+    <h1 class="reveal">Hôtel de la Sûre<br><em>au fil de l'eau</em></h1>
+    <p class="tagline reveal">L'auberge au bord de la rivière, là où les Ardennes se reposent.</p>
+    <p class="support reveal">Depuis la boucle de la Sûre, une maison de tradition luxembourgeoise : la table du <strong>Restaurant Comte Godefroy</strong>, des chambres paisibles et la grande nature à votre porte.</p>
+    <div class="hero-cta reveal">
+      <a href="#contact" class="btn btn-brass">Réserver une table</a>
+      <a href="#sejour" class="btn btn-ghost">Découvrir les chambres</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span>Découvrir</span><span class="line"></span></div>
+</section>
+
+<!-- ============ LA MAISON ============ -->
+<section class="maison pad" id="maison">
+  <div class="wrap maison-grid">
+    <div class="maison-copy">
+      <p class="eyebrow reveal">Notre Maison</p>
+      <h2 class="lead reveal">Une halte de pierre<br>et de forêt.</h2>
+      <p class="reveal">Au pied du château médiéval, là où la rivière enlace le village, l'Hôtel de la Sûre veille depuis des générations sur les voyageurs des Ardennes. Murs anciens, feu de bois et silence de la vallée : ici, le temps ralentit.</p>
+      <p class="reveal">On y vient pour la table, on y reste pour le calme — entre les sentiers du Parc Naturel, les eaux du lac de la Haute-Sûre et l'art de recevoir, simplement et avec soin.</p>
+      <div class="stats reveal">
+        <div class="stat"><b>1898</b><span>Maison de tradition</span></div>
+        <div class="stat"><b>14</b><span>Chambres paisibles</span></div>
+        <div class="stat"><b>0 km</b><span>Au cœur du village</span></div>
+      </div>
+    </div>
+    <div class="maison-media reveal">
+      <div class="frame">
+        <!-- PLACEHOLDER image (picsum #786): pine forest path — evokes the surrounding Parc Naturel de la Haute-Sûre -->
+        <img src="https://picsum.photos/id/786/900/1120" alt="Forêt du Parc Naturel de la Haute-Sûre entourant Esch-sur-Sûre (image d'illustration)" loading="lazy" />
+      </div>
+      <div class="badge" aria-hidden="true">
+        <div class="k">« Au bord de la Sûre »</div>
+        <div class="v">Vue rivière & château depuis la terrasse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LA TABLE (Restaurant feature) ============ -->
+<section class="table-sec pad" id="table">
+  <div class="table-bg" aria-hidden="true">
+    <!-- PLACEHOLDER image (picsum #999): plated dessert on dark wood — fine-dining ambiance -->
+    <img src="https://picsum.photos/id/999/1600/1000" alt="" loading="lazy" />
+  </div>
+  <div class="wrap table-inner">
+    <div class="table-head">
+      <div>
+        <p class="eyebrow reveal">Restaurant Comte Godefroy</p>
+        <h2 class="reveal">La table du <em>terroir</em>.</h2>
+      </div>
+      <p class="reveal">Une cuisine de saison, généreuse et précise : gibier des Ardennes, truite de rivière, charcuteries et fromages du pays. Carte évolutive selon le marché.</p>
+    </div>
+
+    <div class="menu-list">
+      <div class="menu-row reveal">
+        <div class="name">Truite de la Sûre, beurre noisette
+          <small>poireaux fondants, amandes torréfiées</small>
+        </div>
+        <div class="price">24 €</div>
+      </div>
+      <div class="menu-row reveal">
+        <div class="name">Civet de cerf des Ardennes
+          <small>spätzle maison, airelles, jus corsé</small>
+        </div>
+        <div class="price">28 €</div>
+      </div>
+      <div class="menu-row reveal">
+        <div class="name">Jambon fumé au feu de hêtre
+          <small>pommes sautées, salade du jardin</small>
+        </div>
+        <div class="price">19 €</div>
+      </div>
+      <div class="menu-row reveal">
+        <div class="name">Poire pochée & miel de la vallée
+          <small>crème de noisette, sablé breton</small>
+        </div>
+        <div class="price">11 €</div>
+      </div>
+    </div>
+
+    <div class="menu-foot reveal">
+      <span>Menu du marché 3 services — 39 €</span>
+      <span>·</span>
+      <span>Terrasse au bord de l'eau, beaux jours</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPÉRIENCES (highlight grid) ============ -->
+<section class="exp pad">
+  <div class="wrap">
+    <div class="exp-head">
+      <p class="eyebrow reveal">Aux alentours</p>
+      <h2 class="reveal">Le village, la <em>vallée</em>, la table.</h2>
+    </div>
+    <div class="exp-grid">
+      <article class="card reveal">
+        <!-- PLACEHOLDER image (picsum #163): outdoor café terrace, wooden tables & chalkboard menu -->
+        <img src="https://picsum.photos/id/163/800/900" alt="Terrasse de l'auberge avec tables en bois et ardoise du jour (image d'illustration)" loading="lazy" />
+        <div class="body">
+          <span class="num">01</span>
+          <h3>La terrasse</h3>
+          <p>Un verre face à la rivière, l'ardoise du jour et le château pour décor.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER image (picsum #431): café with brass reception bell on warm wood — reception & café -->
+        <img src="https://picsum.photos/id/431/800/900" alt="Café et cloche de réception en laiton sur comptoir en bois (image d'illustration)" loading="lazy" />
+        <div class="body">
+          <span class="num">02</span>
+          <h3>L'accueil</h3>
+          <p>Un café au coin du feu, des conseils de sentiers et l'art de recevoir.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER image (picsum #312): artisanal honey pot — produits du terroir -->
+        <img src="https://picsum.photos/id/312/800/900" alt="Pot de miel artisanal de la vallée de la Haute-Sûre (image d'illustration)" loading="lazy" />
+        <div class="body">
+          <span class="num">03</span>
+          <h3>Le terroir</h3>
+          <p>Miels, fromages et confitures de producteurs voisins, à la carte et à emporter.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LE SÉJOUR (stay) ============ -->
+<section class="stay pad" id="sejour">
+  <div class="wrap stay-grid">
+    <div class="stay-media reveal">
+      <!-- PLACEHOLDER image (picsum #365): steaming cup & morning light on bed linen — chambres / petit-déjeuner -->
+      <img src="https://picsum.photos/id/365/900/620" alt="Petit-déjeuner servi en chambre dans la lumière du matin (image d'illustration)" loading="lazy" />
+    </div>
+    <div class="stay-copy">
+      <p class="eyebrow reveal">Le Séjour</p>
+      <h2 class="reveal">Des chambres <em>au calme</em> de la vallée.</h2>
+      <p class="reveal">Quatorze chambres au confort feutré, entre pierre apparente et tons de forêt. On s'endort au murmure de la Sûre, on s'éveille au chant des Ardennes — petit-déjeuner du pays compris.</p>
+      <ul class="stay-feats">
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 12a9 9 0 0118 0M3 12a9 9 0 0018 0"/></svg><span>Vue rivière ou village selon les chambres</span></li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg><span>Petit-déjeuner du terroir & wifi offert</span></li>
+        <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg><span>Départ de sentiers & pistes cyclables à pied</span></li>
+      </ul>
+      <a href="#contact" class="btn btn-brass reveal">Demander une chambre</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact pad" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-copy">
+      <p class="eyebrow reveal">Nous trouver</p>
+      <h2 class="reveal">Au cœur d'<em>Esch-sur-Sûre</em>.</h2>
+      <p class="reveal">Réservez votre table ou votre chambre — nous vous répondons avec plaisir, en français, allemand ou luxembourgeois.</p>
+      <div class="info">
+        <div class="info-row reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div><div class="l">Adresse</div><div class="d">Rue du Moulin, 9650 Esch-sur-Sûre, Luxembourg</div></div>
+        </div>
+        <div class="info-row reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5c0 9 6 15 15 15 1.2 0 2-.8 2-2v-2.3c0-.9-.6-1.6-1.4-1.8l-2.7-.7c-.7-.2-1.4.1-1.8.7l-.7 1c-2.4-1.1-4.3-3-5.4-5.4l1-.7c.6-.4.9-1.1.7-1.8l-.7-2.7C9.9 4.6 9.2 4 8.3 4H6c-1.2 0-2 .8-2 1z"/></svg>
+          <div><div class="l">Téléphone</div><div class="d">+352 00 00 00 <span class="flag">— numéro à confirmer (placeholder)</span></div></div>
+        </div>
+        <div class="info-row reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <div><div class="l">E-mail</div><div class="d">bonjour@example-hoteldelasure.lu <span class="flag">— adresse à confirmer (placeholder)</span></div></div>
+        </div>
+        <div class="info-row reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div><div class="l">Service</div><div class="d">Restaurant 12h–14h · 18h30–21h · fermé le lundi</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="map-card reveal" role="img" aria-label="Esch-sur-Sûre dans sa vallée boisée">
+      <!-- PLACEHOLDER image (picsum #1018): wooded valley — stands in for the Sûre valley setting until a real map/photo is supplied -->
+      <img src="https://picsum.photos/id/1018/900/900" alt="" loading="lazy" />
+      <div class="pin">
+        <p class="eyebrow">À 1h de Luxembourg-Ville</p>
+        <h3>Esch-sur-Sûre</h3>
+        <p>Sortie 24 sur l'A7 · parking au village · gare de Kautenbach à proximité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-inner">
+    <a href="#top" class="wordmark">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none"><path d="M44 22c-3-5-22-6-22 4 0 9 22 5 22 14 0 9-19 8-23 2" stroke="#c79a4b" stroke-width="4" stroke-linecap="round"/></svg>
+      </span>
+      <span class="txt"><b>Hôtel de la Sûre</b><span>Restaurant Comte Godefroy</span></span>
+    </a>
+    <nav class="foot-links" aria-label="Liens de pied de page">
+      <a href="#maison">La Maison</a>
+      <a href="#table">La Table</a>
+      <a href="#sejour">Le Séjour</a>
+      <a href="#contact">Réserver</a>
+    </nav>
+  </div>
+  <div class="wrap foot-legal">
+    <span>© <span id="year"></span> Hôtel de la Sûre · Esch-sur-Sûre, Luxembourg</span>
+    <span>Maquette de présentation — coordonnées et photos à confirmer.</span>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // sticky nav state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // mobile menu
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', open);
+    toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // GSAP animations (guarded for reduced-motion + load)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  window.addEventListener('load', () => {
+    if (reduce || typeof gsap === 'undefined') {
+      document.documentElement.classList.remove('js-anim');
+      return;
+    }
+    window.__heroAnimated = true;
+    gsap.registerPlugin(ScrollTrigger);
+
+    // hero entrance — ends at opacity:1 (set explicitly so text never stays hidden)
+    gsap.set('.hero .reveal', {opacity:1});
+    gsap.from('.hero .reveal', {y:34, opacity:0, duration:1, ease:'power3.out', stagger:.12, delay:.15});
+
+    // hero parallax
+    gsap.to('.hero-media img', {
+      yPercent:14, ease:'none',
+      scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}
+    });
+
+    // generic reveals (elements already in view animate immediately)
+    gsap.utils.toArray('.reveal').forEach(el => {
+      if (el.closest('.hero')) return;
+      gsap.to(el, {
+        opacity:1, y:0, duration:.9, ease:'power3.out',
+        scrollTrigger:{trigger:el, start:'top 90%'}
+      });
+    });
+
+    ScrollTrigger.refresh();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Belair Beauté — Institut de beauté & extensions de cils · Luxembourg-Ville</title>
+<meta name="description" content="Belair Beauté — institut de beauté et spécialiste des extensions de cils au cœur du Belair, Luxembourg-Ville. Soins du regard, du visage et rituels sur-mesure." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="business.business" />
+<meta property="og:title" content="Belair Beauté — Institut de beauté & extensions de cils" />
+<meta property="og:description" content="Le geste juste, le regard sublimé. Institut de beauté au cœur du Belair, Luxembourg-Ville." />
+<meta property="og:locale" content="fr_LU" />
+<meta property="og:image" content="https://picsum.photos/id/1027/1200/630?grayscale" />
+<meta name="theme-color" content="#1a1410" />
+
+<!-- Inline SVG favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a1410'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-style='italic' fill='%23c9a86a' text-anchor='middle'%3EB%3C/text%3E%3C/svg%3E" />
+
+<!-- Fonts: Display = Cormorant Garamond (characterful editorial serif), Body = Jost (clean humanist grotesk). Not Inter/Roboto/Poppins/Montserrat/Lato/Arial/Fraunces. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Belair Beauté",
+  "description": "Institut de beauté et spécialiste des extensions de cils au cœur du Belair, Luxembourg-Ville.",
+  "image": "https://picsum.photos/id/1027/1200/630?grayscale",
+  "@id": "https://belair-beaute.lu",
+  "url": "https://belair-beaute.lu",
+  "telephone": "+352 00 00 00 00",
+  "priceRange": "€€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Avenue du X Septembre",
+    "addressLocality": "Luxembourg-Ville",
+    "addressRegion": "Belair",
+    "postalCode": "L-2550",
+    "addressCountry": "LU"
+  },
+  "areaServed": "Luxembourg-Ville",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:30", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "17:00" }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --ink:#1a1410;          /* near-black warm brown */
+    --espresso:#2b2118;
+    --champagne:#c9a86a;    /* brass / champagne gold */
+    --champagne-soft:#d8c19a;
+    --rose:#c98e83;         /* dusty rose accent */
+    --cream:#f6f0e7;        /* warm paper */
+    --cream-2:#efe6d8;
+    --sand:#e3d6c3;
+    --muted:#8a7d6c;
+    --line:rgba(26,20,16,.12);
+    --shadow:0 24px 60px -28px rgba(43,33,24,.45);
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Jost', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.04;letter-spacing:-.01em}
+  .eyebrow{
+    font-family:var(--sans);font-weight:400;font-size:.72rem;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--champagne);
+  }
+  .wrap{width:min(1180px,90vw);margin-inline:auto}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ---------- NAV ---------- */
+  header{position:fixed;inset:0 0 auto 0;z-index:100;transition:.45s ease}
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    width:min(1180px,90vw);margin:18px auto;padding:14px 26px;
+    border-radius:60px;
+    background:rgba(246,240,231,.55);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border:1px solid rgba(255,255,255,.4);
+    box-shadow:0 10px 40px -22px rgba(43,33,24,.5);
+    transition:.45s ease;
+  }
+  header.scrolled .nav{background:rgba(246,240,231,.82);padding:9px 26px;margin-top:12px}
+  .brand{font-family:var(--serif);font-size:1.55rem;font-weight:600;letter-spacing:.01em;display:flex;align-items:baseline;gap:.45rem}
+  .brand i{font-style:italic;color:var(--champagne)}
+  .brand small{font-family:var(--sans);font-size:.58rem;letter-spacing:.34em;text-transform:uppercase;color:var(--muted);font-weight:400}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{font-size:.82rem;letter-spacing:.08em;color:var(--espresso);position:relative;padding:4px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--champagne);transition:.35s}
+  .nav-links a:hover::after{width:100%}
+  .btn{
+    font-family:var(--sans);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+    padding:12px 26px;border-radius:60px;display:inline-block;transition:.4s;cursor:pointer;border:none;
+  }
+  .btn-gold{background:linear-gradient(135deg,#d8c19a,#c9a86a);color:var(--ink);box-shadow:0 10px 26px -12px rgba(201,168,106,.8)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(201,168,106,.95)}
+  .btn-ghost{border:1px solid var(--champagne);color:var(--espresso)}
+  .btn-ghost:hover{background:var(--champagne);color:var(--ink)}
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px}
+  .menu-toggle span{width:24px;height:1.5px;background:var(--ink);transition:.3s}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden}
+  .hero-media{position:absolute;inset:0;z-index:1}
+  .hero-media img{width:100%;height:120%;object-fit:cover;filter:grayscale(100%) contrast(1.02) brightness(.74);will-change:transform}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(105deg, rgba(26,20,16,.86) 0%, rgba(26,20,16,.5) 42%, rgba(26,20,16,.18) 100%),
+      radial-gradient(120% 80% at 80% 110%, rgba(201,168,106,.22), transparent 60%);
+  }
+  .hero-inner{position:relative;z-index:3;color:var(--cream);width:min(1180px,90vw);margin-inline:auto;padding-top:60px}
+  .hero .eyebrow{color:var(--champagne-soft)}
+  .hero h1{font-size:clamp(3.3rem,9vw,7rem);margin:.18em 0 .12em;color:#fbf6ee}
+  .hero h1 em{font-style:italic;color:var(--champagne-soft)}
+  .hero .lede{font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:34ch;color:rgba(246,240,231,.86);font-weight:300;margin-bottom:2.2rem}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .scroll-cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:3;color:rgba(246,240,231,.7);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:10px}
+  .scroll-cue::after{content:"";width:1px;height:42px;background:linear-gradient(var(--champagne-soft),transparent);animation:cue 2.4s ease-in-out infinite}
+  @keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative;padding:clamp(80px,12vh,150px) 0}
+  .reveal{opacity:0;transform:translateY(34px)}
+
+  /* ---------- MAISON ---------- */
+  .maison{background:var(--cream)}
+  .maison-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,90px);align-items:center}
+  .maison h2{font-size:clamp(2.4rem,4.6vw,3.7rem);margin:.3em 0 .6em}
+  .maison h2 em{font-style:italic;color:var(--champagne)}
+  .maison p{color:#594c3e;max-width:46ch;margin-bottom:1.2rem;font-size:1.04rem}
+  .maison .sign{font-family:var(--serif);font-style:italic;font-size:1.4rem;color:var(--espresso);margin-top:1.5rem}
+  .maison-media{position:relative}
+  .maison-media .frame{border-radius:8px 8px 80px 8px;overflow:hidden;box-shadow:var(--shadow)}
+  .maison-media img{width:100%;height:560px;object-fit:cover;filter:grayscale(100%) sepia(.18) contrast(1.02) brightness(.96)}
+  .maison-media .badge{
+    position:absolute;left:-30px;bottom:48px;background:rgba(246,240,231,.7);
+    backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.5);
+    border-radius:50%;width:150px;height:150px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;box-shadow:var(--shadow)
+  }
+  .badge .num{font-family:var(--serif);font-size:2.6rem;color:var(--champagne);line-height:1}
+  .badge small{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:6px;padding:0 10px}
+
+  /* ---------- SOINS ---------- */
+  .soins{background:linear-gradient(180deg,var(--espresso),var(--ink));color:var(--cream)}
+  .soins .head{text-align:center;max-width:60ch;margin:0 auto clamp(48px,6vw,72px)}
+  .soins h2{font-size:clamp(2.4rem,4.6vw,3.6rem);margin:.3em 0;color:#fbf6ee}
+  .soins h2 em{font-style:italic;color:var(--champagne-soft)}
+  .soins .head p{color:rgba(246,240,231,.7)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .card{
+    position:relative;border-radius:14px;overflow:hidden;min-height:430px;display:flex;flex-direction:column;justify-content:flex-end;
+    box-shadow:0 30px 60px -34px rgba(0,0,0,.8);isolation:isolate;
+  }
+  .card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.03) brightness(.78);z-index:-2;transition:.7s ease}
+  .card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(26,20,16,.05) 30%,rgba(26,20,16,.92) 100%)}
+  .card:hover img{transform:scale(1.06)}
+  .card-body{padding:30px 28px}
+  .card .k{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--champagne-soft)}
+  .card h3{font-size:1.9rem;margin:.25em 0 .35em;color:#fbf6ee}
+  .card p{font-size:.92rem;color:rgba(246,240,231,.78);max-width:30ch}
+  .card .price{margin-top:14px;font-family:var(--serif);font-style:italic;font-size:1.25rem;color:var(--champagne-soft)}
+
+  /* ---------- SIGNATURE / highlight ---------- */
+  .signature{background:var(--cream);position:relative;overflow:hidden}
+  .signature::before{content:"cils";position:absolute;right:-2%;top:-6%;font-family:var(--serif);font-style:italic;font-size:24vw;color:rgba(201,168,106,.07);z-index:0;pointer-events:none}
+  .sig-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(40px,6vw,80px);align-items:center;position:relative;z-index:1}
+  .sig-media{position:relative}
+  .sig-media img{width:100%;height:600px;object-fit:cover;border-radius:120px 8px 120px 8px;filter:grayscale(100%) contrast(1.04) brightness(.9);box-shadow:var(--shadow)}
+  .signature h2{font-size:clamp(2.4rem,4.6vw,3.7rem);margin:.3em 0 .5em}
+  .signature h2 em{font-style:italic;color:var(--champagne)}
+  .sig-list{list-style:none;margin-top:1.6rem}
+  .sig-list li{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .sig-list li:last-child{border-bottom:none}
+  .sig-list .dot{color:var(--champagne);font-family:var(--serif);font-size:1.5rem;line-height:1}
+  .sig-list strong{font-weight:500;font-size:1.02rem;display:block;color:var(--espresso)}
+  .sig-list span{color:var(--muted);font-size:.9rem}
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:linear-gradient(180deg,var(--ink),#120d09);color:var(--cream)}
+  .contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,90px);align-items:center}
+  .contact h2{font-size:clamp(2.6rem,5vw,4rem);margin:.25em 0 .4em;color:#fbf6ee}
+  .contact h2 em{font-style:italic;color:var(--champagne-soft)}
+  .contact p{color:rgba(246,240,231,.75);max-width:42ch}
+  .info{margin-top:2rem;display:grid;gap:18px}
+  .info-row{display:flex;gap:16px;align-items:flex-start}
+  .info-row .ic{color:var(--champagne);margin-top:3px;flex-shrink:0}
+  .info-row .lab{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+  .info-row .val{font-size:1.06rem;color:var(--cream)}
+  .ph{color:var(--rose);font-size:.72rem;letter-spacing:.06em}
+  .contact-card{
+    background:rgba(246,240,231,.05);border:1px solid rgba(201,168,106,.25);
+    border-radius:18px;padding:38px;backdrop-filter:blur(10px);box-shadow:0 30px 60px -34px rgba(0,0,0,.7)
+  }
+  .contact-card h3{font-size:1.7rem;color:#fbf6ee;margin-bottom:.5em}
+  .contact-card p{font-size:.95rem;margin-bottom:1.6rem}
+  .hours{display:grid;gap:10px;margin-bottom:1.8rem}
+  .hours div{display:flex;justify-content:space-between;font-size:.92rem;color:rgba(246,240,231,.85);padding-bottom:8px;border-bottom:1px solid rgba(246,240,231,.1)}
+  .hours span:last-child{color:var(--champagne-soft)}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:#120d09;color:rgba(246,240,231,.6);padding:32px 0}
+  .foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  .foot .brand{font-size:1.3rem;color:var(--cream)}
+  .foot small{font-size:.78rem;letter-spacing:.04em}
+  .foot-links{display:flex;gap:22px;font-size:.8rem}
+  .foot-links a:hover{color:var(--champagne-soft)}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:920px){
+    .maison-grid,.sig-grid,.contact-grid{grid-template-columns:1fr;gap:48px}
+    .sig-grid .sig-media{order:-1}
+    .cards{grid-template-columns:1fr;gap:20px}
+    .card{min-height:340px}
+    .maison-media img,.sig-media img{height:420px}
+    .nav-links,.nav .btn-ghost{display:none}
+    .menu-toggle{display:flex}
+    .nav.open .nav-links{
+      display:flex;position:absolute;top:78px;left:0;right:0;flex-direction:column;gap:18px;
+      background:rgba(246,240,231,.97);backdrop-filter:blur(16px);padding:26px;border-radius:20px;
+      box-shadow:var(--shadow);text-align:center
+    }
+    .nav.open .nav-links a{font-size:1rem}
+  }
+  @media(max-width:520px){
+    .nav{padding:12px 18px}
+    .maison-media .badge{left:50%;transform:translateX(-50%);bottom:-40px}
+    .hero-cta{flex-direction:column;align-items:stretch}
+    .hero-cta .btn{text-align:center}
+  }
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1!important;transform:none!important}
+    .hero-media img{transform:none!important}
+  }
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <nav class="nav" id="nav">
+    <a href="#top" class="brand">Belair<i>Beauté</i><small>Luxembourg</small></a>
+    <div class="nav-links">
+      <a href="#maison">La Maison</a>
+      <a href="#soins">Nos Soins</a>
+      <a href="#cils">Extensions</a>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="#contact" class="btn btn-ghost">Nous trouver</a>
+      <a href="#contact" class="btn btn-gold">Réserver</a>
+      <button class="menu-toggle" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <!-- PLACEHOLDER image — portrait/beauty close-up; grayscale editorial treatment. Swap for client photo of the institut. -->
+    <img id="heroImg" src="https://picsum.photos/id/1027/1800/1200?grayscale" alt="Portrait — soin du regard à l'institut Belair Beauté" />
+  </div>
+  <div class="hero-inner reveal">
+    <p class="eyebrow">Institut de beauté · Belair, Luxembourg-Ville</p>
+    <h1>Le geste juste,<br><em>le regard sublimé.</em></h1>
+    <p class="lede">Extensions de cils, soins du visage et rituels sur-mesure, dans un écrin feutré au cœur du Belair.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-gold">Prendre rendez-vous</a>
+      <a href="#soins" class="btn btn-ghost" style="border-color:rgba(216,193,154,.6);color:var(--cream)">Découvrir nos soins</a>
+    </div>
+  </div>
+  <div class="scroll-cue">Faites défiler</div>
+</section>
+
+<!-- ===================== LA MAISON ===================== -->
+<section class="maison" id="maison">
+  <div class="wrap maison-grid">
+    <div class="reveal">
+      <p class="eyebrow">Notre Maison</p>
+      <h2>Une parenthèse de beauté, <em>pensée pour vous</em>.</h2>
+      <p>Niché dans le quartier résidentiel du Belair, l'institut Belair Beauté cultive un art discret : celui de révéler ce que chaque visage a de plus juste. Lumière douce, matières nobles, mains expertes.</p>
+      <p>Chaque rendez-vous commence par une lecture attentive de votre peau et de votre regard, pour un protocole jamais standardisé — toujours le vôtre.</p>
+      <p class="sign">« La beauté, c'est l'attention faite geste. »</p>
+    </div>
+    <div class="maison-media reveal">
+      <div class="frame">
+        <!-- PLACEHOLDER image — calm interior / spa ambiance. Swap for real photo of the institut. -->
+        <img src="https://picsum.photos/id/1080/900/1120?grayscale" alt="Ambiance feutrée de l'institut Belair Beauté" />
+      </div>
+      <div class="badge">
+        <span class="num">Belair</span>
+        <small>Luxembourg-Ville</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOS SOINS ===================== -->
+<section class="soins" id="soins">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="eyebrow">La Carte</p>
+      <h2>Nos <em>soins signature</em></h2>
+      <p>Une carte resserrée, exécutée avec exigence. Des durées indicatives, des prix sur consultation.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <!-- PLACEHOLDER — lash / eye close-up. Swap for real treatment photo. -->
+        <img src="https://picsum.photos/id/177/700/900?grayscale" alt="Extensions de cils" />
+        <div class="card-body">
+          <span class="k">Le Regard</span>
+          <h3>Extensions de cils</h3>
+          <p>Cil à cil, volume russe ou effet mascara. Pose et remplissage par nos expertes.</p>
+          <span class="price">dès 75 €</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER — facial / skincare. Swap for real treatment photo. -->
+        <img src="https://picsum.photos/id/1062/700/900?grayscale" alt="Soin du visage" />
+        <div class="card-body">
+          <span class="k">L'Éclat</span>
+          <h3>Soins du visage</h3>
+          <p>Nettoyage profond, hydratation, éclat. Protocoles ajustés à votre peau.</p>
+          <span class="price">dès 90 €</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER — brows / beauty detail. Swap for real treatment photo. -->
+        <img src="https://picsum.photos/id/64/700/900?grayscale" alt="Sourcils et architecture du regard" />
+        <div class="card-body">
+          <span class="k">La Finition</span>
+          <h3>Sourcils & teinture</h3>
+          <p>Restructuration, teinture, brow lift. L'architecture juste pour votre visage.</p>
+          <span class="price">dès 40 €</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SIGNATURE / EXTENSIONS ===================== -->
+<section class="signature" id="cils">
+  <div class="wrap sig-grid">
+    <div class="sig-media reveal">
+      <!-- PLACEHOLDER — close-up of lashes / eyes. Swap for real client work. -->
+      <img src="https://picsum.photos/id/65/900/1100?grayscale" alt="Détail d'une pose d'extensions de cils" />
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">Notre Spécialité</p>
+      <h2>L'art de l'<em>extension de cils</em>.</h2>
+      <p style="color:#594c3e;max-width:44ch">Un regard ouvert, dès le réveil et sans effort. Nos poses sont réalisées fibre par fibre, dans le respect de votre cil naturel, pour un rendu fondu et durable.</p>
+      <ul class="sig-list">
+        <li><span class="dot">—</span><div><strong>Pose classique cil à cil</strong><span>Naturel, élégant, sur-mesure — le maquillage en moins.</span></div></li>
+        <li><span class="dot">—</span><div><strong>Volume russe & mixte</strong><span>De l'intensité maîtrisée pour un regard de soirée.</span></div></li>
+        <li><span class="dot">—</span><div><strong>Remplissage & entretien</strong><span>Toutes les 2 à 3 semaines pour garder le galbe parfait.</span></div></li>
+      </ul>
+      <a href="#contact" class="btn btn-gold" style="margin-top:26px">Réserver une pose</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <p class="eyebrow">Nous Rendre Visite</p>
+      <h2>Au cœur du <em>Belair</em>.</h2>
+      <p>Sur rendez-vous, du mardi au samedi. Poussez la porte de l'institut pour un moment suspendu, à deux pas du centre de Luxembourg-Ville.</p>
+      <div class="info">
+        <div class="info-row">
+          <span class="ic">◈</span>
+          <div><div class="lab">Adresse</div><div class="val">Quartier Belair · L-2550 Luxembourg-Ville</div></div>
+        </div>
+        <div class="info-row">
+          <span class="ic">☏</span>
+          <div><div class="lab">Téléphone</div><div class="val">+352 00 00 00 00 <span class="ph">(à confirmer — placeholder)</span></div></div>
+        </div>
+        <div class="info-row">
+          <span class="ic">✉</span>
+          <div><div class="lab">Email</div><div class="val">bonjour@belair-beaute.lu <span class="ph">(à confirmer — placeholder)</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-card reveal">
+      <h3>Prendre rendez-vous</h3>
+      <p>Réservez votre soin en ligne ou contactez-nous directement.</p>
+      <div class="hours">
+        <div><span>Mardi – Vendredi</span><span>09:30 – 19:00</span></div>
+        <div><span>Samedi</span><span>09:00 – 17:00</span></div>
+        <div><span>Dimanche – Lundi</span><span>Fermé</span></div>
+      </div>
+      <a href="#" class="btn btn-gold" style="width:100%;text-align:center">Réserver en ligne</a>
+      <a href="#" class="btn btn-ghost" style="width:100%;text-align:center;margin-top:12px;border-color:rgba(216,193,154,.4);color:var(--cream)">Nous écrire</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap foot">
+    <a href="#top" class="brand">Belair<i style="font-style:italic;color:var(--champagne)">Beauté</i></a>
+    <div class="foot-links">
+      <a href="#maison">La Maison</a>
+      <a href="#soins">Soins</a>
+      <a href="#cils">Extensions</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <small>© 2026 Belair Beauté · Luxembourg-Ville · Conçu avec soin.</small>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav state
+  const hdr = document.getElementById('hdr');
+  addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40), {passive:true});
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const nav = document.getElementById('nav');
+  burger.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  // Motion (guarded for reduced-motion)
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && window.gsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to('#heroImg', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.utils.toArray('.reveal').forEach(el => {
+      gsap.to(el, { opacity:1, y:0, duration:1, ease:'power3.out',
+        scrollTrigger:{ trigger:el, start:'top 86%' } });
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => { el.style.opacity=1; el.style.transform='none'; });
+  }
+</script>
+</body>
+</html>

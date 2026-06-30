@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Café du Théâtre — Café · Bar · Restaurant à Esch-sur-Alzette</title>
+<meta name="description" content="Café du Théâtre — un café, bar et restaurant chaleureux à deux pas de l'Escher Theater, à Esch-sur-Alzette. Cafés de spécialité, cuisine du marché et apéritifs jusqu'au lever de rideau." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant.restaurant" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Café du Théâtre — Café · Bar · Restaurant à Esch-sur-Alzette" />
+<meta property="og:description" content="À deux pas de l'Escher Theater : cafés de spécialité, cuisine du marché et apéritifs avant le spectacle." />
+<meta property="og:site_name" content="Café du Théâtre" />
+<!-- Placeholder OG image: on-subject cappuccino + service bell (picsum id 431) -->
+<meta property="og:image" content="https://picsum.photos/id/431/1200/630" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- Inline SVG favicon: brass coffee-cup glyph on espresso ground -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23211915'/%3E%3Cpath d='M8 12h13v6a5 5 0 0 1-5 5h-3a5 5 0 0 1-5-5z' fill='none' stroke='%23C4933F' stroke-width='2'/%3E%3Cpath d='M21 13h2.5a2.5 2.5 0 0 1 0 5H21' fill='none' stroke='%23C4933F' stroke-width='2'/%3E%3Cpath d='M11 6c-1 1.4-1 2.6 0 4M15.5 6c-1 1.4-1 2.6 0 4' fill='none' stroke='%23B4502E' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- LocalBusiness JSON-LD (placeholder contact details flagged in page) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Café du Théâtre",
+  "description": "Café, bar et restaurant à deux pas de l'Escher Theater à Esch-sur-Alzette.",
+  "servesCuisine": ["Café de spécialité", "Cuisine du marché", "Bistrot", "Apéritifs"],
+  "priceRange": "€€",
+  "image": "https://picsum.photos/id/431/1200/630",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Place de l'Hôtel de Ville",
+    "addressLocality": "Esch-sur-Alzette",
+    "postalCode": "4138",
+    "addressCountry": "LU"
+  },
+  "telephone": "+352 00 00 00 00",
+  "email": "bonjour@cafe-du-theatre.lu",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday"], "opens": "08:00", "closes": "23:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "08:00", "closes": "01:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "18:00" }
+  ]
+}
+</script>
+
+<style>
+  :root{
+    --ink:#211915;          /* espresso */
+    --ink-2:#2c2219;
+    --cream:#f4ebdd;
+    --cream-soft:#efe3cf;
+    --brass:#c4933f;
+    --brass-bright:#dcb05a;
+    --terra:#b4502e;
+    --sage:#7c8466;
+    --paper:#fbf6ec;
+    --line:rgba(33,25,21,.12);
+    --shadow-lg:0 30px 70px -30px rgba(33,25,21,.55);
+    --shadow-md:0 18px 40px -22px rgba(33,25,21,.45);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Hanken Grotesk",system-ui,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  .display{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;line-height:1.04;letter-spacing:-.01em}
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;font-weight:600;
+    color:var(--terra);
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    transition:all .45s var(--ease);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:14px auto 0;
+    padding:14px clamp(18px,4vw,30px);
+    display:flex;align-items:center;justify-content:space-between;
+    border-radius:18px;
+    background:rgba(251,246,236,.55);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border:1px solid rgba(255,255,255,.4);
+    box-shadow:0 10px 30px -18px rgba(33,25,21,.5);
+    transition:all .45s var(--ease);
+  }
+  header.nav.scrolled .nav-inner{
+    margin-top:8px;
+    background:rgba(33,25,21,.82);
+    border-color:rgba(196,147,63,.28);
+  }
+  header.nav.scrolled .brand,
+  header.nav.scrolled .nav-links a{color:var(--cream)}
+  header.nav.scrolled .brand .b-sub{color:var(--brass-bright)}
+  header.nav.scrolled .nav-links a:hover{color:var(--brass-bright)}
+
+  .brand{display:flex;align-items:baseline;gap:.5ch;line-height:1;color:var(--ink);transition:color .45s var(--ease)}
+  .brand .b-main{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:600;letter-spacing:.01em}
+  .brand .b-sub{font-size:.62rem;letter-spacing:.34em;text-transform:uppercase;font-weight:600;color:var(--terra);transition:color .45s var(--ease)}
+
+  .nav-links{display:flex;align-items:center;gap:clamp(20px,3vw,38px)}
+  .nav-links a{font-size:.83rem;font-weight:500;letter-spacing:.02em;color:var(--ink);transition:color .25s,opacity .25s;position:relative}
+  .nav-links .lnk::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1.5px;background:var(--brass);transition:width .3s var(--ease)}
+  .nav-links .lnk:hover{color:var(--terra)}
+  .nav-links .lnk:hover::after{width:100%}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.6ch;
+    font-family:"Hanken Grotesk",sans-serif;font-weight:600;font-size:.82rem;letter-spacing:.02em;
+    padding:.72em 1.4em;border-radius:999px;cursor:pointer;border:0;
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s;
+    background:linear-gradient(135deg,var(--brass) 0%,var(--terra) 130%);
+    color:#fff8ec;box-shadow:0 12px 26px -12px rgba(180,80,46,.7);
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px -14px rgba(180,80,46,.8)}
+  .btn.ghost{
+    background:transparent;color:var(--cream);border:1px solid rgba(244,235,221,.45);box-shadow:none;
+  }
+  .btn.ghost:hover{background:rgba(244,235,221,.1);border-color:var(--brass-bright)}
+  .btn.dark{background:var(--ink);color:var(--cream);box-shadow:var(--shadow-md)}
+
+  .burger{display:none;background:none;border:0;cursor:pointer;width:30px;height:22px;position:relative}
+  .burger span{position:absolute;left:0;height:2px;width:100%;background:currentColor;transition:.3s var(--ease);border-radius:2px}
+  .burger span:nth-child(1){top:0}
+  .burger span:nth-child(2){top:10px}
+  .burger span:nth-child(3){top:20px}
+  body.menu-open .burger{color:var(--cream)}
+  body.menu-open .burger span:nth-child(1){top:10px;transform:rotate(45deg)}
+  body.menu-open .burger span:nth-child(2){opacity:0}
+  body.menu-open .burger span:nth-child(3){top:10px;transform:rotate(-45deg)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:var(--cream)}
+  .hero-media{position:absolute;inset:0;z-index:0}
+  .hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+  .hero-media::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(33,25,21,.42) 0%,rgba(33,25,21,.18) 32%,rgba(33,25,21,.55) 72%,rgba(20,14,11,.92) 100%),
+      radial-gradient(120% 80% at 75% 18%,rgba(196,147,63,.22),transparent 55%);
+  }
+  .hero-grain{position:absolute;inset:0;z-index:1;opacity:.5;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+  .hero-content{position:relative;z-index:3;width:100%;padding-bottom:clamp(54px,8vh,96px);padding-top:120px}
+  .hero .eyebrow{color:var(--brass-bright)}
+  .hero h1{
+    font-family:"Cormorant Garamond",serif;font-weight:500;
+    font-size:clamp(3.2rem,10vw,7.4rem);line-height:.94;letter-spacing:-.015em;
+    margin:.18em 0 .12em;text-shadow:0 14px 40px rgba(0,0,0,.4);
+  }
+  .hero h1 em{font-style:italic;color:var(--brass-bright)}
+  .hero .tagline{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:clamp(1.3rem,3vw,2rem);color:#f6ecdb;opacity:.95;margin-bottom:.5em}
+  .hero .support{max-width:46ch;font-size:1.02rem;color:rgba(244,235,221,.86);margin-bottom:2em}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-meta{display:flex;gap:clamp(20px,4vw,46px);margin-top:clamp(34px,5vh,60px);flex-wrap:wrap;
+    border-top:1px solid rgba(244,235,221,.2);padding-top:24px}
+  .hero-meta .m{min-width:0}
+  .hero-meta .m b{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:600;color:var(--brass-bright);display:block;line-height:1.1}
+  .hero-meta .m span{font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,235,221,.72)}
+
+  .scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(244,235,221,.7);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase}
+  .scroll-cue .line{width:1px;height:38px;background:linear-gradient(var(--brass-bright),transparent);animation:cue 2.2s var(--ease) infinite}
+  @keyframes cue{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative}
+  .pad{padding:clamp(76px,11vh,140px) 0}
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---------- ABOUT ---------- */
+  .about{background:
+    radial-gradient(80% 60% at 12% 0%,rgba(196,147,63,.08),transparent 60%),
+    var(--paper);}
+  .about-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(36px,6vw,82px);align-items:center}
+  .about h2{font-size:clamp(2.4rem,5vw,3.8rem);color:var(--ink);margin:.2em 0 .55em;max-width:14ch}
+  .about p{font-size:1.05rem;color:#4a3b30;max-width:52ch;margin-bottom:1.1em}
+  .about .sig{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:1.5rem;color:var(--terra);margin-top:.4em}
+  .about-figure{position:relative}
+  .about-figure .frame{position:relative;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg)}
+  .about-figure .frame img{width:100%;height:clamp(360px,52vh,560px);object-fit:cover}
+  .about-figure .tag{
+    position:absolute;left:-14px;bottom:28px;z-index:2;
+    background:rgba(251,246,236,.78);backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.6);border-radius:14px;
+    padding:14px 20px;box-shadow:var(--shadow-md);
+  }
+  .about-figure .tag b{font-family:"Cormorant Garamond",serif;font-size:1.35rem;color:var(--ink);display:block;line-height:1}
+  .about-figure .tag span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra)}
+  .about-figure .halo{position:absolute;inset:auto -30px -30px auto;width:62%;height:62%;border:1px solid var(--brass);border-radius:20px;z-index:0}
+
+  /* feature strip */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+  .feature{
+    padding:22px 20px;border-radius:16px;
+    background:linear-gradient(160deg,#fff 0%,var(--cream-soft) 130%);
+    border:1px solid rgba(255,255,255,.7);
+    box-shadow:0 16px 34px -26px rgba(33,25,21,.5);
+  }
+  .feature .ic{width:38px;height:38px;color:var(--terra);margin-bottom:12px}
+  .feature h3{font-family:"Cormorant Garamond",serif;font-size:1.35rem;font-weight:600;color:var(--ink);margin-bottom:.2em}
+  .feature p{font-size:.9rem;color:#5a4a3d}
+
+  /* ---------- MENU HIGHLIGHTS ---------- */
+  .menu{background:var(--ink);color:var(--cream);overflow:hidden}
+  .menu .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;margin-bottom:clamp(34px,6vh,64px)}
+  .menu h2{font-size:clamp(2.4rem,5vw,4rem);color:var(--cream);max-width:16ch}
+  .menu h2 em{font-style:italic;color:var(--brass-bright)}
+  .menu .head p{color:rgba(244,235,221,.7);max-width:34ch;font-size:.98rem}
+  .menu .eyebrow{color:var(--brass-bright)}
+
+  .menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .card{
+    position:relative;border-radius:18px;overflow:hidden;min-height:360px;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    box-shadow:var(--shadow-lg);isolation:isolate;
+  }
+  .card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1s var(--ease)}
+  .card::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(20,14,11,.05) 0%,rgba(20,14,11,.35) 45%,rgba(20,14,11,.92) 100%);}
+  .card:hover img{transform:scale(1.07)}
+  .card-body{padding:22px 22px 24px}
+  .card .k{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:var(--brass-bright);font-weight:600}
+  .card h3{font-family:"Cormorant Garamond",serif;font-size:1.55rem;font-weight:600;margin:.18em 0 .3em;line-height:1.05}
+  .card p{font-size:.86rem;color:rgba(244,235,221,.82);margin-bottom:.7em}
+  .card .price{font-family:"Cormorant Garamond",serif;font-size:1.2rem;color:var(--cream);font-weight:600}
+  .card.tall{grid-row:span 2;min-height:auto}
+  .menu .foot{margin-top:34px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;color:rgba(244,235,221,.6);font-size:.86rem}
+
+  /* ---------- VISIT / CONTACT ---------- */
+  .visit{background:
+    radial-gradient(90% 70% at 88% 8%,rgba(180,80,46,.07),transparent 60%),
+    var(--paper);}
+  .visit-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(34px,5vw,72px);align-items:stretch}
+  .visit h2{font-size:clamp(2.4rem,5vw,3.8rem);color:var(--ink);margin:.18em 0 .5em;max-width:13ch}
+  .visit .lead{font-size:1.05rem;color:#4a3b30;max-width:46ch;margin-bottom:2em}
+  .info-row{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line)}
+  .info-row .ic{flex:0 0 22px;width:22px;height:22px;color:var(--terra);margin-top:3px}
+  .info-row .t b{display:block;font-family:"Cormorant Garamond",serif;font-size:1.25rem;color:var(--ink);font-weight:600;line-height:1.2}
+  .info-row .t span{font-size:.92rem;color:#5a4a3d}
+  .placeholder-note{font-size:.74rem;color:var(--terra);letter-spacing:.04em;margin-top:.3em;font-style:italic}
+
+  .visit-card{
+    position:relative;border-radius:22px;overflow:hidden;min-height:420px;
+    box-shadow:var(--shadow-lg);display:flex;flex-direction:column;justify-content:flex-end;
+  }
+  .visit-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+  .visit-card::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:linear-gradient(180deg,rgba(20,14,11,.1),rgba(20,14,11,.78));}
+  .visit-card .hours{padding:26px 26px 28px;color:var(--cream)}
+  .visit-card .hours h3{font-family:"Cormorant Garamond",serif;font-size:1.6rem;font-weight:600;margin-bottom:.6em}
+  .hours-line{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-bottom:1px dashed rgba(244,235,221,.22);font-size:.92rem}
+  .hours-line:last-child{border-bottom:0}
+  .hours-line span:last-child{color:var(--brass-bright);font-weight:600}
+
+  /* reservation form */
+  .resform{margin-top:26px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .resform input,.resform select{
+    width:100%;padding:.85em 1em;border-radius:12px;border:1px solid var(--line);
+    background:#fff;font-family:inherit;font-size:.92rem;color:var(--ink);
+    box-shadow:0 6px 16px -14px rgba(33,25,21,.5);
+  }
+  .resform input:focus,.resform select:focus{outline:none;border-color:var(--brass)}
+  .resform .full{grid-column:1/-1}
+  .resform button{grid-column:1/-1;justify-content:center;width:100%}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink-2);color:rgba(244,235,221,.72);padding:46px 0 30px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  footer .brand .b-main{color:var(--cream)}
+  .foot-soc{display:flex;gap:14px}
+  .foot-soc a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(244,235,221,.2);color:rgba(244,235,221,.8);transition:.3s var(--ease)}
+  .foot-soc a:hover{background:var(--brass);color:var(--ink);border-color:var(--brass);transform:translateY(-2px)}
+  .foot-bottom{margin-top:30px;padding-top:20px;border-top:1px solid rgba(244,235,221,.12);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:.78rem;color:rgba(244,235,221,.5)}
+
+  /* mobile menu panel */
+  .mobile-panel{
+    position:fixed;inset:0;z-index:99;background:rgba(33,25,21,.97);
+    backdrop-filter:blur(8px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;
+    opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
+  }
+  .mobile-panel.open{opacity:1;pointer-events:auto}
+  .mobile-panel a{color:var(--cream);font-family:"Cormorant Garamond",serif;font-size:2rem}
+  .mobile-panel a.btn{font-family:"Hanken Grotesk",sans-serif;font-size:.95rem}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:1000px){
+    .menu-grid{grid-template-columns:repeat(2,1fr)}
+    .card.tall{grid-row:auto;min-height:360px}
+    .features{grid-template-columns:1fr}
+  }
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .burger{display:block}
+    header.nav.scrolled .burger{color:var(--cream)}
+    .about-grid,.visit-grid{grid-template-columns:1fr}
+    .about-figure{order:-1}
+    .about-figure .frame img{height:46vh;min-height:320px}
+    .resform{grid-template-columns:1fr}
+  }
+  @media (max-width:560px){
+    .menu-grid{grid-template-columns:1fr}
+    .hero-meta .m b{font-size:1.3rem}
+    .hero .support{font-size:.96rem}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    .reveal{opacity:1!important;transform:none!important}
+    .hero-media img{transform:none!important}
+    .scroll-cue{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="Café du Théâtre, accueil">
+      <span class="b-main">Café du Théâtre</span>
+      <span class="b-sub">Esch</span>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a href="#maison" class="lnk">Notre maison</a>
+      <a href="#carte" class="lnk">La carte</a>
+      <a href="#visite" class="lnk">Nous trouver</a>
+      <a href="#visite" class="btn">Réserver une table</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-panel" id="mpanel">
+  <a href="#maison" class="mlink">Notre maison</a>
+  <a href="#carte" class="mlink">La carte</a>
+  <a href="#visite" class="mlink">Nous trouver</a>
+  <a href="#visite" class="btn mlink">Réserver une table</a>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <!-- PLACEHOLDER image: cappuccino with latte art + brass service bell (picsum id 431) — on-subject café -->
+    <img src="https://picsum.photos/id/431/2000/1300" alt="Cappuccino au lait moussé servi sur le comptoir en bois du Café du Théâtre" fetchpriority="high" />
+  </div>
+  <div class="hero-grain" aria-hidden="true"></div>
+
+  <div class="hero-content wrap">
+    <p class="eyebrow reveal">Café · Bar · Restaurant — Esch-sur-Alzette</p>
+    <h1 class="reveal">Le rendez-vous<br><em>d'avant&#8209;spectacle.</em></h1>
+    <p class="tagline reveal">À deux pas de l'Escher Theater, le temps ralentit.</p>
+    <p class="support reveal">Cafés de spécialité au lever du jour, cuisine du marché à midi, et l'apéritif qui s'étire jusqu'au lever de rideau. Une maison chaleureuse au cœur d'Esch.</p>
+    <div class="hero-cta reveal">
+      <a href="#visite" class="btn">Réserver une table</a>
+      <a href="#carte" class="btn ghost">Découvrir la carte</a>
+    </div>
+
+    <div class="hero-meta reveal">
+      <div class="m"><b>07h30</b><span>Premier café</span></div>
+      <div class="m"><b>~120 m</b><span>De l'Escher Theater</span></div>
+      <div class="m"><b>Apéro</b><span>Jusqu'au rideau</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"><span>Découvrir</span><span class="line"></span></div>
+</section>
+
+<!-- ===================== ABOUT / NOTRE MAISON ===================== -->
+<section class="about pad" id="maison">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <p class="eyebrow reveal">Notre maison</p>
+      <h2 class="display reveal">Un comptoir, une scène, et tout ce qu'il y a entre les deux.</h2>
+      <p class="reveal">Le Café du Théâtre est né d'une idée simple : offrir aux Eschois un lieu qui suit le rythme de la ville. On y prend son café avant le travail, son déjeuner sans façon, et son verre avant la représentation.</p>
+      <p class="reveal">Torréfaction de spécialité, produits de saison choisis au marché, vins luxembourgeois et de la Grande Région — tout est pensé pour que l'on s'y sente chez soi, du matin tôt jusqu'à tard le soir.</p>
+      <p class="sig reveal">— L'équipe du Café du Théâtre</p>
+
+      <div class="features reveal">
+        <div class="feature">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 12h2a2.5 2.5 0 0 1 0 5h-2"/><path d="M8 3c-.8 1-.8 2 0 3M12 3c-.8 1-.8 2 0 3"/></svg>
+          <h3>Café de spécialité</h3>
+          <p>Grains torréfiés avec soin, extraits à la minute par nos baristas.</p>
+        </div>
+        <div class="feature">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v8a3 3 0 0 0 6 0V3M6 11v10"/><path d="M16 3c-1.5 1.5-1.5 6 0 7.5V21"/><path d="M16 3c1.5 1.5 1.5 6 0 7.5"/></svg>
+          <h3>Cuisine du marché</h3>
+          <p>Une carte courte, qui change avec les saisons et les arrivages.</p>
+        </div>
+        <div class="feature">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h14l-6 8v6"/><path d="M9 21h6"/><path d="M13 17v4"/></svg>
+          <h3>L'apéro d'avant-rideau</h3>
+          <p>Vins de la Grande Région et planches à partager, jusqu'au spectacle.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-figure reveal">
+      <div class="halo" aria-hidden="true"></div>
+      <div class="frame">
+        <!-- PLACEHOLDER image: café terrace with chalkboard menu and outdoor tables (picsum id 163) — on-subject -->
+        <img src="https://picsum.photos/id/163/1000/1200" alt="Terrasse du café avec tables en bois et ardoise du jour" loading="lazy" />
+      </div>
+      <div class="tag">
+        <b>Place de l'Hôtel de Ville</b>
+        <span>Au cœur d'Esch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MENU HIGHLIGHTS ===================== -->
+<section class="menu pad" id="carte">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="eyebrow reveal">La carte</p>
+        <h2 class="display reveal">Quelques <em>moments</em> de la journée.</h2>
+      </div>
+      <p class="reveal">Une sélection qui évolue ; voici l'esprit de la maison, du premier espresso au dernier verre.</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="card tall reveal">
+        <!-- PLACEHOLDER image: espresso / coffee beans on wood (picsum id 425) — on-subject -->
+        <img src="https://picsum.photos/id/425/700/1000" alt="Grains de café torréfiés posés sur le comptoir" loading="lazy" />
+        <div class="card-body">
+          <span class="k">Le matin</span>
+          <h3>Café &amp; viennoiseries</h3>
+          <p>Espresso de torréfaction maison, flat white, et viennoiseries du jour cuites par notre boulanger.</p>
+          <span class="price">dès 3,20 €</span>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <!-- PLACEHOLDER image: plated dish on marble (picsum id 488) — on-subject -->
+        <img src="https://picsum.photos/id/488/600/600" alt="Plat du marché dressé dans un bol" loading="lazy" />
+        <div class="card-body">
+          <span class="k">À midi</span>
+          <h3>Le plat du marché</h3>
+          <p>Une assiette de saison, dressée à l'envie du chef.</p>
+          <span class="price">16,50 €</span>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <!-- PLACEHOLDER image: fresh seasonal ingredients on board (picsum id 240) — on-subject -->
+        <img src="https://picsum.photos/id/240/600/600" alt="Légumes et herbes frais sur une planche" loading="lazy" />
+        <div class="card-body">
+          <span class="k">À partager</span>
+          <h3>Planches &amp; tapas</h3>
+          <p>Charcuteries, fromages et bouchées de la Grande Région.</p>
+          <span class="price">dès 12 €</span>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <!-- PLACEHOLDER image: strawberry muesli / dessert bowl (picsum id 493) — on-subject -->
+        <img src="https://picsum.photos/id/493/600/600" alt="Coupe de muesli aux fraises fraîches" loading="lazy" />
+        <div class="card-body">
+          <span class="k">Les douceurs</span>
+          <h3>Pâtisseries maison</h3>
+          <p>Le dessert du jour et les douceurs faites maison.</p>
+          <span class="price">dès 5,50 €</span>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <!-- PLACEHOLDER image: roasted coffee beans texture (picsum id 766) — on-subject -->
+        <img src="https://picsum.photos/id/766/600/600" alt="Fond de grains de café fraîchement torréfiés" loading="lazy" />
+        <div class="card-body">
+          <span class="k">L'apéritif</span>
+          <h3>Vins &amp; cocktails</h3>
+          <p>Crémants, vins de Moselle et cocktails signature avant le rideau.</p>
+          <span class="price">dès 6 €</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="foot reveal">
+      <a href="#visite" class="btn">Réserver une table</a>
+      <span>Carte complète et menu du jour disponibles sur place.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VISIT / CONTACT ===================== -->
+<section class="visit pad" id="visite">
+  <div class="wrap visit-grid">
+    <div class="visit-info">
+      <p class="eyebrow reveal">Nous trouver</p>
+      <h2 class="display reveal">Passez nous voir avant le spectacle.</h2>
+      <p class="lead reveal">Au cœur d'Esch-sur-Alzette, à quelques pas de l'Escher Theater. Réservez votre table en quelques secondes — on garde le meilleur coin pour vous.</p>
+
+      <div class="reveal">
+        <div class="info-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <div class="t">
+            <b>Place de l'Hôtel de Ville</b>
+            <span>L-4138 Esch-sur-Alzette, Luxembourg</span>
+            <div class="placeholder-note">⚑ Adresse exemple — à confirmer avec le client.</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l1 4v2a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+          <div class="t">
+            <b>+352 00 00 00 00</b>
+            <span>Réservations &amp; groupes</span>
+            <div class="placeholder-note">⚑ Numéro fictif — à remplacer.</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          <div class="t">
+            <b>bonjour@cafe-du-theatre.lu</b>
+            <span>Événements &amp; privatisation</span>
+            <div class="placeholder-note">⚑ E-mail fictif — à remplacer.</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="resform reveal" onsubmit="event.preventDefault();this.reset();var n=this.querySelector('.note');n.textContent='Merci ! Démo — la réservation sera reliée à votre système.';n.style.display='block';">
+        <input type="text" name="nom" placeholder="Votre nom" required aria-label="Votre nom" />
+        <input type="tel" name="tel" placeholder="Téléphone" aria-label="Téléphone" />
+        <select name="couverts" class="full" aria-label="Nombre de couverts">
+          <option>2 couverts</option><option>3 couverts</option><option>4 couverts</option>
+          <option>5 couverts</option><option>6 couverts et plus</option>
+        </select>
+        <input type="datetime-local" name="moment" class="full" aria-label="Date et heure" />
+        <button type="submit" class="btn">Demander une réservation</button>
+        <p class="note full" style="display:none;font-size:.82rem;color:var(--sage);text-align:center;margin-top:4px"></p>
+      </form>
+    </div>
+
+    <div class="visit-card reveal">
+      <!-- PLACEHOLDER image: warm European cobblestone street near the venue (picsum id 322) — on-subject location feel -->
+      <img src="https://picsum.photos/id/322/1000/1200" alt="Ruelle pavée chaleureuse au cœur de la vieille ville" loading="lazy" />
+      <div class="hours">
+        <h3>Horaires</h3>
+        <div class="hours-line"><span>Lundi</span><span>Fermé</span></div>
+        <div class="hours-line"><span>Mardi – Jeudi</span><span>08h – 23h</span></div>
+        <div class="hours-line"><span>Vendredi – Samedi</span><span>08h – 01h</span></div>
+        <div class="hours-line"><span>Dimanche</span><span>09h – 18h</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <a href="#top" class="brand">
+        <span class="b-main">Café du Théâtre</span>
+        <span class="b-sub">Esch</span>
+      </a>
+      <div class="foot-soc">
+        <a href="#" aria-label="Facebook"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H17V3.6c-.3 0-1.3-.1-2.5-.1-2.45 0-4.15 1.5-4.15 4.25V9.9H7.6V13h2.75v8z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#visite" aria-label="Itinéraire"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="yr"></span> Café du Théâtre · Esch-sur-Alzette, Luxembourg</span>
+      <span>Concept &amp; site — démo · Images d'illustration (placeholders)</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // sticky nav state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // mobile panel
+  const burger = document.getElementById('burger');
+  const panel = document.getElementById('mpanel');
+  const toggle = (open) => {
+    panel.classList.toggle('open', open);
+    document.body.classList.toggle('menu-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true':'false');
+    burger.setAttribute('aria-label', open ? 'Fermer le menu':'Ouvrir le menu');
+    document.body.style.overflow = open ? 'hidden':'';
+  };
+  burger.addEventListener('click', () => toggle(!panel.classList.contains('open')));
+  panel.querySelectorAll('.mlink').forEach(a => a.addEventListener('click', () => toggle(false)));
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if(!reduce && window.gsap){
+    gsap.registerPlugin(ScrollTrigger);
+
+    // reveal on scroll
+    gsap.utils.toArray('.reveal').forEach((el) => {
+      ScrollTrigger.create({
+        trigger: el, start: 'top 86%',
+        onEnter: () => el.classList.add('in'),
+        once: true
+      });
+    });
+    // hero copy in immediately (staggered)
+    gsap.to('.hero .reveal', {duration:0});
+    document.querySelectorAll('.hero .reveal').forEach((el,i)=>{
+      setTimeout(()=>el.classList.add('in'), 120 + i*120);
+    });
+
+    // hero parallax (subtle)
+    gsap.to('.hero-media img', {
+      yPercent: 12, ease: 'none',
+      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>

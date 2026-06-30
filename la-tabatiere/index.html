@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>La Tabatière — Civette, Presse & Cadeaux · Luxembourg</title>
+<meta name="description" content="La Tabatière — votre civette de quartier à Luxembourg. Tabac, presse internationale, articles fumeurs et cadeaux choisis. Une maison où l'on prend le temps." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="business.business" />
+<meta property="og:title" content="La Tabatière — Civette, Presse & Cadeaux · Luxembourg" />
+<meta property="og:description" content="Tabac, presse internationale et cadeaux choisis au cœur de Luxembourg. Une maison où l'on prend le temps." />
+<meta property="og:locale" content="fr_LU" />
+<meta property="og:image" content="https://picsum.photos/id/431/1200/630" />
+
+<!-- Inline SVG favicon: a stylised pipe/leaf mark -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232b1d12'/%3E%3Cpath d='M8 19c0-4 3-7 7-7l2-4c.4-.9 1.7-.6 1.6.4l-.4 3.8c2.6.3 4.6 1.5 4.6 3.4 0 3-3.8 5.4-8.4 5.4S8 22 8 19z' fill='none' stroke='%23c79a4e' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TobaccoShop",
+  "name": "La Tabatière",
+  "description": "Civette, presse internationale et cadeaux choisis à Luxembourg.",
+  "image": "https://picsum.photos/id/431/1200/630",
+  "@id": "https://latabatiere.lu",
+  "url": "https://latabatiere.lu",
+  "telephone": "+352 00 00 00 00",
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Rue du Marché (à confirmer)",
+    "addressLocality": "Luxembourg",
+    "postalCode": "L-0000",
+    "addressCountry": "LU"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 49.6116, "longitude": 6.1319 },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "07:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "08:00", "closes": "18:00" }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --espresso:#2b1d12;
+  --espresso-2:#3a2818;
+  --tobacco:#6f4a28;
+  --amber:#a9692f;
+  --brass:#c79a4e;
+  --brass-soft:#d9b878;
+  --parchment:#f5ede0;
+  --cream:#fbf6ec;
+  --ink:#241710;
+  --muted:#8a7560;
+  --hair:rgba(43,29,18,.14);
+  --shadow-soft:0 24px 60px -28px rgba(40,24,10,.45);
+  --shadow-card:0 30px 70px -34px rgba(40,24,10,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Hanken Grotesk",sans-serif;
+  background:var(--cream);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:"Cormorant Garamond",serif;font-weight:500;line-height:1.05;letter-spacing:.005em}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.eyebrow{
+  font-size:.74rem;letter-spacing:.32em;text-transform:uppercase;
+  font-weight:600;color:var(--amber);
+}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-weight:600;font-size:.86rem;letter-spacing:.04em;
+  padding:.85rem 1.5rem;border-radius:999px;
+  background:linear-gradient(135deg,var(--brass) 0%,var(--amber) 100%);
+  color:#241003;
+  box-shadow:0 12px 28px -12px rgba(169,105,47,.7);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+  cursor:pointer;border:none;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 20px 38px -14px rgba(169,105,47,.85)}
+.btn--ghost{
+  background:transparent;color:var(--parchment);
+  border:1px solid rgba(245,237,224,.4);box-shadow:none;
+}
+.btn--ghost:hover{background:rgba(245,237,224,.08);box-shadow:none}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .4s ease,backdrop-filter .4s,box-shadow .4s,padding .4s;
+  padding:1.3rem 0;
+}
+.nav.scrolled{
+  background:rgba(43,29,18,.62);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  box-shadow:0 1px 0 rgba(245,237,224,.08),0 18px 40px -30px rgba(0,0,0,.7);
+  padding:.85rem 0;
+}
+.nav__inner{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:.6rem;color:var(--parchment)}
+.brand__mark{width:30px;height:30px;flex:0 0 auto}
+.brand__name{font-family:"Cormorant Garamond",serif;font-size:1.5rem;font-weight:600;letter-spacing:.02em}
+.nav__links{display:flex;align-items:center;gap:2rem}
+.nav__links a{
+  color:var(--parchment);font-size:.85rem;font-weight:500;letter-spacing:.06em;
+  opacity:.82;position:relative;transition:opacity .3s;
+}
+.nav__links a::after{
+  content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--brass);transition:width .35s;
+}
+.nav__links a:hover{opacity:1}
+.nav__links a:hover::after{width:100%}
+.nav__cta{padding:.6rem 1.15rem;font-size:.8rem}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.burger span{width:24px;height:2px;background:var(--parchment);border-radius:2px;transition:.3s}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;color:var(--parchment)}
+.hero__bg{position:absolute;inset:0;z-index:0}
+.hero__bg img{
+  width:100%;height:120%;object-fit:cover;
+  /* tasteful warm duotone so a generic photo reads as an old-world tobacconist interior */
+  filter:sepia(.55) saturate(1.05) brightness(.62) contrast(1.05);
+  will-change:transform;
+}
+.hero__bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 75% 15%,rgba(199,154,78,.22) 0%,transparent 55%),
+    linear-gradient(180deg,rgba(28,18,10,.55) 0%,rgba(28,18,10,.25) 35%,rgba(28,18,10,.92) 100%);
+}
+.hero__grain{
+  position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+.hero__content{position:relative;z-index:2;padding-bottom:7vh;padding-top:18vh}
+.hero__eyebrow{color:var(--brass-soft);margin-bottom:1.4rem}
+.hero h1{
+  font-size:clamp(3.2rem,9vw,7.4rem);font-weight:500;
+  max-width:14ch;text-shadow:0 2px 40px rgba(0,0,0,.4);
+}
+.hero h1 em{font-style:italic;color:var(--brass-soft)}
+.hero__sub{
+  margin-top:1.6rem;max-width:46ch;font-size:clamp(1rem,1.6vw,1.18rem);
+  color:rgba(245,237,224,.86);font-weight:300;
+}
+.hero__actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem}
+.hero__scroll{
+  position:absolute;bottom:2rem;right:max(4vw,1rem);z-index:2;
+  writing-mode:vertical-rl;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(245,237,224,.6);display:flex;align-items:center;gap:1rem;
+}
+.hero__scroll::after{content:"";width:1px;height:46px;background:linear-gradient(var(--brass),transparent);animation:drip 2.2s infinite}
+@keyframes drip{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
+
+/* ---------- SECTION SHELL ---------- */
+section{position:relative}
+.pad{padding:clamp(5rem,11vw,9rem) 0}
+.lede{font-size:clamp(1.05rem,1.7vw,1.32rem);color:#4a3829;font-weight:300;max-width:54ch}
+.reveal{opacity:0;transform:translateY(26px)}
+
+/* ---------- ABOUT / NOTRE MAISON ---------- */
+.maison{background:var(--cream)}
+.maison__grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.maison h2{font-size:clamp(2.4rem,5vw,3.8rem);margin:1.1rem 0 1.4rem;color:var(--espresso)}
+.maison h2 em{font-style:italic;color:var(--amber)}
+.maison p+p{margin-top:1.1rem}
+.maison__figure{position:relative}
+.maison__figure img{
+  width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;
+  filter:sepia(.32) saturate(1.05) contrast(1.02);
+  box-shadow:var(--shadow-card);
+}
+.maison__badge{
+  position:absolute;left:-26px;bottom:34px;
+  background:rgba(251,246,236,.94);backdrop-filter:blur(10px);
+  border:1px solid var(--hair);border-radius:14px;
+  padding:1.1rem 1.4rem;box-shadow:var(--shadow-soft);max-width:230px;
+}
+.maison__badge strong{font-family:"Cormorant Garamond",serif;font-size:2.2rem;color:var(--amber);display:block;line-height:1}
+.maison__badge span{font-size:.8rem;color:#5a4636;letter-spacing:.04em}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+.pillars{display:flex;gap:2rem;margin-top:2.4rem;flex-wrap:wrap}
+.pillars div{flex:1;min-width:140px}
+.pillars h3{font-size:1.35rem;color:var(--tobacco);margin-bottom:.2rem}
+.pillars p{font-size:.92rem;color:var(--muted)}
+
+/* ---------- HIGHLIGHT / L'ÉTABLI (offerings) ---------- */
+.offer{
+  background:
+    radial-gradient(100% 70% at 80% 0%,rgba(199,154,78,.1),transparent 60%),
+    linear-gradient(180deg,var(--espresso) 0%,var(--espresso-2) 100%);
+  color:var(--parchment);
+}
+.offer__head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-bottom:3rem}
+.offer h2{font-size:clamp(2.4rem,5vw,3.8rem);max-width:16ch}
+.offer h2 em{font-style:italic;color:var(--brass-soft)}
+.offer__head p{color:rgba(245,237,224,.7);max-width:34ch;font-weight:300}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.card{
+  position:relative;border-radius:16px;overflow:hidden;min-height:380px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  box-shadow:var(--shadow-card);isolation:isolate;
+  border:1px solid rgba(245,237,224,.08);
+}
+.card img{
+  position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;
+  filter:sepia(.4) saturate(1.05) brightness(.78);
+  transition:transform .9s cubic-bezier(.2,.8,.2,1);
+}
+.card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 30%,rgba(24,15,8,.92) 100%)}
+.card:hover img{transform:scale(1.07)}
+.card__body{padding:1.5rem 1.5rem 1.6rem}
+.card__body h3{font-size:1.7rem;margin-bottom:.35rem}
+.card__body p{font-size:.9rem;color:rgba(245,237,224,.78);font-weight:300}
+.card__tag{
+  position:absolute;top:1rem;left:1rem;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;
+  background:rgba(199,154,78,.92);color:#241003;padding:.32rem .7rem;border-radius:999px;font-weight:600;
+}
+
+/* ---------- CONTACT / VISITE ---------- */
+.visit{background:var(--parchment)}
+.visit__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:stretch}
+.visit h2{font-size:clamp(2.4rem,5vw,3.6rem);color:var(--espresso);margin:1rem 0 1.4rem}
+.visit h2 em{font-style:italic;color:var(--amber)}
+.info-row{display:flex;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--hair)}
+.info-row:last-of-type{border-bottom:none}
+.info-row .ic{flex:0 0 auto;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;
+  background:rgba(199,154,78,.16);color:var(--amber)}
+.info-row b{display:block;font-family:"Cormorant Garamond",serif;font-size:1.2rem;color:var(--espresso)}
+.info-row span{font-size:.92rem;color:#5a4636}
+.flag{font-size:.72rem;color:#a3461f;font-style:italic;letter-spacing:.02em}
+.visit__card{
+  position:relative;border-radius:16px;overflow:hidden;min-height:340px;box-shadow:var(--shadow-card);
+  display:flex;align-items:flex-end;
+}
+.visit__card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:sepia(.45) saturate(1.05) brightness(.7)}
+.visit__card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(24,15,8,.85))}
+.visit__caption{position:relative;z-index:1;padding:1.6rem;color:var(--parchment)}
+.visit__caption b{font-family:"Cormorant Garamond",serif;font-size:1.6rem;display:block}
+.visit__caption span{font-size:.85rem;color:rgba(245,237,224,.8)}
+
+/* ---------- FOOTER ---------- */
+.foot{background:var(--espresso);color:rgba(245,237,224,.72);padding:2.4rem 0}
+.foot__inner{display:flex;align-items:center;justify-content:space-between;gap:1.2rem;flex-wrap:wrap}
+.foot .brand__name{font-size:1.3rem}
+.foot__links{display:flex;gap:1.4rem;font-size:.84rem}
+.foot__links a{opacity:.78;transition:opacity .3s}
+.foot__links a:hover{opacity:1;color:var(--brass-soft)}
+.foot__legal{font-size:.74rem;color:rgba(245,237,224,.45);width:100%;text-align:center;margin-top:1.2rem}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:860px){
+  .nav__links{
+    position:fixed;inset:0 0 0 auto;width:min(78vw,320px);
+    background:rgba(43,29,18,.96);backdrop-filter:blur(20px);
+    flex-direction:column;justify-content:center;gap:2rem;
+    transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);padding:2rem;
+  }
+  .nav__links.open{transform:translateX(0)}
+  .nav__links a{font-size:1.1rem}
+  .burger{display:flex;z-index:101}
+  .maison__grid,.offer__head,.visit__grid{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr}
+  .maison__badge{left:auto;right:18px;bottom:18px}
+  .offer__head{margin-bottom:2.2rem}
+}
+@media(max-width:520px){
+  .hero__scroll{display:none}
+  .hero__content{padding-bottom:5vh}
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .hero__bg img{transform:none!important;height:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a href="#top" class="brand" aria-label="La Tabatière — accueil">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M8 19c0-4 3-7 7-7l2-4c.4-.9 1.7-.6 1.6.4l-.4 3.8c2.6.3 4.6 1.5 4.6 3.4 0 3-3.8 5.4-8.4 5.4S8 22 8 19z" fill="none" stroke="#c79a4e" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand__name">La Tabatière</span>
+    </a>
+    <div class="nav__links" id="navLinks">
+      <a href="#maison">Notre Maison</a>
+      <a href="#offre">La Boutique</a>
+      <a href="#visite">Nous Trouver</a>
+      <a href="#visite" class="btn nav__cta">Passer nous voir</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero__bg" id="heroBg">
+    <!-- PLACEHOLDER: warm low-light interior, treated as an old-world tobacconist / civette -->
+    <img src="https://picsum.photos/id/431/1920/1280" alt="Intérieur chaleureux de la civette La Tabatière" />
+  </div>
+  <div class="hero__grain"></div>
+  <div class="wrap hero__content">
+    <p class="eyebrow hero__eyebrow">Civette · Presse · Cadeaux — Luxembourg</p>
+    <h1>La maison où l'on <em>prend le temps</em>.</h1>
+    <p class="hero__sub">Le tabac choisi, la presse du monde et le petit cadeau qui touche juste — au coin de la rue, depuis toujours. Poussez la porte, l'odeur du bon papier vous attend.</p>
+    <div class="hero__actions">
+      <a href="#offre" class="btn">Découvrir la boutique</a>
+      <a href="#visite" class="btn btn--ghost">Horaires &amp; adresse</a>
+    </div>
+  </div>
+  <div class="hero__scroll" aria-hidden="true">Faites défiler</div>
+</header>
+
+<!-- ===== NOTRE MAISON ===== -->
+<section class="maison pad" id="maison">
+  <div class="wrap maison__grid">
+    <div class="reveal">
+      <p class="eyebrow">Notre Maison</p>
+      <h2>Une <em>civette de quartier</em>, à l'ancienne — tenue avec soin.</h2>
+      <p class="lede">La Tabatière, c'est cette adresse familière où l'on entre pour un journal et où l'on repart avec une conversation. Un comptoir patiné, des présentoirs bien rangés, et l'envie de bien faire.</p>
+      <p style="color:#5a4636;margin-top:1.2rem;max-width:54ch">Tabac et articles fumeurs, presse nationale et internationale, jeux, et une sélection de cadeaux qui ne ressemblent à aucun autre. On vous conseille comme on conseillerait un voisin : sans pression, avec le bon mot.</p>
+      <div class="pillars">
+        <div>
+          <h3>Le choix</h3>
+          <p>Une sélection serrée, jamais au hasard.</p>
+        </div>
+        <div>
+          <h3>Le conseil</h3>
+          <p>On connaît nos clients par leur prénom.</p>
+        </div>
+        <div>
+          <h3>Le quartier</h3>
+          <p>Ancrés à Luxembourg, fidèles depuis des années.</p>
+        </div>
+      </div>
+    </div>
+    <figure class="maison__figure reveal">
+      <!-- PLACEHOLDER: rolled newspapers / paper texture, reads as the press counter -->
+      <img src="https://picsum.photos/id/1080/900/1125" alt="Le comptoir de presse de La Tabatière" />
+      <div class="maison__badge">
+        <strong>Lun–Sam</strong>
+        <span>Ouvert tôt, fermé tard. On vous attend.</span>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ===== LA BOUTIQUE (highlight) ===== -->
+<section class="offer pad" id="offre">
+  <div class="wrap">
+    <div class="offer__head">
+      <div class="reveal">
+        <p class="eyebrow" style="color:var(--brass-soft)">La Boutique</p>
+        <h2>Trois rayons, une même <em>exigence</em>.</h2>
+      </div>
+      <p class="reveal">Du paquet de tabac au cadeau de dernière minute — tout est choisi pour la qualité, pas pour le volume.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <!-- PLACEHOLDER: dim warm shelf, reads as tobacco / pipes counter -->
+        <img src="https://picsum.photos/id/225/700/900" alt="Rayon tabac et articles fumeurs" />
+        <span class="card__tag">Tabac</span>
+        <div class="card__body">
+          <h3>Tabac &amp; articles fumeurs</h3>
+          <p>Cigarettes, tabac à rouler, pipes, briquets et accessoires — les marques que vous cherchez, bien tenues.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER: stacked papers / print, reads as the press wall -->
+        <img src="https://picsum.photos/id/24/700/900" alt="Rayon presse et magazines" />
+        <span class="card__tag">Presse</span>
+        <div class="card__body">
+          <h3>Presse du monde</h3>
+          <p>Quotidiens, magazines, titres internationaux et jeux de grattage. L'actualité, au comptoir, chaque matin.</p>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER: warm wrapped goods, reads as the gift table -->
+        <img src="https://picsum.photos/id/823/700/900" alt="Rayon cadeaux et idées" />
+        <span class="card__tag">Cadeaux</span>
+        <div class="card__body">
+          <h3>Cadeaux choisis</h3>
+          <p>Cartes, petites éditions, idées qui font plaisir et emballage soigné. Le geste juste, sans courir les boutiques.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NOUS TROUVER ===== -->
+<section class="visit pad" id="visite">
+  <div class="wrap visit__grid">
+    <div class="reveal">
+      <p class="eyebrow">Nous Trouver</p>
+      <h2>Au cœur de <em>Luxembourg</em>.</h2>
+      <p class="lede" style="margin-bottom:1.6rem">Poussez la porte aux heures d'ouverture, ou écrivez-nous — on répond avec plaisir.</p>
+
+      <div class="info-row">
+        <span class="ic" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </span>
+        <div>
+          <b>Adresse</b>
+          <span>Luxembourg-Ville, Grand-Duché de Luxembourg</span><br />
+          <span class="flag">Adresse exacte à confirmer avec le client</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="ic" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+        </span>
+        <div>
+          <b>Téléphone</b>
+          <span>+352 00 00 00 00</span><br />
+          <span class="flag">Numéro fictif — à remplacer</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="ic" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+        </span>
+        <div>
+          <b>E-mail</b>
+          <span>bonjour@latabatiere.lu</span><br />
+          <span class="flag">Adresse fictive — à remplacer</span>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <span class="ic" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <div>
+          <b>Horaires</b>
+          <span>Lun–Ven 07:00–19:00 · Sam 08:00–18:00 · Dim fermé</span><br />
+          <span class="flag">Horaires indicatifs — à confirmer</span>
+        </div>
+      </div>
+
+      <a href="mailto:bonjour@latabatiere.lu" class="btn" style="margin-top:1.8rem">Nous écrire</a>
+    </div>
+
+    <div class="visit__card reveal">
+      <!-- PLACEHOLDER: warm European street facade, reads as a Luxembourg shopfront -->
+      <img src="https://picsum.photos/id/660/900/700" alt="La devanture de La Tabatière à Luxembourg" />
+      <div class="visit__caption">
+        <b>La devanture</b>
+        <span>Reconnaissable à sa vitrine de presse — vous ne pouvez pas la manquer.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="foot">
+  <div class="wrap foot__inner">
+    <a href="#top" class="brand">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M8 19c0-4 3-7 7-7l2-4c.4-.9 1.7-.6 1.6.4l-.4 3.8c2.6.3 4.6 1.5 4.6 3.4 0 3-3.8 5.4-8.4 5.4S8 22 8 19z" fill="none" stroke="#c79a4e" stroke-width="1.6" stroke-linejoin="round"/>
+      </svg>
+      <span class="brand__name">La Tabatière</span>
+    </a>
+    <nav class="foot__links">
+      <a href="#maison">Notre Maison</a>
+      <a href="#offre">La Boutique</a>
+      <a href="#visite">Nous Trouver</a>
+    </nav>
+  </div>
+  <p class="foot__legal">© <span id="yr"></span> La Tabatière · Civette, presse &amp; cadeaux à Luxembourg. Concept de site — contenus et coordonnées à finaliser.</p>
+</footer>
+
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // Sticky nav state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const links = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open'); burger.setAttribute('aria-expanded', false);
+  }));
+
+  // Motion (guarded by reduced-motion)
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && window.gsap) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero parallax
+    gsap.to('#heroBg img', {
+      yPercent: 14, ease: 'none',
+      scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: true }
+    });
+
+    // Reveal on scroll
+    gsap.utils.toArray('.reveal').forEach((el, i) => {
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%' }, delay: (i % 3) * 0.06
+      });
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+  }
+</script>
+</body>
+</html>

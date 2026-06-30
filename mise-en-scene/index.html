@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mise en Scène — Restaurant gastronomique · Grillades sur pierre · Esch-sur-Alzette</title>
+<meta name="description" content="Mise en Scène — restaurant gastronomique à Esch-sur-Alzette. Grillades sur pierre brûlante, cave choisie et cuisine de saison. Une mise en scène du goût, à quelques pas du centre." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant" />
+<meta property="og:title" content="Mise en Scène — Grillades sur pierre · Esch-sur-Alzette" />
+<meta property="og:description" content="Cuisine gastronomique et grillades sur pierre brûlante au cœur d'Esch-sur-Alzette. La table se transforme en scène." />
+<meta property="og:locale" content="fr_LU" />
+<meta property="og:image" content="https://picsum.photos/id/999/1200/630" />
+<meta name="theme-color" content="#16110d" />
+
+<!-- Inline SVG favicon: ember flame mark -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2316110d'/%3E%3Cpath d='M16 5c3 4 1 6 3 9 1.6 2.4 0 6-3 6s-5-2.6-3.6-5.4C13.8 11 15 9 16 5z' fill='%23d8742f'/%3E%3Cpath d='M16 12c1.4 2 .6 3.2 1.6 4.8.8 1.3-.2 3-1.6 3s-2.4-1.4-1.7-2.8C15 15.6 15.6 14 16 12z' fill='%23f3c98b'/%3E%3C/svg%3E" />
+
+<!-- Fonts: Cormorant Garamond (display) + Jost (grotesk) — distinctive, not banned -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Mise en Scène",
+  "description": "Restaurant gastronomique et grillades sur pierre brûlante à Esch-sur-Alzette, Luxembourg.",
+  "servesCuisine": ["Gastronomique", "Grillades", "Cuisine de saison"],
+  "priceRange": "€€€",
+  "image": "https://picsum.photos/id/999/1200/630",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Esch-sur-Alzette",
+    "addressCountry": "LU"
+  },
+  "telephone": "+352 00 00 00 00",
+  "email": "bonjour@miseenscene.lu",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday"], "opens": "18:30", "closes": "22:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "18:30", "closes": "23:30"},
+    {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "12:00", "closes": "15:00"}
+  ]
+}
+</script>
+
+<noscript><style>.reveal{opacity:1!important;transform:none!important}.nav-links{position:static!important;transform:none!important}.burger{display:none!important}</style></noscript>
+<style>
+:root{
+  --noir:#16110d;        /* charcoal-brown base */
+  --noir-2:#1f1813;
+  --noir-3:#2a2019;
+  --stone:#c9bcab;       /* warm stone */
+  --stone-soft:#e9e0d3;
+  --ember:#d8742f;       /* grill ember orange */
+  --ember-bright:#ec9a52;
+  --gold:#caa46a;        /* warm brass */
+  --cream:#f6efe3;
+  --line:rgba(201,188,171,.16);
+  --ink:#0d0a07;
+  --shadow:0 28px 70px -28px rgba(0,0,0,.7);
+  --shadow-soft:0 18px 50px -24px rgba(0,0,0,.6);
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--noir);
+  color:var(--stone-soft);
+  font-family:'Jost',system-ui,sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.05;letter-spacing:.01em}
+.eyebrow{
+  font-family:'Jost',sans-serif;font-weight:500;
+  text-transform:uppercase;letter-spacing:.42em;
+  font-size:.7rem;color:var(--ember-bright);
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;cursor:pointer;
+  font-family:'Jost',sans-serif;font-weight:500;font-size:.82rem;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:.95em 1.7em;border-radius:100px;border:1px solid transparent;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s,color .35s,box-shadow .35s;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--ember),#b65a1d);
+  color:#fff;box-shadow:0 14px 34px -12px rgba(216,116,47,.7);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 22px 44px -14px rgba(216,116,47,.85)}
+.btn-ghost{border-color:var(--line);color:var(--stone-soft);background:rgba(255,255,255,.02)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--cream);transform:translateY(-3px)}
+.btn svg{width:1em;height:1em}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem clamp(20px,5vw,48px);
+  transition:background .4s,backdrop-filter .4s,box-shadow .4s,padding .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(22,17,13,.72);
+  backdrop-filter:blur(16px) saturate(140%);
+  -webkit-backdrop-filter:blur(16px) saturate(140%);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 10px 40px -18px rgba(0,0,0,.7);
+  padding-top:.6rem;padding-bottom:.6rem;
+}
+.brand{display:flex;align-items:center;gap:.6rem;font-family:'Cormorant Garamond',serif;font-size:1.5rem;letter-spacing:.02em;color:var(--cream)}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--ember);box-shadow:0 0 14px 2px rgba(216,116,47,.8)}
+.brand b{font-weight:600}
+.nav-links{display:flex;align-items:center;gap:2.1rem}
+.nav-links a.lnk{
+  font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400;
+  color:var(--stone);position:relative;padding:.3em 0;
+}
+.nav-links a.lnk::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--ember);transition:width .35s}
+.nav-links a.lnk:hover{color:var(--cream)}
+.nav-links a.lnk:hover::after{width:100%}
+.nav-cta{padding:.7em 1.3em;font-size:.74rem}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--cream);transition:.3s}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:120%;object-fit:cover;filter:saturate(.85) brightness(.62) contrast(1.05);will-change:transform}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 70% 10%,rgba(216,116,47,.18),transparent 55%),
+    linear-gradient(180deg,rgba(22,17,13,.55) 0%,rgba(22,17,13,.2) 35%,rgba(22,17,13,.9) 92%);
+}
+.hero-grain{position:absolute;inset:0;z-index:1;opacity:.5;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;}
+.hero-inner{position:relative;z-index:2;width:100%;padding-bottom:clamp(48px,9vh,110px)}
+.hero h1{font-size:clamp(3.4rem,11vw,9.2rem);color:var(--cream);letter-spacing:-.01em;text-shadow:0 14px 50px rgba(0,0,0,.55)}
+.hero h1 em{font-style:italic;color:var(--ember-bright);font-weight:400}
+.hero .tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.3rem,3.2vw,2rem);color:var(--stone-soft);margin-top:.2rem}
+.hero .support{max-width:48ch;color:var(--stone);font-size:1rem;margin-top:1.4rem;font-weight:300}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.2rem}
+.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.6rem;color:var(--stone);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase}
+.scroll-cue .line{width:1px;height:42px;background:linear-gradient(var(--ember),transparent);animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* ---------- Section frame ---------- */
+section{position:relative}
+.band{padding:clamp(72px,12vh,150px) 0}
+.sec-head{max-width:62ch}
+.sec-head h2{font-size:clamp(2.4rem,5.5vw,4.4rem);color:var(--cream);margin-top:1rem}
+.sec-head p{margin-top:1.2rem;color:var(--stone);font-weight:300}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Maison (about) ---------- */
+.maison{background:linear-gradient(180deg,var(--noir),var(--noir-2))}
+.maison-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,86px);align-items:center}
+.maison-figure{position:relative}
+.maison-figure .frame{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
+.maison-figure .frame img{width:100%;height:560px;object-fit:cover;filter:saturate(.9) brightness(.78);transition:transform 1.2s ease}
+.maison-figure:hover .frame img{transform:scale(1.05)}
+.maison-figure .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(22,17,13,.45));}
+.maison-figure .badge{
+  position:absolute;bottom:-26px;right:-10px;background:rgba(31,24,19,.85);
+  backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;
+  padding:1.1rem 1.4rem;box-shadow:var(--shadow-soft);text-align:center;
+}
+.maison-figure .badge .n{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--ember-bright);line-height:1}
+.maison-figure .badge .l{font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--stone)}
+.maison-body p{color:var(--stone);margin-top:1.3rem}
+.maison-body .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-top:1.8rem}
+.pillars{display:flex;gap:1.8rem;margin-top:2.2rem;flex-wrap:wrap}
+.pillar{flex:1;min-width:140px}
+.pillar .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:rgba(216,116,47,.14);border:1px solid rgba(216,116,47,.3);color:var(--ember-bright);margin-bottom:.7rem}
+.pillar .ic svg{width:20px;height:20px}
+.pillar h3{font-family:'Jost',sans-serif;font-weight:500;font-size:.92rem;color:var(--cream);letter-spacing:.02em}
+.pillar p{font-size:.85rem;color:var(--stone);margin-top:.2rem}
+
+/* ---------- Carte (menu highlights) ---------- */
+.carte{background:radial-gradient(120% 80% at 100% 0%,rgba(216,116,47,.08),transparent 60%),var(--noir)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:clamp(40px,6vh,72px)}
+.dish{position:relative;border-radius:16px;overflow:hidden;background:var(--noir-2);border:1px solid var(--line);box-shadow:var(--shadow-soft);transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s,border-color .5s}
+.dish:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:rgba(216,116,47,.4)}
+.dish-img{position:relative;height:230px;overflow:hidden}
+.dish-img img{width:100%;height:100%;object-fit:cover;filter:saturate(.9) brightness(.82);transition:transform 1s ease}
+.dish:hover .dish-img img{transform:scale(1.08)}
+.dish-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(22,17,13,.85))}
+.dish-body{padding:1.5rem 1.5rem 1.7rem}
+.dish-body .row{display:flex;justify-content:space-between;align-items:baseline;gap:1rem}
+.dish-body h3{font-size:1.7rem;color:var(--cream)}
+.dish-body .price{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ember-bright);white-space:nowrap}
+.dish-body p{font-size:.85rem;color:var(--stone);margin-top:.5rem}
+.dish .tag{position:absolute;top:14px;left:14px;z-index:2;background:rgba(22,17,13,.7);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:100px;padding:.3em .9em;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.carte-foot{margin-top:clamp(40px,6vh,64px);display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:2rem}
+.carte-foot p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--stone-soft)}
+
+/* ---------- Contact ---------- */
+.contact{background:linear-gradient(180deg,var(--noir-2),var(--ink))}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(40px,6vw,90px);align-items:center}
+.contact-body h2{font-size:clamp(2.4rem,5.5vw,4.2rem);color:var(--cream)}
+.contact-body .lead{color:var(--stone);margin-top:1.2rem;max-width:44ch}
+.info-list{margin-top:2.2rem;display:flex;flex-direction:column;gap:1.3rem}
+.info{display:flex;gap:1rem;align-items:flex-start}
+.info .ic{width:42px;height:42px;flex:none;border-radius:12px;display:grid;place-items:center;background:rgba(202,164,106,.12);border:1px solid rgba(202,164,106,.3);color:var(--gold)}
+.info .ic svg{width:20px;height:20px}
+.info .k{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--ember-bright)}
+.info .v{color:var(--cream);font-size:1.02rem}
+.info .v small{display:block;color:var(--stone);font-size:.74rem;letter-spacing:.02em;text-transform:none}
+.flag{color:var(--gold);font-style:italic;font-size:.74rem}
+.reserve-card{
+  background:linear-gradient(160deg,rgba(42,32,25,.9),rgba(31,24,19,.95));
+  border:1px solid var(--line);border-radius:20px;padding:clamp(1.8rem,3vw,2.6rem);
+  box-shadow:var(--shadow);
+}
+.reserve-card h3{font-size:2rem;color:var(--cream)}
+.reserve-card p{color:var(--stone);font-size:.88rem;margin-top:.4rem}
+.field{margin-top:1.1rem}
+.field label{display:block;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-bottom:.45rem}
+.field input,.field select{
+  width:100%;background:rgba(13,10,7,.6);border:1px solid var(--line);border-radius:11px;
+  padding:.85em 1em;color:var(--cream);font-family:'Jost',sans-serif;font-size:.92rem;
+  transition:border-color .3s,box-shadow .3s;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--ember);box-shadow:0 0 0 3px rgba(216,116,47,.18)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.reserve-card .btn{width:100%;justify-content:center;margin-top:1.5rem}
+
+/* ---------- Footer ---------- */
+footer{background:var(--ink);border-top:1px solid var(--line);padding:2.4rem 0}
+.foot-grid{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.foot-brand{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream);display:flex;align-items:center;gap:.55rem}
+.foot-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--ember)}
+.foot-links{display:flex;gap:1.6rem;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
+.foot-links a:hover{color:var(--ember-bright)}
+.foot-note{font-size:.72rem;color:rgba(201,188,171,.45);margin-top:1.4rem;text-align:center}
+
+/* ---------- Focus ---------- */
+:focus-visible{outline:2px solid var(--ember-bright);outline-offset:3px;border-radius:4px}
+
+/* ---------- Responsive ---------- */
+@media(max-width:920px){
+  .maison-grid,.contact-grid{grid-template-columns:1fr}
+  .menu-grid{grid-template-columns:1fr 1fr}
+  .maison-figure{order:-1}
+  .maison-figure .frame img{height:420px}
+}
+@media(max-width:680px){
+  .nav-links{
+    position:fixed;inset:0 0 0 auto;width:min(82vw,330px);
+    flex-direction:column;justify-content:center;align-items:flex-start;gap:1.6rem;
+    background:rgba(22,17,13,.96);backdrop-filter:blur(20px);
+    padding:2rem 2.2rem;transform:translateX(105%);transition:transform .45s cubic-bezier(.2,.7,.2,1);
+    border-left:1px solid var(--line);
+  }
+  .nav-links.open{transform:none}
+  .nav-links a.lnk{font-size:1rem}
+  .nav-cta{font-size:.8rem}
+  .burger{display:flex;z-index:101}
+  .menu-grid{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr}
+  .pillars{gap:1.4rem}
+  .maison-figure .badge{right:0}
+  .hero{align-items:center}
+  .hero-inner{padding-bottom:0;padding-top:5rem}
+}
+
+/* ---------- Reduced motion ---------- */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+  .hero-bg img{height:100%!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="nav">
+  <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span>Mise&nbsp;<b>en&nbsp;Scène</b></a>
+  <div class="nav-links" id="navLinks">
+    <a class="lnk" href="#maison">La Maison</a>
+    <a class="lnk" href="#carte">La Carte</a>
+    <a class="lnk" href="#contact">Nous trouver</a>
+    <a class="btn btn-primary nav-cta" href="#contact">Réserver</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-bg" id="heroBg">
+    <!-- PLACEHOLDER IMAGE — picsum id 999 (dark, moody plated dish on wood) reads as cinematic gastronomique hero. Replace with client photography. -->
+    <img src="https://picsum.photos/id/999/1920/1280" alt="Plat dressé sous une lumière chaude — ambiance du restaurant Mise en Scène" />
+  </div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-inner wrap">
+    <p class="eyebrow reveal">Restaurant gastronomique · Esch-sur-Alzette</p>
+    <h1 class="reveal">Mise en <em>Scène</em></h1>
+    <p class="tagline reveal">Là où la pierre brûlante devient théâtre du goût.</p>
+    <p class="support reveal">Grillades sur pierre, cave choisie et cuisine de saison. Chaque plat se joue devant vous — un geste, une braise, un silence avant la première bouchée.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="#contact">Réserver une table
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#carte">Découvrir la carte</a>
+    </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true"><span class="line"></span>Faites défiler</div>
+</header>
+
+<!-- ================= LA MAISON ================= -->
+<section class="band maison" id="maison">
+  <div class="wrap maison-grid">
+    <div class="maison-body">
+      <p class="eyebrow reveal">Notre maison</p>
+      <h2 class="sec-head reveal" style="margin-top:.7rem">Une table qui se met<br />en scène.</h2>
+      <p class="reveal">Au cœur d'Esch-sur-Alzette, Mise en Scène réinvente le rituel de la grillade. Ici, le produit arrive cru et brut, puis s'achève sur une pierre volcanique chauffée à blanc, déposée à votre table. La cuisson devient spectacle, et le temps ralentit.</p>
+      <p class="reveal">Une carte courte, dictée par les saisons et les meilleurs artisans de la Grande Région. Des viandes maturées, des poissons du jour, des légumes de maraîchers — et une cave où le sommelier joue les metteurs en scène.</p>
+      <p class="sig reveal">« On ne sert pas un plat. On lève le rideau. »</p>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c1.5 2.5 0 4 1.5 6 1 1.3.5 3.5-1.5 3.5S9.5 10 11 8C11.7 7 12 5.5 12 3z"/><path d="M6 14c0 4 3 7 6 7s6-3 6-7c0-2-1-3.5-2.5-5" stroke-linecap="round"/></svg></div>
+          <h3>Grillé sur pierre</h3>
+          <p>Cuisson minute, à votre table.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v6M9 3v3a3 3 0 0 0 6 0V3M12 9v12" stroke-linecap="round"/></svg></div>
+          <h3>Produit de saison</h3>
+          <p>Artisans de la Grande Région.</p>
+        </div>
+        <div class="pillar reveal">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3h8l-1 8a3 3 0 0 1-6 0L8 3zM12 14v5M9 21h6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Cave choisie</h3>
+          <p>Accords pensés au verre.</p>
+        </div>
+      </div>
+    </div>
+    <figure class="maison-figure reveal">
+      <div class="frame">
+        <!-- PLACEHOLDER IMAGE — picsum id 835 (moody plated food, dark wood) reads as gastronomique dressage. Replace with client photography. -->
+        <img src="https://picsum.photos/id/835/900/1100" alt="Dressage soigné d'un plat de saison chez Mise en Scène" />
+      </div>
+      <figcaption class="badge">
+        <div class="n">2009</div>
+        <div class="l">Esch · depuis</div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= LA CARTE ================= -->
+<section class="band carte" id="carte">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <p class="eyebrow">La carte du moment</p>
+      <h2>Quelques actes<br />de la soirée.</h2>
+      <p>Une sélection en mouvement, repensée chaque semaine. Voici un avant-goût de ce qui se joue en salle.</p>
+    </div>
+    <div class="menu-grid">
+      <article class="dish reveal">
+        <span class="tag">Signature</span>
+        <div class="dish-img">
+          <!-- PLACEHOLDER IMAGE — picsum id 488 (fresh vegetables, prep) reads as grillade de saison. Replace with client photography. -->
+          <img src="https://picsum.photos/id/488/700/500" alt="Pièce de bœuf et légumes grillés sur pierre" />
+        </div>
+        <div class="dish-body">
+          <div class="row"><h3>Bœuf sur pierre</h3><span class="price">38 €</span></div>
+          <p>Faux-filet maturé 40 jours, pierre volcanique, fleur de sel de Guérande et beurre maître d'hôtel.</p>
+        </div>
+      </article>
+      <article class="dish reveal">
+        <span class="tag">Du jour</span>
+        <div class="dish-img">
+          <!-- PLACEHOLDER IMAGE — picsum id 312 (warm artisanal honey pot) reads as artisanal entrée/accompaniment. Replace with client photography. -->
+          <img src="https://picsum.photos/id/312/700/500" alt="Entrée de saison aux notes miellées" />
+        </div>
+        <div class="dish-body">
+          <div class="row"><h3>Le marché</h3><span class="price">26 €</span></div>
+          <p>Le poisson du jour saisi sur pierre, jus de saison, légumes du maraîcher et huile d'herbes.</p>
+        </div>
+      </article>
+      <article class="dish reveal">
+        <span class="tag">Final</span>
+        <div class="dish-img">
+          <!-- PLACEHOLDER IMAGE — picsum id 431 (coffee on dark wood) reads as café/digestif final. Replace with client photography. -->
+          <img src="https://picsum.photos/id/431/700/500" alt="Café et mignardises en fin de repas" />
+        </div>
+        <div class="dish-body">
+          <div class="row"><h3>Le rideau tombe</h3><span class="price">14 €</span></div>
+          <p>Dessert chaud-froid de saison, café de torréfaction artisanale et ses mignardises maison.</p>
+        </div>
+      </article>
+    </div>
+    <div class="carte-foot reveal">
+      <p>Menu dégustation en 5 actes — 72 € · accord mets &amp; vins en option.</p>
+      <a class="btn btn-ghost" href="#contact">Réserver pour la dégustation</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="band contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-body reveal">
+      <p class="eyebrow">Nous trouver</p>
+      <h2>Levez le rideau,<br />une table vous attend.</h2>
+      <p class="lead">Le service se joue en soirée du mardi au samedi, et au déjeuner le dimanche. Réservation conseillée — la salle est intime.</p>
+      <div class="info-list">
+        <div class="info">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div><div class="k">Adresse</div><div class="v">Centre-ville, Esch-sur-Alzette<br /><small>Luxembourg · à deux pas de la rue de l'Alzette</small></div></div>
+        </div>
+        <div class="info">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l-1 4a2 2 0 0 1-2 1.5A14 14 0 0 1 4 6 2 2 0 0 1 5 4z" stroke-linejoin="round"/></svg></span>
+          <div><div class="k">Téléphone</div><div class="v">+352 00 00 00 00 <span class="flag">— à confirmer</span><br /><small>Numéro placeholder pour la maquette</small></div></div>
+        </div>
+        <div class="info">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linejoin="round"/></svg></span>
+          <div><div class="k">Email</div><div class="v">bonjour@miseenscene.lu <span class="flag">— à confirmer</span><br /><small>Adresse placeholder pour la maquette</small></div></div>
+        </div>
+        <div class="info">
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round"/></svg></span>
+          <div><div class="k">Horaires</div><div class="v">Mar–Jeu 18h30–22h30 · Ven–Sam 18h30–23h30<br /><small>Dimanche midi 12h00–15h00 · Lundi fermé</small></div></div>
+        </div>
+      </div>
+    </div>
+
+    <form class="reserve-card reveal" onsubmit="return false;" aria-label="Demande de réservation">
+      <h3>Réserver</h3>
+      <p>Maquette de démonstration — formulaire non connecté.</p>
+      <div class="field">
+        <label for="r-name">Nom</label>
+        <input id="r-name" type="text" placeholder="Votre nom" autocomplete="name" />
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="r-date">Date</label>
+          <input id="r-date" type="date" />
+        </div>
+        <div class="field">
+          <label for="r-guests">Couverts</label>
+          <select id="r-guests">
+            <option>2 personnes</option>
+            <option>3 personnes</option>
+            <option>4 personnes</option>
+            <option>5 personnes</option>
+            <option>6 +</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="r-phone">Téléphone</label>
+        <input id="r-phone" type="tel" placeholder="+352 …" autocomplete="tel" />
+      </div>
+      <button class="btn btn-primary" type="submit">Envoyer la demande
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand"><span class="dot" aria-hidden="true"></span>Mise en Scène</div>
+    <nav class="foot-links" aria-label="Liens de pied de page">
+      <a href="#maison">La Maison</a>
+      <a href="#carte">La Carte</a>
+      <a href="#contact">Réserver</a>
+    </nav>
+  </div>
+  <p class="foot-note">© <span id="yr"></span> Mise en Scène · Esch-sur-Alzette, Luxembourg — Grillades sur pierre. Maquette de démonstration · coordonnées à confirmer.</p>
+</footer>
+
+<!-- GSAP for hero parallax + subtle reveals (graceful without it) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Sticky nav state
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 24); }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // Mobile menu
+  var burger = document.getElementById('burger');
+  var links = document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); burger.setAttribute('aria-expanded',false); });
+  });
+
+  // Reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.14, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el,i){
+    if(reduce){ el.classList.add('in'); return; }
+    el.style.transitionDelay = (Math.min(i,6)*60)+'ms';
+    io.observe(el);
+  });
+  // Failsafe: if the observer never fires (e.g. tooling/edge cases), reveal everything.
+  setTimeout(function(){ document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); }); }, 2600);
+
+  // Hero parallax (skip if reduced motion or no GSAP)
+  if(!reduce && window.gsap){
+    var img = document.querySelector('#heroBg img');
+    gsap.to(img, {yPercent:14, ease:'none', scrollTrigger:false});
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      if(y < window.innerHeight){ img.style.transform = 'translateY(' + (y*0.18) + 'px)'; }
+    }, {passive:true});
+  }
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Anima e Cuore — Restaurant-Pizzeria italien · Niederkorn, Luxembourg</title>
+<meta name="description" content="Anima e Cuore — cuisine italienne authentique et pizzas au feu de bois à Niederkorn (Differdange), Luxembourg. Une trattoria de quartier, faite avec l'âme et le cœur." />
+
+<!-- Open Graph -->
+<meta property="og:type" content="restaurant.restaurant" />
+<meta property="og:locale" content="fr_FR" />
+<meta property="og:title" content="Anima e Cuore — Restaurant-Pizzeria italien à Niederkorn" />
+<meta property="og:description" content="Cuisine italienne authentique & pizzas au feu de bois. Faite avec l'âme et le cœur. Niederkorn, Luxembourg." />
+<meta property="og:image" content="https://picsum.photos/id/999/1200/630" />
+<meta name="theme-color" content="#1a0e0a" />
+
+<!-- Inline SVG favicon: stylized flame/heart in brand gold -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231a0e0a'/%3E%3Cpath d='M16 26c5-3 8-6.5 8-11a5 5 0 0 0-9-3 5 5 0 0 0-7 4.5c0 4.5 3 6.5 8 9.5z' fill='%23c9a35a'/%3E%3C/svg%3E" />
+
+<!-- External: Google Fonts only -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400;1,6..96,500&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- LocalBusiness JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Anima e Cuore",
+  "image": "https://picsum.photos/id/999/1200/630",
+  "servesCuisine": ["Italienne", "Pizza"],
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Niederkorn",
+    "addressRegion": "Differdange",
+    "addressCountry": "LU"
+  },
+  "areaServed": "Differdange, Luxembourg",
+  "telephone": "+352 00 00 00 00",
+  "email": "contact@anima-e-cuore.lu",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "11:30", "closes": "22:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday","Sunday"], "opens": "12:00", "closes": "22:30" }
+  ]
+}
+</script>
+
+<style>
+:root{
+  --ink:#1a0e0a;          /* deep espresso */
+  --ink-2:#2a1812;
+  --cream:#f7efe2;        /* warm paper */
+  --cream-soft:#efe3cf;
+  --gold:#c9a35a;         /* warm brass */
+  --gold-bright:#e0bd76;
+  --terracotta:#b34728;   /* appetizing warm red */
+  --terracotta-deep:#8f3115;
+  --olive:#6f7547;
+  --text:#2a1c14;
+  --text-soft:#5c4a3d;
+  --line:rgba(42,24,18,.12);
+  --shadow-lg:0 28px 60px -24px rgba(26,14,10,.55);
+  --shadow-md:0 16px 38px -20px rgba(26,14,10,.45);
+  --r:18px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Karla",system-ui,sans-serif;
+  color:var(--text);
+  background:var(--cream);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+h1,h2,h3,.display{font-family:"Bodoni Moda",Georgia,serif;font-weight:500;line-height:1.06;letter-spacing:-.01em}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1180px,92vw);margin-inline:auto}
+.eyebrow{
+  font-family:"Karla",sans-serif;font-weight:600;font-size:.74rem;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--terracotta);
+}
+.eyebrow.on-dark{color:var(--gold-bright)}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;cursor:pointer;
+  font-family:"Karla",sans-serif;font-weight:600;font-size:.92rem;letter-spacing:.02em;
+  padding:.92rem 1.6rem;border-radius:100px;border:1px solid transparent;
+  transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,background .25s,color .25s;
+  will-change:transform;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--terracotta),var(--terracotta-deep));
+  color:#fff;box-shadow:0 14px 30px -12px rgba(143,49,21,.7);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 20px 40px -14px rgba(143,49,21,.85)}
+.btn-ghost{border-color:rgba(247,239,226,.4);color:var(--cream)}
+.btn-ghost:hover{background:rgba(247,239,226,.1);transform:translateY(-2px)}
+.btn-outline{border-color:var(--line);color:var(--ink);background:rgba(255,255,255,.5)}
+.btn-outline:hover{border-color:var(--terracotta);color:var(--terracotta);transform:translateY(-2px)}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.85rem clamp(1rem,4vw,2.4rem);
+  background:rgba(26,14,10,.28);
+  backdrop-filter:blur(14px) saturate(140%);
+  -webkit-backdrop-filter:blur(14px) saturate(140%);
+  border-bottom:1px solid rgba(247,239,226,.08);
+  transition:background .4s,box-shadow .4s,padding .4s;
+}
+.nav.scrolled{
+  background:rgba(26,14,10,.86);
+  box-shadow:0 10px 30px -18px rgba(0,0,0,.8);
+  padding-block:.65rem;
+}
+.brand{display:flex;align-items:center;gap:.6rem;color:var(--cream)}
+.brand .mark{width:30px;height:30px;flex:none}
+.brand .word{font-family:"Bodoni Moda",serif;font-weight:500;font-size:1.18rem;letter-spacing:.02em;line-height:1}
+.brand .word b{color:var(--gold-bright);font-weight:500}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a.link{
+  color:rgba(247,239,226,.86);font-weight:500;font-size:.9rem;letter-spacing:.02em;
+  position:relative;padding-block:.2rem;
+}
+.nav-links a.link::after{
+  content:"";position:absolute;left:0;bottom:-2px;height:1.5px;width:0;
+  background:var(--gold-bright);transition:width .3s ease;
+}
+.nav-links a.link:hover{color:#fff}
+.nav-links a.link:hover::after{width:100%}
+.nav .btn{padding:.62rem 1.2rem;font-size:.85rem}
+.menu-toggle{display:none;background:none;border:0;cursor:pointer;color:var(--cream);padding:.4rem}
+.menu-toggle svg{width:26px;height:26px}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  color:var(--cream);overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 22% 50%,rgba(26,14,10,.92),rgba(26,14,10,.55) 45%,rgba(26,14,10,.25) 72%),
+    linear-gradient(to top,rgba(26,14,10,.95),rgba(26,14,10,.1) 55%);
+}
+.hero-grain{position:absolute;inset:0;z-index:1;opacity:.06;mix-blend-mode:overlay;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.hero-inner{position:relative;z-index:2;width:min(1180px,92vw);margin-inline:auto;padding:7rem 0 4rem}
+.hero-inner .eyebrow{display:inline-block;margin-bottom:1.4rem}
+.hero h1{
+  font-size:clamp(3rem,9vw,6.6rem);font-weight:400;
+  text-shadow:0 2px 30px rgba(0,0,0,.4);max-width:14ch;
+}
+.hero h1 em{font-style:italic;color:var(--gold-bright)}
+.hero .lede{
+  margin-top:1.4rem;max-width:46ch;font-size:clamp(1.05rem,1.6vw,1.28rem);
+  color:rgba(247,239,226,.88);font-weight:300;
+}
+.hero .cta-row{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:.9rem}
+.scroll-hint{
+  position:absolute;left:50%;bottom:1.7rem;transform:translateX(-50%);z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:rgba(247,239,226,.6);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+}
+.scroll-hint .dot{width:1px;height:42px;background:linear-gradient(var(--gold-bright),transparent);animation:slide 2.2s ease-in-out infinite}
+@keyframes slide{0%,100%{opacity:.25;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- About ---------- */
+.about{padding:clamp(5rem,11vw,9rem) 0;background:
+  radial-gradient(80% 60% at 90% 0%,rgba(201,163,90,.12),transparent 60%),var(--cream)}
+.about-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.about h2{font-size:clamp(2.2rem,4.6vw,3.6rem);margin:1rem 0 1.3rem;max-width:14ch}
+.about h2 em{font-style:italic;color:var(--terracotta)}
+.about p{color:var(--text-soft);font-size:1.06rem;margin-bottom:1.1rem;max-width:50ch}
+.about .sig{margin-top:1.6rem;font-family:"Bodoni Moda",serif;font-style:italic;font-size:1.5rem;color:var(--terracotta-deep)}
+.about-media{position:relative}
+.about-media .frame{
+  border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-lg);position:relative;
+}
+.about-media .frame img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.about-media .badge{
+  position:absolute;left:-26px;bottom:-26px;z-index:3;
+  background:linear-gradient(145deg,var(--ink),var(--ink-2));color:var(--cream);
+  border-radius:16px;padding:1.1rem 1.3rem;box-shadow:var(--shadow-md);
+  border:1px solid rgba(201,163,90,.3);max-width:200px;
+}
+.about-media .badge .n{font-family:"Bodoni Moda",serif;font-size:2rem;color:var(--gold-bright);line-height:1}
+.about-media .badge .l{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,239,226,.7);margin-top:.3rem}
+.about-media .glow{position:absolute;inset:-12% -8% auto auto;width:60%;height:60%;z-index:-1;
+  background:radial-gradient(circle,rgba(179,71,40,.35),transparent 70%);filter:blur(20px)}
+
+/* ---------- Menu / highlights ---------- */
+.menu{padding:clamp(5rem,11vw,9rem) 0;background:linear-gradient(180deg,var(--ink),#241510);color:var(--cream);position:relative;overflow:hidden}
+.menu::before{content:"";position:absolute;inset:0;opacity:.05;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.menu-head{text-align:center;max-width:60ch;margin:0 auto clamp(2.5rem,5vw,3.5rem)}
+.menu-head h2{font-size:clamp(2.2rem,4.6vw,3.6rem);margin:1rem 0 1rem}
+.menu-head h2 em{font-style:italic;color:var(--gold-bright)}
+.menu-head p{color:rgba(247,239,226,.72);font-weight:300}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;position:relative;z-index:2}
+.card{
+  border-radius:var(--r);overflow:hidden;position:relative;min-height:380px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  box-shadow:var(--shadow-md);border:1px solid rgba(247,239,226,.07);
+  transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;
+}
+.card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(20,11,7,.95),rgba(20,11,7,.18) 60%,transparent)}
+.card .body{position:relative;z-index:2;padding:1.5rem}
+.card .tag{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-bright);font-weight:600}
+.card h3{font-size:1.5rem;margin:.5rem 0 .4rem;color:#fff}
+.card p{font-size:.92rem;color:rgba(247,239,226,.78);font-weight:300}
+.card .price{margin-top:.7rem;font-family:"Bodoni Moda",serif;font-size:1.1rem;color:var(--gold-bright)}
+.card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.card:hover img{transform:scale(1.07)}
+.menu-cta{text-align:center;margin-top:clamp(2.5rem,5vw,3.5rem);position:relative;z-index:2}
+.menu-note{color:rgba(247,239,226,.55);font-size:.85rem;margin-top:1rem;font-style:italic}
+
+/* ---------- Contact ---------- */
+.contact{padding:clamp(5rem,11vw,9rem) 0;background:
+  radial-gradient(70% 60% at 10% 100%,rgba(201,163,90,.14),transparent 60%),var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:stretch}
+.contact h2{font-size:clamp(2.2rem,4.6vw,3.6rem);margin:1rem 0 1.2rem;max-width:13ch}
+.contact h2 em{font-style:italic;color:var(--terracotta)}
+.contact .intro{color:var(--text-soft);max-width:44ch;margin-bottom:2rem}
+.info-list{list-style:none;display:grid;gap:1.2rem}
+.info-list li{display:flex;gap:1rem;align-items:flex-start}
+.info-list .ic{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--ink),var(--ink-2));color:var(--gold-bright);box-shadow:var(--shadow-md)}
+.info-list .ic svg{width:20px;height:20px}
+.info-list .k{font-weight:700;font-size:.95rem;color:var(--ink)}
+.info-list .v{color:var(--text-soft);font-size:.95rem}
+.info-list .ph{display:inline-block;background:rgba(179,71,40,.1);color:var(--terracotta-deep);
+  font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:.12rem .5rem;border-radius:6px;margin-left:.5rem}
+.contact-card{
+  background:linear-gradient(160deg,var(--ink),var(--ink-2));color:var(--cream);
+  border-radius:var(--r);padding:clamp(1.8rem,4vw,2.6rem);box-shadow:var(--shadow-lg);
+  border:1px solid rgba(201,163,90,.18);position:relative;overflow:hidden;
+}
+.contact-card .glow{position:absolute;inset:auto -10% -20% auto;width:60%;height:60%;
+  background:radial-gradient(circle,rgba(179,71,40,.4),transparent 70%);filter:blur(18px)}
+.contact-card h3{font-size:1.7rem;color:#fff;position:relative;z-index:2}
+.contact-card .hours{margin-top:1.4rem;position:relative;z-index:2}
+.contact-card .hours .row{display:flex;justify-content:space-between;padding:.6rem 0;border-bottom:1px solid rgba(247,239,226,.1);font-size:.95rem}
+.contact-card .hours .row span:first-child{color:rgba(247,239,226,.78)}
+.contact-card .hours .row span:last-child{color:var(--gold-bright);font-weight:600}
+.contact-card .closed{color:rgba(247,239,226,.5)}
+.contact-card .btn{margin-top:1.8rem;position:relative;z-index:2}
+
+/* ---------- Footer ---------- */
+.footer{background:#140b07;color:rgba(247,239,226,.7);padding:2.4rem 0}
+.footer .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.footer .brand .word{font-size:1.05rem}
+.footer .legal{font-size:.82rem;color:rgba(247,239,226,.45)}
+.footer .socials{display:flex;gap:.8rem}
+.footer .socials a{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+  background:rgba(247,239,226,.06);color:rgba(247,239,226,.8);transition:background .25s,color .25s,transform .25s}
+.footer .socials a:hover{background:var(--terracotta);color:#fff;transform:translateY(-2px)}
+.footer .socials svg{width:18px;height:18px}
+
+/* ---------- Mobile ---------- */
+@media(max-width:880px){
+  .nav-links{
+    position:fixed;inset:0 0 auto 0;top:0;flex-direction:column;align-items:flex-start;gap:1.4rem;
+    padding:5.5rem 2rem 2.4rem;background:rgba(26,14,10,.97);
+    backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+    transform:translateY(-110%);transition:transform .45s cubic-bezier(.2,.7,.2,1);
+    box-shadow:0 24px 50px -20px rgba(0,0,0,.7);
+  }
+  .nav-links.open{transform:translateY(0)}
+  .nav-links a.link{font-size:1.3rem;font-family:"Bodoni Moda",serif}
+  .nav-links .btn{width:100%;justify-content:center;margin-top:.4rem}
+  .menu-toggle{display:block;z-index:2}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .about-media{order:-1;max-width:440px}
+  .about-media .badge{left:auto;right:-10px}
+  .cards{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
+  .contact-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .hero h1{font-size:clamp(2.6rem,12vw,3.4rem)}
+  .about-media .badge{left:-6px;right:auto}
+}
+
+/* ---------- Reduced motion ---------- */
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .hero-bg img{transform:none!important}
+  .scroll-hint{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Anima e Cuore — accueil">
+    <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1a0e0a"/><path d="M16 26c5-3 8-6.5 8-11a5 5 0 0 0-9-3 5 5 0 0 0-7 4.5c0 4.5 3 6.5 8 9.5z" fill="#c9a35a"/></svg>
+    <span class="word">Anima e <b>Cuore</b></span>
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a class="link" href="#maison">Notre maison</a>
+    <a class="link" href="#carte">La carte</a>
+    <a class="link" href="#visite">Nous trouver</a>
+    <a class="btn btn-primary" href="#visite">Réserver une table</a>
+  </div>
+  <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  </button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <!-- PLACEHOLDER image (picsum id 999 — moody plated dish on dark wood, reads as Italian fine dining). Replace with the restaurant's own hero shot. -->
+    <img src="https://picsum.photos/id/999/1920/1280" alt="" fetchpriority="high" />
+  </div>
+  <div class="hero-grain" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <span class="eyebrow on-dark">Cucina Italiana · Niederkorn</span>
+    <h1>Anima e <em>Cuore</em></h1>
+    <p class="lede">La vraie cuisine italienne, faite avec l'âme et le cœur. Pizzas au feu de bois, pâtes du jour et une table où l'on se sent comme à la maison.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#visite">Réserver une table</a>
+      <a class="btn btn-ghost" href="#carte">Découvrir la carte</a>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><span class="dot"></span>Scoprire</div>
+</header>
+
+<!-- ===== NOTRE MAISON ===== -->
+<section class="about" id="maison">
+  <div class="wrap about-grid">
+    <div class="about-text reveal">
+      <span class="eyebrow">Notre maison</span>
+      <h2>Une trattoria de quartier, <em>au cœur de Niederkorn</em></h2>
+      <p>Chez Anima e Cuore, tout commence par un produit choisi avec soin : la farine qui repose, la tomate San Marzano, l'huile d'olive et le basilic frais. Rien de compliqué — simplement l'Italie, bien faite.</p>
+      <p>Notre four à bois chante du midi au soir, la pâte lève lentement, et chaque assiette quitte la cuisine comme on la servirait à sa propre famille. C'est tout le sens de notre nom : <em>l'âme et le cœur</em>.</p>
+      <p class="sig">— La famiglia Anima e Cuore</p>
+    </div>
+    <div class="about-media reveal">
+      <div class="glow" aria-hidden="true"></div>
+      <div class="frame">
+        <!-- PLACEHOLDER image (picsum id 292 — fresh vegetables & herbs on a board, reads as Italian fresh produce). Replace with a photo of the kitchen / chef. -->
+        <img src="https://picsum.photos/id/292/720/900" alt="Légumes et herbes fraîches sur une planche en bois (image d'illustration)" loading="lazy" />
+      </div>
+      <div class="badge">
+        <div class="n">100%</div>
+        <div class="l">Fatto in casa · fait maison chaque jour</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LA CARTE ===== -->
+<section class="menu" id="carte">
+  <div class="wrap">
+    <div class="menu-head reveal">
+      <span class="eyebrow on-dark">La carte</span>
+      <h2>Quelques <em>incontournables</em></h2>
+      <p>Un aperçu de la maison — la carte complète change au fil des saisons et de l'humeur du chef.</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <!-- PLACEHOLDER image (picsum id 999 — plated dish, dark moody). Replace with a real pizza photo. -->
+        <img src="https://picsum.photos/id/999/700/800" alt="Plat dressé (image d'illustration)" loading="lazy" />
+        <div class="body">
+          <span class="tag">Forno a legna</span>
+          <h3>Pizze al forno</h3>
+          <p>Pâte maturée 48 h, four à bois, mozzarella fior di latte et basilic frais.</p>
+          <div class="price">dès 12 €</div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER image (picsum id 488 — fresh vegetables in a rustic bowl). Replace with a real pasta photo. -->
+        <img src="https://picsum.photos/id/488/700/800" alt="Bol de légumes frais (image d'illustration)" loading="lazy" />
+        <div class="body">
+          <span class="tag">Fatto a mano</span>
+          <h3>Pasta del giorno</h3>
+          <p>Pâtes fraîches du jour, sauces lentement mijotées, generosità italienne.</p>
+          <div class="price">dès 14 €</div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <!-- PLACEHOLDER image (picsum id 1080 — strawberries, reads as dessert). Replace with a real dolci/coffee photo. -->
+        <img src="https://picsum.photos/id/1080/700/800" alt="Fruits frais (image d'illustration)" loading="lazy" />
+        <div class="body">
+          <span class="tag">Dolci &amp; caffè</span>
+          <h3>Tiramisù &amp; espresso</h3>
+          <p>Le tiramisù maison, un ristretto bien serré — le bel final all'italiana.</p>
+          <div class="price">dès 6 €</div>
+        </div>
+      </article>
+    </div>
+    <div class="menu-cta">
+      <a class="btn btn-primary" href="#visite">Réserver pour goûter</a>
+      <p class="menu-note">Carte des allergènes et menu végétarien disponibles sur place.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NOUS TROUVER ===== -->
+<section class="contact" id="visite">
+  <div class="wrap contact-grid">
+    <div class="contact-info reveal">
+      <span class="eyebrow">Nous trouver</span>
+      <h2>Venez vous attabler <em>chez nous</em></h2>
+      <p class="intro">Au cœur de Niederkorn, à deux pas du centre de Differdange. Réservation conseillée le week-end.</p>
+      <ul class="info-list">
+        <li>
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div><div class="k">Adresse</div><div class="v">Niederkorn · Commune de Differdange, Luxembourg</div></div>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l1 5-3 1a16 16 0 0 1-13-13z"/></svg></span>
+          <div><div class="k">Téléphone <span class="ph">à confirmer</span></div><div class="v">+352 00 00 00 00</div></div>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+          <div><div class="k">E-mail <span class="ph">à confirmer</span></div><div class="v">contact@anima-e-cuore.lu</div></div>
+        </li>
+      </ul>
+    </div>
+    <aside class="contact-card reveal">
+      <div class="glow" aria-hidden="true"></div>
+      <h3>Heures d'ouverture</h3>
+      <div class="hours">
+        <div class="row"><span>Lundi</span><span class="closed">Fermé</span></div>
+        <div class="row"><span>Mardi — Vendredi</span><span>11h30 – 22h00</span></div>
+        <div class="row"><span>Samedi</span><span>12h00 – 22h30</span></div>
+        <div class="row"><span>Dimanche</span><span>12h00 – 22h30</span></div>
+      </div>
+      <a class="btn btn-primary" href="tel:+35200000000">Appeler pour réserver</a>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#1a0e0a"/><path d="M16 26c5-3 8-6.5 8-11a5 5 0 0 0-9-3 5 5 0 0 0-7 4.5c0 4.5 3 6.5 8 9.5z" fill="#c9a35a"/></svg>
+      <span class="word">Anima e <b style="color:var(--gold-bright)">Cuore</b></span>
+    </a>
+    <div class="socials">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h3l.5-3.5H13V8.3c0-1 .3-1.7 1.8-1.7H17V3.5c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.6H7V14h3v8z"/></svg></a>
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    </div>
+    <div class="legal">© <span id="yr"></span> Anima e Cuore · Niederkorn, Luxembourg · Maquette de présentation</div>
+  </div>
+</footer>
+
+<!-- External: GSAP only -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Nav scroll state */
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 40); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* Mobile menu */
+  var toggle = document.getElementById('menuToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ links.classList.remove('open'); toggle.setAttribute('aria-expanded', false); });
+  });
+
+  /* Year */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* Reveal on scroll */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.16, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* Motion (GSAP) — skipped entirely under reduced-motion */
+  if(!reduce && window.gsap){
+    gsap.to('.hero-bg img', {yPercent:14, ease:'none', scrollTrigger:false});
+    var bg = document.querySelector('.hero-bg img');
+    var hero = document.querySelector('.hero');
+    window.addEventListener('scroll', function(){
+      var r = hero.getBoundingClientRect();
+      if(r.bottom > 0){ bg.style.transform = 'scale(1.08) translateY(' + (window.scrollY * 0.12) + 'px)'; }
+    }, {passive:true});
+
+    gsap.from('.hero .eyebrow, .hero h1, .hero .lede, .hero .cta-row', {
+      y:30, opacity:0, duration:1, ease:'power3.out', stagger:.12, delay:.15
+    });
+  }
+})();
+</script>
+</body>
+</html>
