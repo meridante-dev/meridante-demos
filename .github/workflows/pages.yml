@@ -3,6 +3,10 @@ on:
   push:
     branches: [master]
   workflow_dispatch:
+  # Self-healing: retry every 20 min so the cockpit republishes automatically
+  # the moment a GitHub Pages incident clears — no human needed.
+  schedule:
+    - cron: '*/20 * * * *'
 permissions:
   contents: read
   pages: write
@@ -24,3 +28,6 @@ jobs:
           path: '.'
       - id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          timeout: 900000        # wait up to 15 min through a degraded queue instead of aborting early
+          error_count: 15        # tolerate more transient poll errors before giving up
