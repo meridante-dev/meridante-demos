@@ -1,100 +1,64 @@
-# Gmail draft maker — inline mockup + attachment (one-time setup)
+# Gmail Draft Maker — v3 (image embeds right after the mockup-offer paragraph)
 
-This makes the dashboard's **"Open in Gmail"** button create a real Gmail **draft** in
-**meridante.pt@gmail.com** with:
-- the approved email text,
-- the website mockup **shown inline** in the body (clearly formatted preview section),
-- the same mockup **attached** as `mockup.jpg`,
-- a line in the body that mentions the attachment.
+Creates a Gmail **draft** in **meridante.pt@gmail.com** with: recipient, subject, the email body,
+the website mockup **embedded inline right after the paragraph that offers the mockup**, the same image
+**attached** with a **per-company filename** (e.g. `Carpintaria Paulino - Meridante.jpg`), and the draft
+auto-filed under the **"To Send - Team"** label.
 
-The team member just opens **Drafts**, reviews, and hits Send.
-
-> ⚠️ This is the only way to get an attachment + inline image into Gmail automatically — a plain
-> compose link can't carry files. Until this is deployed, the button still works but only links the
-> mockup preview (no attachment).
-
----
-
-## Steps (≈4 minutes, do it while logged in as **meridante.pt@gmail.com**)
-
-1. Go to **https://script.google.com** → **New project**.
-2. Delete the sample code, paste **all of `Code.gs`** below.
-3. Click **Save** (disk icon). Name it `Meridante Draft Maker`.
-4. **Deploy → New deployment** → gear icon → **Web app**.
-   - **Description:** draft maker
-   - **Execute as:** **Me (meridante.pt@gmail.com)**
-   - **Who has access:** **Anyone**
-   - **Deploy**.
-5. First time it asks to **authorize** → choose the meridante.pt account → *Advanced → Go to project (unsafe)* → **Allow** (it needs Gmail + fetch permission).
-6. Copy the **Web app URL** (ends in `/exec`).
-7. Send me that URL — I'll paste it into the dashboard's `CONFIG.DRAFT_ENDPOINT` and push. Done.
-
-(If you ever change the code, use **Deploy → Manage deployments → Edit → New version** so the same URL keeps working.)
-
----
+## Update (re-paste + New version — same URL)
+1. Open the **Meridante Draft Maker** Apps Script project (logged in as meridante.pt@gmail.com).
+2. Select all → delete → paste the **Code.gs** below → **💾 Save**.
+3. **Deploy → Manage deployments → ✏️ Edit → Version: New version → Deploy.** (URL unchanged.)
+4. Reply "redeployed".
 
 ## Code.gs
 
 ```javascript
-function doPost(e) {
-  try {
-    var p = JSON.parse(e.postData.contents);
-    var fr = (p.lang === 'fr');
-
-    // fetch the mockup image from the public dashboard and use it inline + attached
-    var blob = UrlFetchApp.fetch(p.image).getBlob().setName('mockup.jpg');
-
-    var head = fr ? 'Aperçu de votre nouveau site' : 'Pré-visualização do seu novo site';
-    var note = fr
-      ? 'La maquette est jointe à cet e-mail (mockup.jpg) et présentée ci-dessous :'
-      : 'A maqueta está em anexo a este e-mail (mockup.jpg) e apresentada em baixo:';
-
-    var bodyHtml = (p.body || '')
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/\n/g, '<br>');
-
-    var html =
-      '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#222;line-height:1.65">' +
-        bodyHtml +
-        '<div style="margin:28px 0 6px;border-top:1px solid #e4e4e4;padding-top:20px">' +
-          '<div style="font:600 16px Georgia,serif;color:#0c1322;margin-bottom:4px">' + head + '</div>' +
-          '<div style="font-size:13px;color:#666;margin-bottom:14px">' + note + '</div>' +
-          '<img src="cid:mockup" style="display:block;width:100%;max-width:600px;border:1px solid #ddd;border-radius:8px"/>' +
-          '<div style="font-size:12px;color:#999;margin-top:7px">📎 mockup.jpg</div>' +
-        '</div>' +
-      '</div>';
-
-    // plain-text fallback (clients that don't render HTML) — also mentions the attachment
-    var plain = (p.body || '') + '\n\n— ' + head + ' —\n' + note + '\n[' + (fr ? 'voir la pièce jointe mockup.jpg' : 'ver o anexo mockup.jpg') + ']';
-
-    GmailApp.createDraft(p.to, p.subject, plain, {
-      htmlBody: html,
-      inlineImages: { mockup: blob },
-      attachments: [blob],
-      name: 'Meridante'
-    });
-
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: true }))
-      .setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService
-      .createTextOutput(JSON.stringify({ ok: false, error: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
+function sanitizeName_(s){
+  s=(s||'').normalize('NFKD').replace(/[̀-ͯ]/g,'');
+  s=s.replace(/[^\w &().,'-]+/g,' ').replace(/\s+/g,' ').trim();
+  return s||'Meridante';
 }
+function escHtml_(t){return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-function doGet() {
-  return ContentService.createTextOutput('Meridante Draft Maker is running.');
+function doPost(e){
+  try{
+    var p=JSON.parse(e.postData.contents);
+    var L=(p.lang||'').toUpperCase(), fr=L==='FR', es=L==='ES';
+    var file=p.file || (sanitizeName_(p.company)+' - Meridante.jpg');
+    var blob=UrlFetchApp.fetch(p.image).getBlob().setName(file);
+
+    var head=fr?'Aperçu de votre nouveau site':es?'Vista previa de su nuevo sitio web':'Pré-visualização do seu novo site';
+    var note=fr?('Voici la maquette ('+file+'), également jointe à cet e-mail :')
+            :es?('Esta es la maqueta ('+file+'), también adjunta a este correo:')
+            :('Aqui está a maquete ('+file+'), também em anexo a este e-mail:');
+
+    var preview='<table role="presentation" width="100%" style="margin:22px 0"><tr><td style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4;padding:20px 0">'+
+      '<div style="font:600 16px Georgia,serif;color:#0c1322;margin-bottom:4px">'+head+'</div>'+
+      '<div style="font-size:13px;color:#666;margin-bottom:14px">'+note+'</div>'+
+      '<img src="cid:mockup" style="display:block;width:100%;max-width:600px;border:1px solid #ddd;border-radius:8px"/>'+
+      '<div style="font-size:12px;color:#999;margin-top:7px">📎 '+escHtml_(file)+'</div></td></tr></table>';
+
+    var html=p.htmlBody;
+    if(!html){
+      var paras=(p.body||'').split(/\n\s*\n/);
+      // insert the preview right AFTER the paragraph that offers the mockup
+      var ins=-1;
+      for(var i=0;i<paras.length;i++){ if(/maquette|maquete|maqueta|mockup/i.test(paras[i])){ ins=i; break; } }
+      if(ins<0) ins=Math.min(1,paras.length-1);
+      var out='<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#222;line-height:1.65">';
+      for(var i=0;i<paras.length;i++){ out+='<div style="margin:0 0 14px">'+escHtml_(paras[i]).replace(/\n/g,'<br>')+'</div>'; if(i===ins) out+=preview; }
+      out+='</div>'; html=out;
+    }
+    var plain=(p.body||'')+'\n\n'+head+'\n'+note;
+
+    var draft=GmailApp.createDraft(p.to,p.subject,plain,{htmlBody:html,inlineImages:{mockup:blob},attachments:[blob],name:'Meridante'});
+
+    var labeled=false, labelName=p.label||'To Send - Team';
+    try{var lbl=GmailApp.getUserLabelByName(labelName)||GmailApp.createLabel(labelName); draft.getMessage().getThread().addLabel(lbl); labeled=true;}catch(le){}
+
+    return ContentService.createTextOutput(JSON.stringify({ok:true,file:file,labeled:labeled})).setMimeType(ContentService.MimeType.JSON);
+  }catch(err){ return ContentService.createTextOutput(JSON.stringify({ok:false,error:String(err)})).setMimeType(ContentService.MimeType.JSON); }
 }
+function doGet(){return ContentService.createTextOutput('Meridante Draft Maker is running.');}
 ```
-
----
-
-## How the team uses it
-1. Pick your name in the top bar (Sajid / Lucas / João).
-2. On a lead, click **✉ Open in Gmail** → a draft is created in meridante.pt@gmail.com and a Gmail
-   **Drafts** tab opens.
-3. The newest draft (top of the list) has the email + the mockup shown inline + `mockup.jpg` attached.
-   Review and **Send**.
-4. Flip the **Mark as sent** toggle on the card — it stamps your name + date for the team.
