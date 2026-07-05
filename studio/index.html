@@ -92,6 +92,12 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opa
 .btn.ghost{background:transparent;color:var(--ivory);border:1px solid var(--line2);box-shadow:none}
 .btn.ghost:hover{border-color:var(--brass);color:var(--brass-b);box-shadow:0 10px 30px -14px rgba(194,151,74,.4)}
 .nav .btn{padding:12px 22px}
+/* language switcher */
+.langsw{display:flex;align-items:center;gap:1px;border:1px solid var(--line2);border-radius:999px;padding:3px;background:rgba(243,238,228,.03)}
+.langsw button{background:none;border:0;color:var(--mut2);font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;padding:6px 8px;border-radius:999px;cursor:pointer;transition:color .25s,background .25s;line-height:1}
+.langsw button:hover{color:var(--ivory)}
+.langsw button.on{color:#120d02;background:linear-gradient(135deg,var(--brass-b),var(--brass));box-shadow:0 3px 10px -4px rgba(203,167,90,.6)}
+.mnav .langsw{margin-top:6px}
 .burger{display:none;background:none;border:0;cursor:pointer;width:40px;height:40px;position:relative;z-index:95}
 .burger span{position:absolute;left:8px;right:8px;height:1.5px;background:var(--ivory);transition:.3s}
 .burger span:nth-child(1){top:14px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:26px}
@@ -245,6 +251,7 @@ footer .base{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);d
 
 @media (max-width:960px){
   .nav .links{display:none}
+  .nav .langsw{display:none}
   .burger{display:block}
   .acad .feat div{flex-wrap:wrap}
   .acad .feat span{flex:1 1 100%;margin-top:2px}
@@ -314,6 +321,7 @@ footer .base{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);d
       <a href="#method">Method</a>
       <a href="#academies">Academies</a>
     </div>
+    <div class="langsw" role="group" aria-label="Language"><button data-l="en" class="on">EN</button><button data-l="fr">FR</button><button data-l="de">DE</button><button data-l="pt">PT</button></div>
     <a class="btn" href="https://cal.com/meridante-studios-brxjh0/15min" target="_blank" rel="noopener">Chart your position</a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -321,6 +329,7 @@ footer .base{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);d
 <div class="mnav" id="mnav">
   <a href="#thesis">Why now</a><a href="#studio">The studio</a><a href="#difference">The difference</a><a href="#method">Method</a><a href="#academies">Academies</a>
   <a class="btn" href="https://cal.com/meridante-studios-brxjh0/15min" target="_blank" rel="noopener">Chart your position</a>
+  <div class="langsw" role="group" aria-label="Language"><button data-l="en" class="on">EN</button><button data-l="fr">FR</button><button data-l="de">DE</button><button data-l="pt">PT</button></div>
 </div>
 
 <header class="hero" id="top">
@@ -827,13 +836,18 @@ const bnum=document.getElementById('bnum'),bnum2=document.getElementById('bnum2'
       ticks=[...document.querySelectorAll('#hud .ticks span')];
 const SECTS=[['drift','#top'],['orient','#act1'],['build','#act2'],['system','#act3'],['scale','#act4'],['oriented','#contact']];
 let curK='drift';
+/* HUD labels — swapped by the language switcher (window.__HUDLAB set in the i18n block) */
+function hudLab(){return window.__HUDLAB||{status:'STATUS',drift:'DRIFT',asc:'ASCENDING',oriented:'ORIENTED',
+  tick:{drift:'DRIFT',orient:'I · ORIENT',build:'II · BUILD',system:'III · SYSTEMIZE',scale:'IV · SCALE',oriented:'ORIENTED'}};}
+function refreshHUD(){const L=hudLab();
+  ticks.forEach(tk=>tk.classList.toggle('on',tk.dataset.k===curK));
+  const word=curK==='oriented'?L.oriented:curK==='drift'?L.drift:L.asc;
+  bstate.innerHTML=L.status+' · <b>'+word+'</b>';
+  if(bstate2)bstate2.textContent=L.tick[curK];
+}
+window.__refreshHUD=refreshHUD;
 SECTS.forEach(([k,sel])=>{ScrollTrigger.create({trigger:sel,start:'top 55%',end:'bottom 45%',
-  onToggle:st=>{if(st.isActive){curK=k;
-    ticks.forEach(tk=>tk.classList.toggle('on',tk.dataset.k===k));
-    const lab=k==='drift'?'DRIFT':k==='oriented'?'ORIENTED':({orient:'I · ORIENT',build:'II · BUILD',system:'III · SYSTEMIZE',scale:'IV · SCALE'})[k];
-    bstate.innerHTML='STATUS · <b>'+(k==='oriented'?'ORIENTED':k==='drift'?'DRIFT':'ASCENDING')+'</b>';
-    if(bstate2)bstate2.textContent=lab;
-  }}});});
+  onToggle:st=>{if(st.isActive){curK=k;refreshHUD();}}});});
 function updateHUD(p){
   const deg=Math.round(p*360).toString().padStart(3,'0')+'°';
   bnum.textContent=deg; if(bnum2)bnum2.textContent=deg;
@@ -880,6 +894,279 @@ gsap.utils.toArray('.stat').forEach((st,i)=>{
 });
 ScrollTrigger.create({trigger:'#progFill',start:'top 85%',once:true,
   onEnter:()=>gsap.to('#progFill',{width:'72%',duration:1.6,ease:'power3.inOut',delay:.4})});
+</script>
+
+<script>
+/* ================= MERIDANTE i18n — PT · EN · FR · DE ================= */
+(function(){
+  const norm = s => s.replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
+
+  // Meta (title + description) per language
+  const META = {
+    en:{t:"Meridante — The AI Studio. We orient companies into the digital era.",
+        d:"Meridante is a European AI studio: full AI audits, AI department builds, team systemization, digital avatars and education platforms — proven in 90 days, EU-compliant by construction. Luxembourg-facing, built in Portugal."},
+    fr:{t:"Meridante — Le studio IA. Nous orientons les entreprises vers l'ère numérique.",
+        d:"Meridante est un studio IA européen : audits IA, départements IA, systématisation des équipes, avatars numériques et plateformes de formation — prouvés en 90 jours, conformes à l'UE par conception. Tourné vers le Luxembourg, bâti au Portugal."},
+    de:{t:"Meridante — Das KI-Studio. Wir orientieren Unternehmen ins digitale Zeitalter.",
+        d:"Meridante ist ein europäisches KI-Studio: KI-Audits, KI-Abteilungen, Team-Systematisierung, digitale Avatare und Lernplattformen — in 90 Tagen bewiesen, EU-konform von Grund auf. Auf Luxemburg ausgerichtet, in Portugal gebaut."},
+    pt:{t:"Meridante — O estúdio de IA. Orientamos empresas para a era digital.",
+        d:"A Meridante é um estúdio de IA europeu: auditorias de IA, departamentos de IA, sistematização de equipas, avatares digitais e plataformas de formação — provados em 90 dias, conformes à UE por conceção. Virado para o Luxemburgo, construído em Portugal."}
+  };
+
+  // HUD instrument labels
+  const HUD = {
+    en:{status:"STATUS",drift:"DRIFT",asc:"ASCENDING",oriented:"ORIENTED",bearing:"BEARING",
+        tick:{drift:"DRIFT",orient:"I · ORIENT",build:"II · BUILD",system:"III · SYSTEMIZE",scale:"IV · SCALE",oriented:"ORIENTED"}},
+    fr:{status:"STATUT",drift:"DÉRIVE",asc:"ASCENSION",oriented:"ORIENTÉ",bearing:"CAP",
+        tick:{drift:"DÉRIVE",orient:"I · ORIENTER",build:"II · CONSTRUIRE",system:"III · SYSTÉMATISER",scale:"IV · DÉPLOYER",oriented:"ORIENTÉ"}},
+    de:{status:"STATUS",drift:"ABDRIFT",asc:"AUFSTIEG",oriented:"ORIENTIERT",bearing:"KURS",
+        tick:{drift:"ABDRIFT",orient:"I · ORIENTIEREN",build:"II · BAUEN",system:"III · SYSTEMATISIEREN",scale:"IV · SKALIEREN",oriented:"ORIENTIERT"}},
+    pt:{status:"ESTADO",drift:"DERIVA",asc:"ASCENSÃO",oriented:"ORIENTADO",bearing:"RUMO",
+        tick:{drift:"DERIVA",orient:"I · ORIENTAR",build:"II · CONSTRUIR",system:"III · SISTEMATIZAR",scale:"IV · ESCALAR",oriented:"ORIENTADO"}}
+  };
+
+  // Copy table — [ EN(exact innerHTML), FR, DE, PT ]
+  const T = [
+    // nav + menu + buttons
+    ["Why now","Pourquoi maintenant","Warum jetzt","Porquê agora"],
+    ["The studio","Le studio","Das Studio","O estúdio"],
+    ["Difference","La différence","Der Unterschied","A diferença"],
+    ["The difference","La différence","Der Unterschied","A diferença"],
+    ["Method","La méthode","Methode","Método"],
+    ["Academies","Académies","Akademien","Academias"],
+    ["Chart your position","Fixez votre cap","Standort bestimmen","Trace a sua posição"],
+    ["Begin the ascent","Commencer l'ascension","Aufstieg beginnen","Iniciar a ascensão"],
+    ["Scroll to ascend","Défiler pour monter","Scrollen zum Aufstieg","Role para subir"],
+    // hero
+    ["AI STUDIO · EUROPE · <b>49.61°N 6.13°E</b>","STUDIO IA · EUROPE · <b>49.61°N 6.13°E</b>","KI-STUDIO · EUROPA · <b>49.61°N 6.13°E</b>","ESTÚDIO DE IA · EUROPA · <b>49.61°N 6.13°E</b>"],
+    ["We orient companies into the <b>digital era</b>.","Nous orientons les entreprises vers l'<b>ère numérique</b>.","Wir orientieren Unternehmen ins <b>digitale Zeitalter</b>.","Orientamos empresas para a <b>era digital</b>."],
+    ["The gold rush is digital. The fortune goes to the <em>oriented.</em>","La ruée vers l'or est numérique. La fortune va à <em>ceux qui s'orientent.</em>","Der Goldrausch ist digital. Das Vermögen gehört den <em>Orientierten.</em>","A corrida ao ouro é digital. A fortuna é de quem <em>se orienta.</em>"],
+    ["Meridante is the AI studio that orients companies into the digital era — then <b>builds, systemizes and scales</b> what the map reveals. Audits, AI departments, avatar-led academies. Proven before you commit.",
+     "Meridante est le studio IA qui oriente les entreprises vers l'ère numérique — puis <b>construit, systématise et déploie</b> ce que révèle la carte. Audits, départements IA, académies animées par des avatars. Prouvé avant tout engagement.",
+     "Meridante ist das KI-Studio, das Unternehmen ins digitale Zeitalter orientiert — und dann <b>baut, systematisiert und skaliert</b>, was die Karte zeigt. Audits, KI-Abteilungen, Avatar-geführte Akademien. Bewiesen, bevor Sie sich binden.",
+     "A Meridante é o estúdio de IA que orienta empresas para a era digital — e depois <b>constrói, sistematiza e escala</b> aquilo que o mapa revela. Auditorias, departamentos de IA, academias com avatares. Provado antes de qualquer compromisso."],
+    // marquee
+    ["AI audits","Audits IA","KI-Audits","Auditorias de IA"],
+    ["AI departments","Départements IA","KI-Abteilungen","Departamentos de IA"],
+    ["Department systemization","Systématisation des équipes","Team-Systematisierung","Sistematização de equipas"],
+    ["Custom LLMs","LLM sur mesure","Maßgeschneiderte LLMs","LLMs à medida"],
+    ["Digital avatars","Avatars numériques","Digitale Avatare","Avatares digitais"],
+    ["Education platforms","Plateformes de formation","Lernplattformen","Plataformas de formação"],
+    ["Premium web presence","Présence web premium","Premium-Webpräsenz","Presença web premium"],
+    ["Automation builds","Automatisations","Automatisierungen","Automações"],
+    // 01 — moment
+    ["01 — THE MOMENT","01 — LE MOMENT","01 — DER MOMENT","01 — O MOMENTO"],
+    ["Everyone bought shovels. <em>Almost no one struck gold.</em>","Tout le monde a acheté des pelles. <em>Presque personne n'a trouvé l'or.</em>","Alle kauften Schaufeln. <em>Fast niemand fand Gold.</em>","Todos compraram pás. <em>Quase ninguém encontrou ouro.</em>"],
+    ["Companies didn't miss the AI rush — they walked in without a map. The tools work. What fails is orientation: <b>nobody drew the line</b> from where the business stands to where the value actually sits. That line is our trade. It's in our name.",
+     "Les entreprises n'ont pas manqué la ruée vers l'IA — elles y sont entrées sans carte. Les outils fonctionnent. Ce qui manque, c'est l'orientation : <b>personne n'a tracé la ligne</b> entre là où l'entreprise se trouve et là où se situe réellement la valeur. Cette ligne, c'est notre métier. Elle est dans notre nom.",
+     "Unternehmen haben den KI-Boom nicht verpasst — sie sind ohne Karte hineingegangen. Die Werkzeuge funktionieren. Was fehlt, ist Orientierung: <b>niemand zog die Linie</b> von dort, wo das Unternehmen steht, zu dort, wo der Wert wirklich liegt. Diese Linie ist unser Handwerk. Sie steckt in unserem Namen.",
+     "As empresas não perderam a corrida à IA — entraram nela sem mapa. As ferramentas funcionam. O que falta é orientação: <b>ninguém traçou a linha</b> entre onde a empresa está e onde o valor realmente se encontra. Essa linha é o nosso ofício. Está no nosso nome."],
+    ["of corporate AI pilots deliver no measurable return","des projets pilotes d'IA en entreprise n'offrent aucun retour mesurable","der KI-Pilotprojekte in Unternehmen bringen keinen messbaren Ertrag","dos projetos-piloto de IA nas empresas não trazem retorno mensurável"],
+    ["partnering with specialists beats building in-house","s'associer à des spécialistes l'emporte sur le développement interne","Partnerschaft mit Spezialisten schlägt den Eigenbau","associar-se a especialistas supera o desenvolvimento interno"],
+    ["enterprise GenAI spend, growing 3.2× year on year","de dépenses en IA générative, en croissance de 3,2× par an","Unternehmensausgaben für GenKI, 3,2× Wachstum pro Jahr","de gastos empresariais em IA generativa, a crescer 3,2× ao ano"],
+    ["EU AI Act enforcement arrives — governance becomes board-level","l'AI Act européen entre en vigueur — la gouvernance devient une affaire de conseil","der EU AI Act tritt in Kraft — Governance wird Chefsache","o AI Act europeu entra em vigor — a governação passa a ser assunto de administração"],
+    // 02 — studio
+    ["02 — THE STUDIO","02 — LE STUDIO","02 — DAS STUDIO","02 — O ESTÚDIO"],
+    ["Four movements. <em>One ascent.</em>","Quatre mouvements. <em>Une seule ascension.</em>","Vier Bewegungen. <em>Ein Aufstieg.</em>","Quatro movimentos. <em>Uma só ascensão.</em>"],
+    ["Not a course. Not a one-off build. A studio installs a working capability inside your company — in four movements that each stand on the last. The sky above you keeps the score.",
+     "Ni une formation. Ni une prestation ponctuelle. Un studio installe une capacité opérationnelle au sein de votre entreprise — en quatre mouvements qui s'appuient chacun sur le précédent. Le ciel au-dessus de vous tient le compte.",
+     "Kein Kurs. Keine einmalige Leistung. Ein Studio installiert eine funktionierende Fähigkeit in Ihrem Unternehmen — in vier Bewegungen, die jeweils auf der vorigen aufbauen. Der Himmel über Ihnen führt Buch.",
+     "Não é um curso. Não é um trabalho pontual. Um estúdio instala uma capacidade operacional dentro da sua empresa — em quatro movimentos que assentam cada um no anterior. O céu acima de si vai marcando o rumo."],
+    ["Orient","Orienter","Orientieren","Orientar"],
+    ["Full audits · department mapping","Audits complets · cartographie des départements","Vollständige Audits · Abteilungs-Kartierung","Auditorias completas · mapeamento de departamentos"],
+    ["Before anything is built, we take the reading. A full audit of your operations — department by department — surfacing where AI pays, where it doesn't, and what it will disturb. You leave with coordinates, not opinions.",
+     "Avant toute construction, nous prenons le relevé. Un audit complet de vos opérations — département par département — révélant où l'IA rapporte, où elle ne rapporte pas, et ce qu'elle va bouleverser. Vous repartez avec des coordonnées, pas des opinions.",
+     "Bevor etwas gebaut wird, nehmen wir die Peilung. Ein vollständiges Audit Ihrer Abläufe — Abteilung für Abteilung — das zeigt, wo KI sich lohnt, wo nicht, und was sie umwälzen wird. Sie gehen mit Koordinaten, nicht mit Meinungen.",
+     "Antes de construir seja o que for, fazemos a leitura. Uma auditoria completa das suas operações — departamento a departamento — revelando onde a IA compensa, onde não compensa, e o que irá abalar. Sai com coordenadas, não com opiniões."],
+    ["Company-wide AI audit &amp; readiness reading","Audit IA et diagnostic de maturité à l'échelle de l'entreprise","Unternehmensweites KI-Audit und Reifegrad-Analyse","Auditoria de IA e leitura de maturidade em toda a empresa"],
+    ["Department-level opportunity map","Carte des opportunités par département","Chancenkarte je Abteilung","Mapa de oportunidades por departamento"],
+    ["Risk, compliance &amp; data-residency review","Revue des risques, de la conformité et de la résidence des données","Prüfung von Risiko, Compliance und Datenresidenz","Revisão de risco, conformidade e residência de dados"],
+    ["A sequenced route — what to build first, and why","Une feuille de route séquencée — quoi construire d'abord, et pourquoi","Eine geordnete Route — was zuerst gebaut wird, und warum","Um percurso sequenciado — o que construir primeiro, e porquê"],
+    ["Build","Construire","Bauen","Construir"],
+    ["AI departments · custom LLMs · digital presence","Départements IA · LLM sur mesure · présence numérique","KI-Abteilungen · maßgeschneiderte LLMs · digitale Präsenz","Departamentos de IA · LLMs à medida · presença digital"],
+    ["Then we install what the map calls for. Working AI departments that carry real operational load. Custom models trained on your knowledge. A digital presence engineered to convert — built to the standard of this page.",
+     "Nous installons ensuite ce que la carte exige. Des départements IA qui portent une véritable charge opérationnelle. Des modèles sur mesure entraînés sur votre savoir. Une présence numérique conçue pour convertir — au niveau de cette page.",
+     "Dann installieren wir, was die Karte verlangt. KI-Abteilungen, die echte operative Last tragen. Maßgeschneiderte Modelle, trainiert auf Ihrem Wissen. Eine digitale Präsenz, die auf Konversion ausgelegt ist — auf dem Niveau dieser Seite.",
+     "Depois instalamos o que o mapa exige. Departamentos de IA que carregam trabalho operacional real. Modelos à medida treinados no seu conhecimento. Uma presença digital desenhada para converter — ao nível desta página."],
+    ["AI department builds — agents doing real work","Départements IA — des agents qui font un vrai travail","KI-Abteilungen — Agenten, die echte Arbeit leisten","Departamentos de IA — agentes a fazer trabalho real"],
+    ["Custom-tailored LLMs on your own knowledge","LLM sur mesure entraînés sur votre propre savoir","Maßgeschneiderte LLMs auf Ihrem eigenen Wissen","LLMs à medida sobre o seu próprio conhecimento"],
+    ["Automation across your existing tools","Automatisation de vos outils existants","Automatisierung über Ihre bestehenden Tools","Automação sobre as suas ferramentas atuais"],
+    ["Premium websites &amp; digital presence","Sites premium et présence numérique","Premium-Websites und digitale Präsenz","Sites premium e presença digital"],
+    ["Systemize","Systématiser","Systematisieren","Sistematizar"],
+    ["Team consulting · department-by-department","Conseil aux équipes · département par département","Team-Beratung · Abteilung für Abteilung","Consultoria de equipas · departamento a departamento"],
+    ["A build without adoption is furniture. We work inside your teams — sweeping loose process into documented, AI-carried systems, department by department. What ran on memory now runs on rails.",
+     "Une construction sans adoption n'est qu'un meuble. Nous travaillons au sein de vos équipes — transformant les processus flous en systèmes documentés, portés par l'IA, département par département. Ce qui reposait sur la mémoire roule désormais sur des rails.",
+     "Ein Bau ohne Akzeptanz ist nur Mobiliar. Wir arbeiten in Ihren Teams — und überführen lose Prozesse in dokumentierte, KI-getragene Systeme, Abteilung für Abteilung. Was auf Gedächtnis lief, läuft nun auf Schienen.",
+     "Uma construção sem adoção é apenas mobília. Trabalhamos dentro das suas equipas — transformando processos soltos em sistemas documentados, sustentados por IA, departamento a departamento. O que corria de memória passa a correr sobre carris."],
+    ["Embedded team consulting &amp; enablement","Conseil et accompagnement intégrés aux équipes","Eingebettete Team-Beratung und Befähigung","Consultoria e capacitação integradas nas equipas"],
+    ["Back-sweep: undocumented work → living systems","Reprise du passif : le travail non documenté → des systèmes vivants","Nacharbeit: undokumentierte Arbeit → lebendige Systeme","Recuperação do histórico: trabalho não documentado → sistemas vivos"],
+    ["SOPs that machines and people both follow","Des procédures que machines et humains suivent de concert","Abläufe, denen Maschinen und Menschen gleichermaßen folgen","Procedimentos que máquinas e pessoas seguem em conjunto"],
+    ["Department-level operating rhythm, installed","Un rythme opérationnel installé au niveau du département","Ein operativer Rhythmus, auf Abteilungsebene installiert","Um ritmo operacional instalado ao nível do departamento"],
+    ["Scale","Déployer","Skalieren","Escalar"],
+    ["Education platforms · digital avatars","Plateformes de formation · avatars numériques","Lernplattformen · digitale Avatare","Plataformas de formação · avatares digitais"],
+    ["Finally, we multiply your best people. Senior knowledge becomes avatar-led academies — custom AI delivering your expertise in every language, on every shift, at mass production. Your company learns as fast as it grows.",
+     "Enfin, nous démultiplions vos meilleurs éléments. Le savoir des seniors devient des académies animées par des avatars — une IA sur mesure qui délivre votre expertise dans toutes les langues, à chaque poste, en production de masse. Votre entreprise apprend aussi vite qu'elle grandit.",
+     "Schließlich vervielfachen wir Ihre besten Köpfe. Senior-Wissen wird zu Avatar-geführten Akademien — maßgeschneiderte KI, die Ihr Fachwissen in jeder Sprache liefert, in jeder Schicht, in Massenproduktion. Ihr Unternehmen lernt so schnell, wie es wächst.",
+     "Por fim, multiplicamos as suas melhores pessoas. O conhecimento sénior torna-se academias com avatares — IA à medida que entrega a sua especialidade em todas as línguas, em cada turno, em produção em massa. A sua empresa aprende à velocidade a que cresce."],
+    ["Education platforms built on your expertise","Plateformes de formation bâties sur votre expertise","Lernplattformen auf Basis Ihres Fachwissens","Plataformas de formação construídas sobre a sua especialidade"],
+    ["Digital avatars — your teachers, multiplied","Avatars numériques — vos formateurs, démultipliés","Digitale Avatare — Ihre Lehrenden, vervielfacht","Avatares digitais — os seus formadores, multiplicados"],
+    ["AI-generated learning content at scale","Contenus pédagogiques générés par IA à grande échelle","KI-generierte Lerninhalte in großem Maßstab","Conteúdo formativo gerado por IA em grande escala"],
+    ["Custom LLM tutors trained on your practice","Tuteurs LLM sur mesure entraînés sur vos pratiques","Maßgeschneiderte LLM-Tutoren, trainiert auf Ihrer Praxis","Tutores LLM à medida treinados na sua prática"],
+    // 03 — difference
+    ["03 — THE DIFFERENCE","03 — LA DIFFÉRENCE","03 — DER UNTERSCHIED","03 — A DIFERENÇA"],
+    ["Others teach, or build. <em>A studio does both — and stays.</em>","Les autres enseignent, ou construisent. <em>Un studio fait les deux — et reste.</em>","Die anderen lehren, oder bauen. <em>Ein Studio tut beides — und bleibt.</em>","Os outros ensinam, ou constroem. <em>Um estúdio faz ambos — e fica.</em>"],
+    ["We studied the leaders of this market closely. The educators are excellent at teaching. The agencies are excellent at shipping. The gap between them is exactly where companies get lost — and exactly where Meridante stands.",
+     "Nous avons étudié de près les leaders de ce marché. Les formateurs excellent à enseigner. Les agences excellent à livrer. L'écart entre les deux est précisément là où les entreprises se perdent — et précisément là où se tient Meridante.",
+     "Wir haben die Marktführer genau studiert. Die Ausbilder sind exzellent im Lehren. Die Agenturen sind exzellent im Liefern. Die Lücke dazwischen ist genau dort, wo Unternehmen sich verlieren — und genau dort steht Meridante.",
+     "Estudámos de perto os líderes deste mercado. Os formadores são excelentes a ensinar. As agências são excelentes a entregar. A lacuna entre os dois é exatamente onde as empresas se perdem — e exatamente onde a Meridante está."],
+    ["The educators","Les formateurs","Die Ausbilder","Os formadores"],
+    ["Courses &amp; communities","Cours et communautés","Kurse und Communities","Cursos e comunidades"],
+    ["Brilliant at showing what's possible. Then the videos end — and your team is alone with the implementation.",
+     "Brillants pour montrer ce qui est possible. Puis les vidéos s'arrêtent — et votre équipe reste seule face à la mise en œuvre.",
+     "Brillant darin, das Mögliche zu zeigen. Dann enden die Videos — und Ihr Team steht allein vor der Umsetzung.",
+     "Brilhantes a mostrar o que é possível. Depois os vídeos acabam — e a sua equipa fica sozinha com a implementação."],
+    ["You watch, you try","Vous regardez, vous essayez","Sie schauen zu, Sie versuchen","Vê, e tenta"],
+    ["Generic, not your data","Générique, pas vos données","Generisch, nicht Ihre Daten","Genérico, não os seus dados"],
+    ["No one owns the outcome","Personne ne porte le résultat","Niemand verantwortet das Ergebnis","Ninguém assume o resultado"],
+    ["The AI studio","Le studio IA","Das KI-Studio","O estúdio de IA"],
+    ["Orientation, builds, systems and scale — installed inside your company, proven on one metric before you commit, and taught to your people so it compounds.",
+     "Orientation, construction, systèmes et passage à l'échelle — installés au sein de votre entreprise, prouvés sur un indicateur avant tout engagement, puis transmis à vos équipes pour que cela compose.",
+     "Orientierung, Aufbau, Systeme und Skalierung — in Ihrem Unternehmen installiert, an einer Kennzahl bewiesen, bevor Sie sich binden, und Ihren Leuten beigebracht, damit es sich verzinst.",
+     "Orientação, construção, sistemas e escala — instalados dentro da sua empresa, provados numa métrica antes de qualquer compromisso, e ensinados às suas pessoas para que componha."],
+    ["Audit first — coordinates, not opinions","L'audit d'abord — des coordonnées, pas des opinions","Zuerst das Audit — Koordinaten, keine Meinungen","A auditoria primeiro — coordenadas, não opiniões"],
+    ["Built on your knowledge, in your tools","Bâti sur votre savoir, dans vos outils","Auf Ihrem Wissen, in Ihren Tools gebaut","Construído sobre o seu conhecimento, nas suas ferramentas"],
+    ["Systemized into your departments","Systématisé dans vos départements","In Ihre Abteilungen systematisiert","Sistematizado nos seus departamentos"],
+    ["Scaled through avatar-led academies","Déployé par des académies à avatars","Über Avatar-geführte Akademien skaliert","Escalado por academias com avatares"],
+    ["EU-compliant by construction","Conforme à l'UE par conception","EU-konform von Grund auf","Conforme à UE por conceção"],
+    ["The agencies","Les agences","Die Agenturen","As agências"],
+    ["A build, delivered","Une prestation, livrée","Eine Leistung, geliefert","Um trabalho, entregue"],
+    ["Strong hands, fast shipping. Then the invoice, the handover — and the exit. Adoption is your problem now.",
+     "Des mains solides, une livraison rapide. Puis la facture, la passation — et la sortie. L'adoption devient votre problème.",
+     "Starke Hände, schnelle Lieferung. Dann die Rechnung, die Übergabe — und der Abgang. Die Akzeptanz ist nun Ihr Problem.",
+     "Mãos fortes, entrega rápida. Depois a fatura, a passagem de testemunho — e a saída. A adoção passa a ser o seu problema."],
+    ["One deliverable, then gone","Un livrable, puis plus rien","Ein Liefergegenstand, dann fort","Uma entrega, e depois nada"],
+    ["Tools installed, teams untouched","Des outils installés, des équipes intactes","Tools installiert, Teams unberührt","Ferramentas instaladas, equipas intactas"],
+    ["Nothing learns, nothing scales","Rien n'apprend, rien ne passe à l'échelle","Nichts lernt, nichts skaliert","Nada aprende, nada escala"],
+    // 04 — method
+    ["04 — THE METHOD","04 — LA MÉTHODE","04 — DIE METHODE","04 — O MÉTODO"],
+    ["Proof before <em>commitment.</em>","La preuve avant <em>l'engagement.</em>","Beweis vor <em>Bindung.</em>","Prova antes do <em>compromisso.</em>"],
+    ["European companies buy carefully — as they should. So the risk stays on our side of the table.",
+     "Les entreprises européennes achètent avec prudence — à juste titre. Le risque reste donc de notre côté de la table.",
+     "Europäische Unternehmen kaufen mit Bedacht — zu Recht. Also bleibt das Risiko auf unserer Seite des Tisches.",
+     "As empresas europeias compram com cautela — e com razão. Por isso o risco fica do nosso lado da mesa."],
+    ["The reading","Le relevé","Die Peilung","A leitura"],
+    ["A focused audit of where AI pays in your company. <b>Days, not months</b> — you get the map either way.",
+     "Un audit ciblé de là où l'IA rapporte dans votre entreprise. <b>Des jours, pas des mois</b> — vous repartez avec la carte, quoi qu'il arrive.",
+     "Ein gezieltes Audit, wo KI sich in Ihrem Unternehmen lohnt. <b>Tage, nicht Monate</b> — die Karte bekommen Sie in jedem Fall.",
+     "Uma auditoria focada em onde a IA compensa na sua empresa. <b>Dias, não meses</b> — o mapa é seu, aconteça o que acontecer."],
+    ["The pilot","Le pilote","Der Pilot","O piloto"],
+    ["<b>90 days, one metric, in production.</b> We prove the value on real work before any ongoing commitment. If it doesn't hit — you keep the build.",
+     "<b>90 jours, un indicateur, en production.</b> Nous prouvons la valeur sur du travail réel avant tout engagement durable. Si l'objectif n'est pas atteint — la construction vous reste.",
+     "<b>90 Tage, eine Kennzahl, in Produktion.</b> Wir beweisen den Wert an echter Arbeit, vor jeder laufenden Bindung. Wird das Ziel verfehlt — der Bau bleibt Ihnen.",
+     "<b>90 dias, uma métrica, em produção.</b> Provamos o valor em trabalho real antes de qualquer compromisso contínuo. Se não atingir — a construção fica sua."],
+    ["The ascent","L'ascension","Der Aufstieg","A ascensão"],
+    ["We run it, systemize it, and teach it — then expand to the next department. <b>Each movement stands on the last.</b>",
+     "Nous l'exploitons, la systématisons et la transmettons — puis nous passons au département suivant. <b>Chaque mouvement s'appuie sur le précédent.</b>",
+     "Wir betreiben es, systematisieren es und lehren es — dann geht es zur nächsten Abteilung. <b>Jede Bewegung baut auf der vorigen auf.</b>",
+     "Operamos, sistematizamos e ensinamos — e depois avançamos para o departamento seguinte. <b>Cada movimento assenta no anterior.</b>"],
+    ["<b>EU-compliant by construction.</b> GDPR-first architecture, EU AI Act readiness, EU data residency, and self-hosted models where the work demands it. For regulated buyers, this is not a feature — it's the foundation.",
+     "<b>Conforme à l'UE par conception.</b> Architecture RGPD d'abord, préparation à l'AI Act européen, résidence des données dans l'UE, et modèles auto-hébergés là où le travail l'exige. Pour les acteurs régulés, ce n'est pas une option — c'est le socle.",
+     "<b>EU-konform von Grund auf.</b> DSGVO-first-Architektur, Bereitschaft für den EU AI Act, Datenresidenz in der EU und selbst gehostete Modelle, wo die Arbeit es verlangt. Für regulierte Kunden ist das kein Feature — es ist das Fundament.",
+     "<b>Conforme à UE por conceção.</b> Arquitetura RGPD em primeiro lugar, preparação para o AI Act europeu, residência de dados na UE, e modelos auto-alojados onde o trabalho o exige. Para clientes regulados, isto não é um extra — é o alicerce."],
+    // 05 — academies
+    ["05 — ACADEMIES","05 — ACADÉMIES","05 — AKADEMIEN","05 — ACADEMIAS"],
+    ["Your best teacher, <em>multiplied.</em>","Votre meilleur formateur, <em>démultiplié.</em>","Ihr bester Lehrer, <em>vervielfacht.</em>","O seu melhor formador, <em>multiplicado.</em>"],
+    ["One senior expert. Infinite classrooms. We turn the knowledge locked in your best people into avatar-led education platforms — custom AI trained on your practice, producing learning content at mass production.",
+     "Un expert senior. Des salles de classe infinies. Nous transformons le savoir enfermé dans vos meilleurs éléments en plateformes de formation animées par des avatars — une IA sur mesure entraînée sur vos pratiques, produisant du contenu pédagogique en production de masse.",
+     "Ein Senior-Experte. Unendlich viele Klassenräume. Wir verwandeln das Wissen, das in Ihren besten Köpfen steckt, in Avatar-geführte Lernplattformen — maßgeschneiderte KI, trainiert auf Ihrer Praxis, die Lerninhalte in Massenproduktion erzeugt.",
+     "Um especialista sénior. Salas de aula infinitas. Transformamos o conhecimento fechado nas suas melhores pessoas em plataformas de formação com avatares — IA à medida treinada na sua prática, a produzir conteúdo formativo em produção em massa."],
+    ["<em>a.</em><b>Digital avatars</b><span>— your experts, teaching in every language, on every shift.</span>",
+     "<em>a.</em><b>Avatars numériques</b><span>— vos experts, enseignant dans toutes les langues, à chaque poste.</span>",
+     "<em>a.</em><b>Digitale Avatare</b><span>— Ihre Experten, lehrend in jeder Sprache, in jeder Schicht.</span>",
+     "<em>a.</em><b>Avatares digitais</b><span>— os seus especialistas, a ensinar em todas as línguas, em cada turno.</span>"],
+    ["<em>b.</em><b>Custom LLM tutors</b><span>— trained on your documents, answering like your best.</span>",
+     "<em>b.</em><b>Tuteurs LLM sur mesure</b><span>— entraînés sur vos documents, répondant comme vos meilleurs.</span>",
+     "<em>b.</em><b>Maßgeschneiderte LLM-Tutoren</b><span>— trainiert auf Ihren Dokumenten, antwortend wie Ihre Besten.</span>",
+     "<em>b.</em><b>Tutores LLM à medida</b><span>— treinados nos seus documentos, respondendo como os seus melhores.</span>"],
+    ["<em>c.</em><b>Mass production</b><span>— courses generated, updated and versioned at AI speed.</span>",
+     "<em>c.</em><b>Production de masse</b><span>— des cours générés, mis à jour et versionnés à la vitesse de l'IA.</span>",
+     "<em>c.</em><b>Massenproduktion</b><span>— Kurse erzeugt, aktualisiert und versioniert im KI-Tempo.</span>",
+     "<em>c.</em><b>Produção em massa</b><span>— cursos gerados, atualizados e versionados à velocidade da IA.</span>"],
+    // 06 — CTA
+    ["06 — YOUR COORDINATES","06 — VOS COORDONNÉES","06 — IHRE KOORDINATEN","06 — AS SUAS COORDENADAS"],
+    ["Chart your <em>position.</em>","Fixez votre <em>cap.</em>","Bestimmen Sie Ihren <em>Standort.</em>","Trace a sua <em>posição.</em>"],
+    ["Fifteen minutes. A straight reading of where AI pays in your company — and where it doesn't. No deck, no pressure. You keep the map.",
+     "Quinze minutes. Un relevé franc de là où l'IA rapporte dans votre entreprise — et là où elle ne rapporte pas. Sans présentation, sans pression. Vous gardez la carte.",
+     "Fünfzehn Minuten. Eine klare Peilung, wo KI sich in Ihrem Unternehmen lohnt — und wo nicht. Kein Foliensatz, kein Druck. Die Karte behalten Sie.",
+     "Quinze minutos. Uma leitura direta de onde a IA compensa na sua empresa — e onde não compensa. Sem apresentação, sem pressão. O mapa fica consigo."],
+    ["Book the reading — 15 min","Réserver le relevé — 15 min","Peilung buchen — 15 Min.","Reservar a leitura — 15 min"],
+    ["or write to <a href=\"mailto:meridante.pt@gmail.com\">meridante.pt@gmail.com</a>","ou écrivez à <a href=\"mailto:meridante.pt@gmail.com\">meridante.pt@gmail.com</a>","oder schreiben Sie an <a href=\"mailto:meridante.pt@gmail.com\">meridante.pt@gmail.com</a>","ou escreva para <a href=\"mailto:meridante.pt@gmail.com\">meridante.pt@gmail.com</a>"],
+    // footer
+    ["The AI studio. We orient companies into the digital era.","Le studio IA. Nous orientons les entreprises vers l'ère numérique.","Das KI-Studio. Wir orientieren Unternehmen ins digitale Zeitalter.","O estúdio de IA. Orientamos empresas para a era digital."],
+    ["Studio","Studio","Studio","Estúdio"],
+    ["Four movements","Quatre mouvements","Vier Bewegungen","Quatro movimentos"],
+    ["Craft","Savoir-faire","Handwerk","Ofício"],
+    ["AI departments","Départements IA","KI-Abteilungen","Departamentos de IA"],
+    ["Systemization","Systématisation","Systematisierung","Sistematização"],
+    ["Academies &amp; avatars","Académies et avatars","Akademien und Avatare","Academias e avatares"],
+    ["Digital presence","Présence numérique","Digitale Präsenz","Presença digital"],
+    ["Contact","Contact","Kontakt","Contacto"],
+    ["Book 15 minutes","Réserver 15 minutes","15 Minuten buchen","Reservar 15 minutos"],
+    ["LUXEMBOURG-FACING · BUILT IN PORTUGAL · SERVING EUROPE","TOURNÉ VERS LE LUXEMBOURG · BÂTI AU PORTUGAL · AU SERVICE DE L'EUROPE","AUF LUXEMBURG AUSGERICHTET · IN PORTUGAL GEBAUT · FÜR EUROPA","VIRADO PARA O LUXEMBURGO · CONSTRUÍDO EM PORTUGAL · AO SERVIÇO DA EUROPA"],
+    // HUD static
+    ["BEARING","CAP","KURS","RUMO"],
+    ["DRIFT","DÉRIVE","ABDRIFT","DERIVA"],
+    ["I · ORIENT","I · ORIENTER","I · ORIENTIEREN","I · ORIENTAR"],
+    ["II · BUILD","II · CONSTRUIRE","II · BAUEN","II · CONSTRUIR"],
+    ["III · SYSTEMIZE","III · SYSTÉMATISER","III · SYSTEMATISIEREN","III · SISTEMATIZAR"],
+    ["IV · SCALE","IV · DÉPLOYER","IV · SKALIEREN","IV · ESCALAR"],
+    ["ORIENTED","ORIENTÉ","ORIENTIERT","ORIENTADO"]
+  ];
+
+  const DICT={fr:{},de:{},pt:{}};
+  T.forEach(r=>{const k=norm(r[0]);DICT.fr[k]=r[1];DICT.de[k]=r[2];DICT.pt[k]=r[3];});
+
+  const SEL = [
+    '.nav .links a','.nav a.btn','.mnav > a','.mnav a.btn',
+    '.hero .eyeb','.hero .tag','.hero h1','.hero p','.hero .cta a','.scr span',
+    '.marq .tk span',
+    '.sect .eyeb .n','.h2','.lede',
+    '.act h3','.act .tag','.act > .txt > p','.act ul li',
+    '.ccol .who','.ccol h4','.ccol > p','.ccol li',
+    '.mrow h4','.mrow p','.comp-strip p',
+    '.feat > div',
+    '.ctaS .mono','.ctaS h2','.ctaS > .wrap > p','.ctaS .cta a','.mail',
+    'footer .col span','footer .col a','footer > .wrap > div > p','footer .base span',
+    '#hud .b-val small','#hud .ticks span'
+  ].join(',');
+
+  const els = [...document.querySelectorAll(SEL)];
+  els.forEach(el=>{ if(el.dataset.i===undefined) el.dataset.i = el.innerHTML; });
+
+  function setLang(lang){
+    if(!['en','fr','de','pt'].includes(lang)) lang='en';
+    els.forEach(el=>{
+      const en = el.dataset.i;
+      el.innerHTML = (lang==='en') ? en : (DICT[lang][norm(en)] || en);
+    });
+    document.documentElement.setAttribute('lang',lang);
+    const m=META[lang]; if(m){document.title=m.t; const md=document.querySelector('meta[name="description"]'); if(md)md.setAttribute('content',m.d);}
+    window.__HUDLAB = HUD[lang];
+    if(window.__refreshHUD) window.__refreshHUD();
+    document.querySelectorAll('.langsw button').forEach(b=>b.classList.toggle('on', b.dataset.l===lang));
+    try{ localStorage.setItem('ml_lang',lang); }catch(e){}
+  }
+  window.setLang=setLang;
+
+  document.querySelectorAll('.langsw button').forEach(b=>{
+    b.addEventListener('click',()=>setLang(b.dataset.l));
+  });
+
+  let saved=null; try{ saved=localStorage.getItem('ml_lang'); }catch(e){}
+  const n2=(navigator.language||'en').slice(0,2).toLowerCase();
+  const auto=['fr','de','pt'].includes(n2)?n2:'en';
+  setLang(saved||auto);
+})();
 </script>
 </body>
 </html>
