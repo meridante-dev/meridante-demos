@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Meridante — The AI Studio. We orient companies into the new era.</title>
+<meta name="description" content="Meridante is a European AI studio: full AI audits, AI department builds, team systemization, digital avatars and education platforms — proven in 90 days, EU-compliant by construction. Luxembourg-facing, built in Portugal.">
+<meta property="og:title" content="Meridante — The AI Studio">
+<meta property="og:description" content="The gold rush is digital. The fortune goes to the oriented. Audits, AI builds, systemization, avatars and education platforms — proven before you commit.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#070c17">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 25'%3E%3Ccircle cx='11' cy='14.5' r='8.2' stroke='%23c2974a' fill='none'/%3E%3Cellipse cx='11' cy='14.5' rx='3.3' ry='8.2' stroke='%23c2974a' fill='none'/%3E%3Cpath d='M2.9 14.5h16.2M11 6.3v16.4' stroke='%23c2974a'/%3E%3Ccircle cx='11' cy='2.7' r='2.1' fill='%23ddb877'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400&family=Hanken+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Meridante","description":"European AI studio — AI audits, AI department builds, team systemization, digital avatars and education platforms.","areaServed":["Luxembourg","Portugal","Belgium","Europe"],"knowsAbout":["Artificial Intelligence","AI Consulting","AI Automation","Corporate Education","Digital Avatars"],"url":"https://meridante.ai"}
+</script>
+<style>
+:root{
+  --night:#070c17; --night2:#0a1120; --ink:#0c1322; --panel:#0e1626;
+  --ivory:#f3eee4; --ivory2:#e6ddc9; --mut:#8d99b2; --mut2:#5c6880;
+  --brass:#c2974a; --brass-b:#ddb877; --brass-d:#94702f;
+  --teal:#5fa091;
+  --line:rgba(243,238,228,.09); --line2:rgba(243,238,228,.16);
+  --disp:'Fraunces',Georgia,serif; --body:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--night);color:var(--ivory);font:400 17px/1.65 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(194,151,74,.35)}
+img,svg{display:block}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,44px)}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:500}
+h1,h2,h3{font-family:var(--disp);font-weight:400;line-height:1.06;letter-spacing:-.015em}
+em{font-style:italic;color:var(--brass-b)}
+.hairline{height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent);transform-origin:left;transform:scaleX(0)}
+
+/* grain */
+body::after{content:"";position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:80;opacity:.05;
+ background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+ animation:grain 9s steps(10) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,-4%)}30%{transform:translate(4%,2%)}50%{transform:translate(-2%,5%)}70%{transform:translate(5%,-3%)}90%{transform:translate(-4%,1%)}}
+
+/* cursor halo */
+#halo{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:1;
+ background:radial-gradient(circle,rgba(194,151,74,.075),rgba(194,151,74,.02) 45%,transparent 68%);opacity:0}
+
+/* loader */
+#loader{position:fixed;inset:0;z-index:200;background:var(--night);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:22px}
+#loader svg{width:44px;height:50px;color:var(--brass)}
+#loader svg *{stroke-dasharray:80;stroke-dashoffset:80;animation:dr 1.4s ease forwards}
+#loader svg circle[fill]{animation:fdin 1s .9s ease forwards;opacity:0;fill:var(--brass-b)}
+@keyframes dr{to{stroke-dashoffset:0}}
+@keyframes fdin{to{opacity:1}}
+#loader .lw{font-family:var(--disp);font-size:21px;letter-spacing:.34em;text-indent:.34em;opacity:0;animation:fdin .8s .5s ease forwards}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:90;transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+.nav.sc{background:rgba(7,12,23,.78);backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-color:var(--line)}
+.nav .in{display:flex;align-items:center;justify-content:space-between;padding:20px clamp(20px,4vw,44px);max-width:1400px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:24px;height:27px;color:var(--brass)}
+.brand b{font-family:var(--disp);font-weight:500;font-size:19px;letter-spacing:.26em;text-indent:.26em}
+.nav .links{display:flex;gap:34px;align-items:center}
+.nav .links a{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);transition:color .25s;position:relative}
+.nav .links a:hover{color:var(--ivory)}
+.nav .links a::after{content:"";position:absolute;left:0;bottom:-5px;height:1px;width:0;background:var(--brass);transition:width .3s}
+.nav .links a:hover::after{width:100%}
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 13px/1 var(--body);letter-spacing:.08em;text-transform:uppercase;
+ color:#120d02;background:linear-gradient(135deg,var(--brass-b),var(--brass) 60%,var(--brass-d));padding:15px 26px;border-radius:999px;
+ box-shadow:0 8px 28px -10px rgba(194,151,74,.55),inset 0 1px 0 rgba(255,255,255,.28);transition:transform .28s cubic-bezier(.2,.9,.3,1.4),box-shadow .3s;cursor:pointer;border:0;white-space:nowrap}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 36px -10px rgba(194,151,74,.7),inset 0 1px 0 rgba(255,255,255,.3)}
+.btn.ghost{background:transparent;color:var(--ivory);border:1px solid var(--line2);box-shadow:none}
+.btn.ghost:hover{border-color:var(--brass);color:var(--brass-b);box-shadow:0 10px 30px -14px rgba(194,151,74,.4)}
+.nav .btn{padding:12px 22px}
+.burger{display:none;background:none;border:0;cursor:pointer;width:40px;height:40px;position:relative;z-index:95}
+.burger span{position:absolute;left:8px;right:8px;height:1.5px;background:var(--ivory);transition:.3s}
+.burger span:nth-child(1){top:14px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:26px}
+.mnav{position:fixed;inset:0;z-index:89;background:rgba(7,12,23,.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;opacity:0;pointer-events:none;transition:opacity .35s}
+.mnav.open{opacity:1;pointer-events:auto}
+.mnav a{font-family:var(--disp);font-size:30px;color:var(--ivory)}
+body.mopen .burger span:nth-child(1){top:20px;transform:rotate(45deg)}
+body.mopen .burger span:nth-child(2){opacity:0}
+body.mopen .burger span:nth-child(3){top:20px;transform:rotate(-45deg)}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+#stars{position:absolute;inset:0;z-index:0}
+.hero .sphere{position:absolute;z-index:1;right:-16vw;top:50%;transform:translateY(-50%);width:min(74vw,980px);height:auto;color:var(--brass);opacity:.5;pointer-events:none}
+.sphere .d{stroke-dasharray:3200;stroke-dashoffset:3200}
+.hero .in{position:relative;z-index:2;padding-top:120px;padding-bottom:80px}
+.hero .coords{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:30px}
+.hero .coords span{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--mut2)}
+.hero .coords b{color:var(--brass);font-weight:500}
+.hero h1{font-size:clamp(46px,7.4vw,104px);max-width:12ch}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+.hero h1 .w i{display:inline-block;font-style:inherit;transform:translateY(110%)}
+.hero p.sub{margin-top:30px;max-width:56ch;color:var(--mut);font-size:clamp(16px,1.5vw,19px);font-weight:300}
+.hero p.sub b{color:var(--ivory);font-weight:500}
+.hero .cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;align-items:center}
+.hero .scr{position:absolute;right:clamp(20px,4vw,44px);bottom:28px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--mut2)}
+.hero .scr .lin{width:1px;height:52px;background:linear-gradient(var(--brass),transparent);animation:scr 2.2s ease infinite}
+@keyframes scr{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* marquee */
+.marq{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(243,238,228,.014)}
+.marq .tk{display:flex;gap:0;width:max-content;will-change:transform}
+.marq span{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut2);padding:0 34px;white-space:nowrap}
+.marq span::after{content:"✦";color:var(--brass);margin-left:64px;font-size:9px;vertical-align:2px}
+
+/* section shell */
+section{position:relative}
+.sect{padding:clamp(90px,12vw,170px) 0}
+.eyeb{display:flex;align-items:center;gap:16px;margin-bottom:26px}
+.eyeb .n{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--mut2)}
+.eyeb .hairline{width:64px;flex:none}
+.h2{font-size:clamp(34px,4.6vw,62px);max-width:18ch}
+.lede{margin-top:24px;color:var(--mut);max-width:60ch;font-weight:300;font-size:clamp(16px,1.4vw,19px)}
+.lede b{color:var(--ivory);font-weight:500}
+
+/* thesis stats */
+.thesis{background:linear-gradient(180deg,var(--night) 0%,var(--night2) 100%)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:70px}
+.stat{background:var(--night2);padding:38px 30px;position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--brass);transform:scaleY(0);transform-origin:top;transition:transform .8s .2s}
+.stat.on::before{transform:scaleY(1)}
+.stat .v{font-family:var(--disp);font-size:clamp(38px,4vw,56px);color:var(--brass-b);line-height:1;font-weight:300}
+.stat .v sup{font-size:.45em;color:var(--brass);vertical-align:super}
+.stat .l{margin-top:14px;color:var(--mut);font-size:14px;line-height:1.5;font-weight:300}
+.stat .s{margin-top:10px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--mut2);text-transform:uppercase}
+
+/* acts */
+.acts .act{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,6vw,110px);align-items:center;padding:clamp(70px,9vw,130px) 0;border-top:1px solid var(--line)}
+.acts .act:first-of-type{border-top:0}
+.act .num{font-family:var(--disp);font-style:italic;font-weight:300;font-size:clamp(70px,8vw,120px);color:transparent;-webkit-text-stroke:1px var(--brass-d);line-height:.9}
+.act h3{font-size:clamp(30px,3.6vw,48px);margin-top:18px}
+.act .tag{margin-top:10px;font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--brass)}
+.act p{margin-top:22px;color:var(--mut);font-weight:300;max-width:46ch}
+.act ul{margin-top:26px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.act li{list-style:none;padding:15px 2px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:14px;color:var(--ivory2);font-size:15.5px;font-weight:300;transition:padding-left .3s,color .3s}
+.act li::before{content:"—";color:var(--brass);flex:none;font-family:var(--disp)}
+.act li:hover{padding-left:10px;color:var(--ivory)}
+.act .vis{position:relative;aspect-ratio:1.04;display:flex;align-items:center;justify-content:center}
+.act .vis svg{width:min(100%,480px);height:auto;overflow:visible}
+.act.rev{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.act.rev .vis{order:-1}
+.dr{stroke-dasharray:1200;stroke-dashoffset:1200}
+
+/* comparison */
+.compare{background:linear-gradient(180deg,var(--night2),var(--night))}
+.cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:64px}
+.ccol{border:1px solid var(--line);border-radius:18px;padding:36px 32px;background:rgba(243,238,228,.015);display:flex;flex-direction:column;transition:transform .4s,border-color .4s}
+.ccol .who{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut2)}
+.ccol h4{font-family:var(--disp);font-weight:400;font-size:27px;margin-top:14px;color:var(--mut)}
+.ccol p{margin-top:16px;color:var(--mut2);font-size:15px;font-weight:300;line-height:1.6}
+.ccol ul{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.ccol li{list-style:none;font-size:14.5px;color:var(--mut);font-weight:300;display:flex;gap:11px;align-items:baseline}
+.ccol li::before{content:"·";color:var(--mut2)}
+.ccol.us{border-color:rgba(194,151,74,.5);background:linear-gradient(165deg,rgba(194,151,74,.07),rgba(194,151,74,.015) 55%);position:relative;box-shadow:0 30px 80px -40px rgba(194,151,74,.35)}
+.ccol.us::before{content:"THE STUDIO MODEL";position:absolute;top:-11px;left:32px;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;color:#120d02;background:linear-gradient(135deg,var(--brass-b),var(--brass));padding:5px 13px;border-radius:999px;font-weight:500}
+.ccol.us h4{color:var(--ivory);font-size:29px}
+.ccol.us p{color:var(--mut)}
+.ccol.us li{color:var(--ivory2)}
+.ccol.us li::before{content:"✦";color:var(--brass);font-size:10px}
+.ccol:hover{transform:translateY(-6px)}
+
+/* method */
+.meth{counter-reset:m}
+.mrow{display:grid;grid-template-columns:110px minmax(0,.85fr) minmax(0,1.35fr);gap:clamp(20px,4vw,60px);padding:44px 0;border-top:1px solid var(--line);align-items:baseline}
+.mrow:last-of-type{border-bottom:1px solid var(--line)}
+.mrow .mn{font-family:var(--disp);font-style:italic;font-weight:300;font-size:44px;color:var(--brass-d)}
+.mrow h4{font-family:var(--disp);font-weight:400;font-size:clamp(23px,2.4vw,30px)}
+.mrow p{color:var(--mut);font-weight:300;font-size:16px}
+.mrow p b{color:var(--ivory);font-weight:500}
+.comp-strip{margin-top:60px;border:1px solid rgba(95,160,145,.3);border-radius:16px;padding:26px 32px;display:flex;gap:22px;align-items:center;background:rgba(95,160,145,.05);flex-wrap:wrap}
+.comp-strip svg{width:30px;height:30px;color:var(--teal);flex:none}
+.comp-strip p{color:var(--mut);font-size:15px;font-weight:300}
+.comp-strip b{color:var(--ivory);font-weight:500}
+
+/* avatars / academy */
+.acad{background:linear-gradient(180deg,var(--night),#0b1322 55%,var(--night))}
+.acad .grid{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(44px,6vw,100px);align-items:center}
+.screen{border:1px solid var(--line2);border-radius:20px;background:linear-gradient(170deg,#101a2e,#0a1120);box-shadow:0 50px 120px -50px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.05);overflow:hidden;transform:perspective(1400px) rotateY(-7deg) rotateX(2deg)}
+.screen .bar{display:flex;gap:7px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.screen .bar i{width:9px;height:9px;border-radius:50%;background:var(--line2)}
+.screen .bar i:first-child{background:rgba(194,151,74,.65)}
+.screen .body{padding:26px}
+.lesson{display:flex;gap:18px;align-items:center;padding:15px;border:1px solid var(--line);border-radius:13px;margin-bottom:12px;background:rgba(243,238,228,.02);transition:border-color .3s,transform .3s}
+.lesson:hover{border-color:rgba(194,151,74,.4);transform:translateX(5px)}
+.lesson .av{width:52px;height:52px;border-radius:12px;flex:none;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 32%,#243350,#141d31)}
+.lesson .av::before{content:"";position:absolute;left:50%;top:26%;width:20px;height:20px;border-radius:50%;transform:translateX(-50%);background:linear-gradient(180deg,var(--brass-b),var(--brass-d))}
+.lesson .av::after{content:"";position:absolute;left:50%;bottom:-8px;width:36px;height:26px;border-radius:10px 10px 0 0;transform:translateX(-50%);background:linear-gradient(180deg,var(--brass-d),#3a2d12)}
+.lesson .tx{flex:1;min-width:0}
+.lesson .tx b{display:block;font-size:14.5px;font-weight:600;color:var(--ivory)}
+.lesson .tx span{font-size:12px;color:var(--mut2);font-family:var(--mono);letter-spacing:.08em}
+.lesson .pl{width:36px;height:36px;border-radius:50%;border:1px solid rgba(194,151,74,.5);display:flex;align-items:center;justify-content:center;flex:none}
+.lesson .pl::before{content:"";border-left:9px solid var(--brass-b);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
+.prog{height:4px;border-radius:99px;background:var(--line);margin-top:16px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brass),var(--brass-b));border-radius:99px}
+.langs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.langs span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;border:1px solid var(--line2);color:var(--mut);border-radius:999px;padding:6px 12px}
+.acad .feat{margin-top:34px;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--line)}
+.acad .feat div{padding:18px 2px;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:baseline}
+.acad .feat b{color:var(--ivory);font-weight:500;white-space:nowrap}
+.acad .feat span{color:var(--mut);font-weight:300;font-size:15px}
+.acad .feat em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--brass);letter-spacing:.14em;flex:none;width:30px}
+
+/* CTA */
+.ctaS{position:relative;overflow:hidden;text-align:center}
+.ctaS .sphere2{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(120vw,1100px);color:var(--brass);opacity:.16;pointer-events:none}
+.ctaS .in{position:relative;z-index:2}
+.ctaS h2{font-size:clamp(40px,6vw,84px);max-width:14ch;margin:0 auto}
+.ctaS p{margin:26px auto 0;max-width:46ch;color:var(--mut);font-weight:300;font-size:clamp(16px,1.5vw,19px)}
+.ctaS .cta{margin-top:46px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.ctaS .mail{margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--mut2)}
+.ctaS .mail a{color:var(--brass);border-bottom:1px solid rgba(194,151,74,.35);padding-bottom:2px;transition:color .3s}
+.ctaS .mail a:hover{color:var(--brass-b)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:54px 0 44px;background:var(--night)}
+footer .in{display:flex;justify-content:space-between;gap:30px;align-items:flex-start;flex-wrap:wrap}
+footer .brand b{font-size:16px}
+footer .cols{display:flex;gap:70px;flex-wrap:wrap}
+footer .col{display:flex;flex-direction:column;gap:11px}
+footer .col span{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut2);margin-bottom:4px}
+footer .col a{font-size:14px;color:var(--mut);font-weight:300;transition:color .25s}
+footer .col a:hover{color:var(--brass-b)}
+footer .base{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--mut2);text-transform:uppercase}
+
+/* reveal defaults */
+.rv{opacity:0;transform:translateY(38px)}
+
+@media (max-width:960px){
+  .nav .links{display:none}
+  .burger{display:block}
+  .hero .scr{display:none}
+  .acad .feat div{flex-wrap:wrap}
+  .acad .feat span{flex:1 1 100%;margin-top:2px}
+  .hero .sphere{right:-46vw;opacity:.3;width:130vw}
+  .stats{grid-template-columns:1fr 1fr}
+  .acts .act,.acts .act.rev{grid-template-columns:1fr;gap:34px}
+  .act.rev .vis{order:0}
+  .act .vis{aspect-ratio:auto;max-width:400px;margin:0 auto}
+  .cmp{grid-template-columns:1fr}
+  .mrow{grid-template-columns:1fr;gap:10px;padding:34px 0}
+  .mrow .mn{font-size:34px}
+  .acad .grid{grid-template-columns:1fr}
+  .screen{transform:none}
+}
+@media (max-width:560px){
+  .stats{grid-template-columns:1fr}
+  .nav .btn{display:none}
+  .hero h1{font-size:clamp(40px,11.5vw,56px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;transition-duration:.001s!important}
+  .rv{opacity:1;transform:none}
+  .hero h1 .w i{transform:none}
+  #halo{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="halo"></div>
+
+<div id="loader" aria-hidden="true">
+  <svg viewBox="0 0 22 25" fill="none"><circle cx="11" cy="14.5" r="8.2" stroke="currentColor"/><ellipse cx="11" cy="14.5" rx="3.3" ry="8.2" stroke="currentColor"/><path d="M2.9 14.5h16.2M11 6.3v16.4" stroke="currentColor"/><circle cx="11" cy="2.7" r="2.1" fill="currentColor"/></svg>
+  <div class="lw">MERIDANTE</div>
+</div>
+
+<nav class="nav" id="nav">
+  <div class="in">
+    <a class="brand" href="#top" aria-label="Meridante home">
+      <svg viewBox="0 0 22 25" fill="none"><circle cx="11" cy="14.5" r="8.2" stroke="currentColor"/><ellipse cx="11" cy="14.5" rx="3.3" ry="8.2" stroke="currentColor"/><path d="M2.9 14.5h16.2M11 6.3v16.4" stroke="currentColor"/><circle cx="11" cy="2.7" r="2.1" fill="currentColor"/></svg>
+      <b>MERIDANTE</b>
+    </a>
+    <div class="links">
+      <a href="#thesis">Why now</a>
+      <a href="#studio">The studio</a>
+      <a href="#difference">Difference</a>
+      <a href="#method">Method</a>
+      <a href="#academies">Academies</a>
+    </div>
+    <a class="btn" href="https://cal.com/meridante-studios-brxjh0/15min" target="_blank" rel="noopener">Chart your position</a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mnav" id="mnav">
+  <a href="#thesis">Why now</a><a href="#studio">The studio</a><a href="#difference">Difference</a><a href="#method">Method</a><a href="#academies">Academies</a>
+  <a class="btn" href="https://cal.com/meridante-studios-brxjh0/15min" target="_blank" rel="noopener">Chart your position</a>
+</div>
+
+<header class="hero" id="top">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <svg class="sphere" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+    <circle class="d" cx="200" cy="200" r="150" stroke="currentColor" stroke-width="1"/>
+    <ellipse class="d" cx="200" cy="200" rx="60" ry="150" stroke="currentColor" stroke-width=".8"/>
+    <ellipse class="d" cx="200" cy="200" rx="110" ry="150" stroke="currentColor" stroke-width=".5" opacity=".6"/>
+    <ellipse class="d" cx="200" cy="200" rx="150" ry="60" stroke="currentColor" stroke-width=".8"/>
+    <ellipse class="d" cx="200" cy="200" rx="150" ry="110" stroke="currentColor" stroke-width=".5" opacity=".6"/>
+    <path class="d" d="M50 200h300M200 50v300" stroke="currentColor" stroke-width=".8"/>
+    <circle class="d" cx="200" cy="200" r="176" stroke="currentColor" stroke-width=".4" stroke-dasharray="2 7" opacity=".65"/>
+  </svg>
+  <div class="wrap in">
+    <div class="coords rv">
+      <span><b>49.61°N 6.13°E</b> — LUXEMBOURG</span>
+      <span><b>38.72°N 9.14°W</b> — LISBON</span>
+      <span>AI STUDIO · EUROPE</span>
+    </div>
+    <h1 id="h1">The gold rush is digital. The fortune goes to the <em>oriented.</em></h1>
+    <p class="sub rv">Meridante is the AI studio that orients companies into the new era — then <b>builds, systemizes and scales</b> what the map reveals. Audits, AI departments, avatar-led academies. Proven before you commit.</p>
+    <div class="cta rv">
+      <a class="btn" href="https://cal.com/meridante-studios-brxjh0/15min" target="_blank" rel="noopener">Chart your position</a>
+      <a class="btn ghost" href="#studio">Explore the studio</a>
+    </div>
+  </div>
+  <div class="scr" aria-hidden="true"><span class="mono" style="color:var(--mut2)">Descend</span><span class="lin"></span></div>
+</header>
+
+<div class="marq" aria-hidden="true">
+  <div class="tk" id="tk">
+    <span>AI audits</span><span>AI departments</span><span>Department systemization</span><span>Custom LLMs</span><span>Digital avatars</span><span>Education platforms</span><span>Premium web presence</span><span>Automation builds</span>
+  </div>
+</div>
+
+<section class="sect thesis" id="thesis">
+  <div class="wrap">
+    <div class="eyeb rv"><span class="n">01 — THE MOMENT</span><span class="hairline"></span></div>
+    <h2 class="h2 rv">Everyone bought shovels. <em>Almost no one struck gold.</em></h2>
+    <p class="lede rv">Companies didn't miss the AI rush — they walked in without a map. The tools work. What fails is orientation: <b>nobody drew the line</b> from where the business stands to where the value actually sits. That line is our trade. It's in our name.</p>
+    <div class="stats">
+      <div class="stat"><div class="v"><span data-cnt="95">0</span>%</div><div class="l">of corporate AI pilots deliver no measurable return</div><div class="s">MIT · GenAI Divide</div></div>
+      <div class="stat"><div class="v"><span data-cnt="2">0</span>:1</div><div class="l">partnering with specialists beats building in-house</div><div class="s">Menlo Ventures 2025</div></div>
+      <div class="stat"><div class="v">$<span data-cnt="37">0</span>B</div><div class="l">enterprise GenAI spend, growing 3.2× year on year</div><div class="s">State of GenAI</div></div>
+      <div class="stat"><div class="v">'<span data-cnt="26">0</span></div><div class="l">EU AI Act enforcement arrives — governance becomes board-level</div><div class="s">EU · Aug 2026</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sect acts" id="studio">
+  <div class="wrap">
+    <div class="eyeb rv"><span class="n">02 — THE STUDIO</span><span class="hairline"></span></div>
+    <h2 class="h2 rv">Four movements. <em>One ascent.</em></h2>
+    <p class="lede rv">Not a course. Not a one-off build. A studio installs a working capability inside your company — in four movements that each stand on the last.</p>
+
+    <div class="act">
+      <div class="txt">
+        <div class="num rv">I</div>
+        <h3 class="rv">Orient</h3>
+        <div class="tag rv">Full audits · department mapping</div>
+        <p class="rv">Before anything is built, we take the reading. A full audit of your operations — department by department — surfacing where AI pays, where it doesn't, and what it will disturb. You leave with coordinates, not opinions.</p>
+        <ul>
+          <li>Company-wide AI audit &amp; readiness reading</li>
+          <li>Department-level opportunity map</li>
+          <li>Risk, compliance &amp; data-residency review</li>
+          <li>A sequenced route — what to build first, and why</li>
+        </ul>
+      </div>
+      <div class="vis" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none">
+          <circle class="dr" cx="200" cy="200" r="140" stroke="#94702f" stroke-width="1"/>
+          <circle cx="200" cy="200" r="100" stroke="rgba(243,238,228,.12)" stroke-width=".7" stroke-dasharray="2 6"/>
+          <path class="dr" d="M200 60v280M60 200h280" stroke="#94702f" stroke-width=".7"/>
+          <path class="dr" d="M101 101l198 198M299 101L101 299" stroke="rgba(243,238,228,.14)" stroke-width=".6"/>
+          <circle cx="200" cy="200" r="7" fill="#ddb877"/>
+          <circle cx="200" cy="200" r="16" stroke="#c2974a" stroke-width=".8" opacity=".7"/>
+          <text x="216" y="192" fill="#8d99b2" font-family="IBM Plex Mono" font-size="10" letter-spacing="2">YOU ARE HERE</text>
+          <circle cx="286" cy="122" r="4" fill="#c2974a"/><text x="296" y="118" fill="#5c6880" font-family="IBM Plex Mono" font-size="9" letter-spacing="1">OPS</text>
+          <circle cx="118" cy="150" r="4" fill="#c2974a"/><text x="86" y="141" fill="#5c6880" font-family="IBM Plex Mono" font-size="9" letter-spacing="1">SALES</text>
+          <circle cx="266" cy="286" r="4" fill="#c2974a"/><text x="276" y="298" fill="#5c6880" font-family="IBM Plex Mono" font-size="9" letter-spacing="1">SUPPORT</text>
+          <path class="dr" d="M200 200L286 122M200 200L118 150M200 200L266 286" stroke="#c2974a" stroke-width=".7" opacity=".8"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="act rev">
+      <div class="txt">
+        <div class="num rv">II</div>
+        <h3 class="rv">Build</h3>
+        <div class="tag rv">AI departments · custom LLMs · digital presence</div>
+        <p class="rv">Then we install what the map calls for. Working AI departments that carry real operational load. Custom models trained on your knowledge. A digital presence engineered to convert — built to the standard of this page.</p>
+        <ul>
+          <li>AI department builds — agents doing real work</li>
+          <li>Custom-tailored LLMs on your own knowledge</li>
+          <li>Automation across your existing tools</li>
+          <li>Premium websites &amp; digital presence</li>
+        </ul>
+      </div>
+      <div class="vis" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none">
+          <rect class="dr" x="70" y="150" width="110" height="110" rx="14" stroke="#c2974a" stroke-width="1"/>
+          <rect class="dr" x="220" y="90" width="90" height="90" rx="12" stroke="#94702f" stroke-width=".8"/>
+          <rect class="dr" x="235" y="230" width="100" height="80" rx="12" stroke="#94702f" stroke-width=".8"/>
+          <path class="dr" d="M180 190q30-30 40-55M180 230q35 15 55 30" stroke="#c2974a" stroke-width=".7" stroke-dasharray="3 6"/>
+          <circle cx="125" cy="205" r="20" stroke="#ddb877" stroke-width="1"/>
+          <circle cx="125" cy="205" r="4" fill="#ddb877"/>
+          <text x="98" y="248" fill="#8d99b2" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5">CORE LLM</text>
+          <text x="234" y="140" fill="#5c6880" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5">AGENTS</text>
+          <text x="249" y="275" fill="#5c6880" font-family="IBM Plex Mono" font-size="9" letter-spacing="1.5">AUTOMATION</text>
+          <path class="dr" d="M70 330h265" stroke="rgba(243,238,228,.15)" stroke-width=".7"/>
+          <circle cx="90" cy="330" r="3" fill="#c2974a"/><circle cx="200" cy="330" r="3" fill="#c2974a"/><circle cx="315" cy="330" r="3" fill="#c2974a"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="act">
+      <div class="txt">
+        <div class="num rv">III</div>
+        <h3 class="rv">Systemize</h3>
+        <div class="tag rv">Team consulting · department-by-department</div>
+        <p class="rv">A build without adoption is furniture. We work inside your teams — sweeping loose process into documented, AI-carried systems, department by department. What ran on memory now runs on rails.</p>
+        <ul>
+          <li>Embedded team consulting &amp; enablement</li>
+          <li>Back-sweep: undocumented work → living systems</li>
+          <li>SOPs that machines and people both follow</li>
+          <li>Department-level operating rhythm, installed</li>
+        </ul>
+      </div>
+      <div class="vis" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none">
+          <path class="dr" d="M60 300C120 300 120 100 200 100s80 200 140 200" stroke="#c2974a" stroke-width="1"/>
+          <path d="M60 320h280" stroke="rgba(243,238,228,.14)" stroke-width=".7"/>
+          <g stroke="rgba(243,238,228,.2)" stroke-width=".6">
+            <path d="M85 268l-14 24M118 205l-22 14M160 130l-24 6M245 132l22 8M287 208l22 12M322 270l16 22"/>
+          </g>
+          <circle cx="200" cy="100" r="5" fill="#ddb877"/>
+          <circle cx="96" cy="252" r="3.5" fill="#c2974a"/><circle cx="304" cy="252" r="3.5" fill="#c2974a"/>
+          <text x="152" y="80" fill="#8d99b2" font-family="IBM Plex Mono" font-size="9" letter-spacing="2">SYSTEMIZED</text>
+          <text x="60" y="352" fill="#5c6880" font-family="IBM Plex Mono" font-size="9" letter-spacing="2">CHAOS → ORDER → LEVERAGE</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="act rev">
+      <div class="txt">
+        <div class="num rv">IV</div>
+        <h3 class="rv">Scale</h3>
+        <div class="tag rv">Education platforms · digital avatars</div>
+        <p class="rv">Finally, we multiply your best people. Senior knowledge becomes avatar-led academies — custom AI delivering your expertise in every language, on every shift, at mass production. Your company learns as fast as it grows.</p>
+        <ul>
+          <li>Education platforms built on your expertise</li>
+          <li>Digital avatars — your teachers, multiplied</li>
+          <li>AI-generated learning content at scale</li>
+          <li>Custom LLM tutors trained on your practice</li>
+        </ul>
+      </div>
+      <div class="vis" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none">
+          <circle cx="200" cy="130" r="26" stroke="#ddb877" stroke-width="1.1"/>
+          <circle cx="200" cy="122" r="8" fill="#c2974a"/>
+          <path d="M186 144c0-8 28-8 28 0" stroke="#c2974a" stroke-width="1.1" fill="none"/>
+          <g stroke="#94702f" stroke-width=".8">
+            <circle class="dr" cx="110" cy="270" r="18"/><circle class="dr" cx="170" cy="290" r="18"/><circle class="dr" cx="230" cy="290" r="18"/><circle class="dr" cx="290" cy="270" r="18"/>
+          </g>
+          <path class="dr" d="M192 158l-74 96M197 160l-24 112M203 160l24 112M208 158l74 96" stroke="#c2974a" stroke-width=".6" opacity=".8"/>
+          <text x="141" y="345" fill="#8d99b2" font-family="IBM Plex Mono" font-size="9" letter-spacing="2">ONE EXPERT → EVERY TEAM</text>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="sect compare" id="difference">
+  <div class="wrap">
+    <div class="eyeb rv"><span class="n">03 — THE DIFFERENCE</span><span class="hairline"></span></div>
+    <h2 class="h2 rv">Others teach, or build. <em>A studio does both — and stays.</em></h2>
+    <p class="lede rv">We studied the leaders of this market closely. The educators are excellent at teaching. The agencies are excellent at shipping. The gap between them is exactly where companies get lost — and exactly where Meridante stands.</p>
+    <div class="cmp">
+      <div class="ccol rv">
+        <div class="who">The educators</div>
+        <h4>Courses &amp; communities</h4>
+        <p>Brilliant at showing what's possible. Then the videos end — and your team is alone with the implementation.</p>
+        <ul><li>You watch, you try</li><li>Generic, not your data</li><li>No one owns the outcome</li></ul>
+      </div>
+      <div class="ccol us rv">
+        <div class="who">Meridante</div>
+        <h4>The AI studio</h4>
+        <p>Orientation, builds, systems and scale — installed inside your company, proven on one metric before you commit, and taught to your people so it compounds.</p>
+        <ul><li>Audit first — coordinates, not opinions</li><li>Built on your knowledge, in your tools</li><li>Systemized into your departments</li><li>Scaled through avatar-led academies</li><li>EU-compliant by construction</li></ul>
+      </div>
+      <div class="ccol rv">
+        <div class="who">The agencies</div>
+        <h4>A build, delivered</h4>
+        <p>Strong hands, fast shipping. Then the invoice, the handover — and the exit. Adoption is your problem now.</p>
+        <ul><li>One deliverable, then gone</li><li>Tools installed, teams untouched</li><li>Nothing learns, nothing scales</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sect meth" id="method">
+  <div class="wrap">
+    <div class="eyeb rv"><span class="n">04 — THE METHOD</span><span class="hairline"></span></div>
+    <h2 class="h2 rv">Proof before <em>commitment.</em></h2>
+    <p class="lede rv">European companies buy carefully — as they should. So the risk stays on our side of the table.</p>
+    <div style="margin-top:64px">
+      <div class="mrow rv"><div class="mn">i.</div><h4>The reading</h4><p>A focused audit of where AI pays in your company. <b>Days, not months</b> — you get the map either way.</p></div>
+      <div class="mrow rv"><div class="mn">ii.</div><h4>The pilot</h4><p><b>90 days, one metric, in production.</b> We prove the value on real work before any ongoing commitment. If it doesn't hit — you keep the build.</p></div>
+      <div class="mrow rv"><div class="mn">iii.</div><h4>The ascent</h4><p>We run it, systemize it, and teach it — then expand to the next department. <b>Each movement stands on the last.</b></p></div>
+    </div>
+    <div class="comp-strip rv">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z" stroke="currentColor" stroke-width="1.4"/><path d="M8.5 12l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p><b>EU-compliant by construction.</b> GDPR-first architecture, EU AI Act readiness, EU data residency, and self-hosted models where the work demands it. For regulated buyers, this is not a feature — it's the foundation.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sect acad" id="academies">
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <div class="eyeb rv"><span class="n">05 — ACADEMIES</span><span class="hairline"></span></div>
+        <h2 class="h2 rv">Your best teacher, <em>multiplied.</em></h2>
+        <p class="lede rv">One senior expert. Infinite classrooms. We turn the knowledge locked in your best people into avatar-led education platforms — custom AI trained on your practice, producing learning content at mass production.</p>
+        <div class="feat">
+          <div class="rv"><em>a.</em><b>Digital avatars</b><span>— your experts, teaching in every language, on every shift.</span></div>
+          <div class="rv"><em>b.</em><b>Custom LLM tutors</b><span>— trained on your documents, answering like your best.</span></div>
+          <div class="rv"><em>c.</em><b>Mass production</b><span>— courses generated, updated and versioned at AI speed.</span></div>
+        </div>
+      </div>
+      <div class="screen rv" aria-hidden="true">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="body">
+          <div class="mono" style="margin-bottom:18px;color:var(--mut2)">YOUR ACADEMY · MODULE 04</div>
+          <div class="lesson"><div class="av"></div><div class="tx"><b>Fund reporting, the fast way</b><span>AVATAR · 12 MIN</span></div><div class="pl"></div></div>
+          <div class="lesson"><div class="av"></div><div class="tx"><b>Client comms that keep clients</b><span>AVATAR · 9 MIN</span></div><div class="pl"></div></div>
+          <div class="lesson"><div class="av"></div><div class="tx"><b>The compliance checklist, alive</b><span>LLM TUTOR · INTERACTIVE</span></div><div class="pl"></div></div>
+          <div class="prog"><i id="progFill"></i></div>
+          <div class="langs"><span>EN</span><span>FR</span><span>DE</span><span>PT</span><span>NL</span><span>+ ANY</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sect ctaS">
+  <svg class="sphere2" viewBox="0 0 400 400" fill="none" aria-hidden="true">
+    <circle cx="200" cy="200" r="150" stroke="currentColor" stroke-width=".8"/>
+    <ellipse cx="200" cy="200" rx="60" ry="150" stroke="currentColor" stroke-width=".6"/>
+    <ellipse cx="200" cy="200" rx="150" ry="60" stroke="currentColor" stroke-width=".6"/>
+    <path d="M50 200h300M200 50v300" stroke="currentColor" stroke-width=".5"/>
+  </svg>
+  <div class="wrap in">
+    <div class="mono rv" style="margin-bottom:26px">06 — YOUR COORDINATES</div>
+    <h2 class="rv">Chart your <em>position.</em></h2>
+    <p class="rv">Fifteen minutes. A straight reading of where AI pays in your company — and where it doesn't. No deck, no pressure. You keep the map.</p>
+    <div class="cta rv">
+      <a class="btn" href="https://cal.com/meridante-studios-brxjh0/15min" target="_blank" rel="noopener">Book the reading — 15 min</a>
+    </div>
+    <div class="mail rv">or write to <a href="mailto:meridante.pt@gmail.com">meridante.pt@gmail.com</a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap in">
+    <div>
+      <a class="brand" href="#top"><svg viewBox="0 0 22 25" fill="none" style="width:20px;height:23px;color:var(--brass)"><circle cx="11" cy="14.5" r="8.2" stroke="currentColor"/><ellipse cx="11" cy="14.5" rx="3.3" ry="8.2" stroke="currentColor"/><path d="M2.9 14.5h16.2M11 6.3v16.4" stroke="currentColor"/><circle cx="11" cy="2.7" r="2.1" fill="currentColor"/></svg><b>MERIDANTE</b></a>
+      <p style="margin-top:16px;color:var(--mut2);font-size:13.5px;font-weight:300;max-width:30ch">The AI studio. We orient companies into the new era.</p>
+    </div>
+    <div class="cols">
+      <div class="col"><span>Studio</span><a href="#thesis">Why now</a><a href="#studio">Four movements</a><a href="#difference">The difference</a><a href="#method">Method</a></div>
+      <div class="col"><span>Craft</span><a href="#studio">AI departments</a><a href="#studio">Systemization</a><a href="#academies">Academies &amp; avatars</a><a href="#studio">Digital presence</a></div>
+      <div class="col"><span>Contact</span><a href="https://cal.com/meridante-studios-brxjh0/15min" target="_blank" rel="noopener">Book 15 minutes</a><a href="mailto:meridante.pt@gmail.com">meridante.pt@gmail.com</a></div>
+    </div>
+  </div>
+  <div class="wrap base">
+    <span>© 2026 MERIDANTE — AI STUDIO</span>
+    <span>LUXEMBOURG-FACING · BUILT IN PORTUGAL · SERVING EUROPE</span>
+    <span>49.61°N 6.13°E</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- stars ---------- */
+(function(){
+  const c=document.getElementById('stars'),x=c.getContext('2d');let W,H,S=[],raf,px=0,py=0;
+  function size(){W=c.width=c.offsetWidth*devicePixelRatio;H=c.height=c.offsetHeight*devicePixelRatio;
+    S=Array.from({length:Math.min(210,W/9)},()=>({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.15+.25)*devicePixelRatio,a:Math.random()*.6+.15,tw:Math.random()*.015+.004,ph:Math.random()*6.28,d:Math.random()*.55+.25}));}
+  size();addEventListener('resize',size);
+  addEventListener('pointermove',e=>{px=(e.clientX/innerWidth-.5);py=(e.clientY/innerHeight-.5);},{passive:true});
+  let t=0;
+  function draw(){t+=1;x.clearRect(0,0,W,H);
+    for(const s of S){const tw=RM?1:(Math.sin(t*s.tw+s.ph)*.5+.5);
+      x.globalAlpha=s.a*(.45+.55*tw);
+      x.fillStyle=s.r>1.1*devicePixelRatio?'#ddb877':'#f3eee4';
+      const ox=RM?0:px*22*s.d*devicePixelRatio,oy=RM?0:py*14*s.d*devicePixelRatio;
+      x.beginPath();x.arc(s.x+ox,s.y+oy,s.r,0,6.28);x.fill();}
+    raf=requestAnimationFrame(draw);}
+  const io=new IntersectionObserver(en=>{en[0].isIntersecting?draw():cancelAnimationFrame(raf);});
+  io.observe(c);
+})();
+
+/* ---------- cursor halo ---------- */
+if(!RM && matchMedia('(pointer:fine)').matches){
+  const h=document.getElementById('halo');
+  const qx=gsap.quickTo(h,'x',{duration:.9,ease:'power3'}),qy=gsap.quickTo(h,'y',{duration:.9,ease:'power3'});
+  addEventListener('pointermove',e=>{h.style.opacity=1;qx(e.clientX);qy(e.clientY);},{passive:true});
+}
+
+/* ---------- loader + hero intro ---------- */
+window.addEventListener('load',()=>{
+  const h1=document.getElementById('h1');
+  h1.innerHTML=h1.innerHTML.split(/(<em>.*?<\/em>)/g).map(seg=>{
+    if(seg.startsWith('<em>')) return '<span class="w"><i><em>'+seg.replace(/<\/?em>/g,'')+'</em></i></span>';
+    return seg.split(' ').filter(Boolean).map(w=>'<span class="w"><i>'+w+'</i></span>').join(' ');
+  }).join(' ');
+  const tl=gsap.timeline();
+  tl.to('#loader',{opacity:0,duration:.6,delay:RM?0:1.5,ease:'power2',onComplete:()=>document.getElementById('loader').remove()})
+    .to('.hero .sphere .d',{strokeDashoffset:0,duration:2.6,ease:'power2.inOut',stagger:.12},'-=.2')
+    .to('#h1 .w i',{y:0,duration:1.05,ease:'power4.out',stagger:.055},'-=2.3')
+    .to('.hero .rv',{opacity:1,y:0,duration:1,ease:'power3.out',stagger:.14},'-=1.7');
+});
+
+/* ---------- nav ---------- */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('sc',scrollY>40),{passive:true});
+const burger=document.getElementById('burger'),mnav=document.getElementById('mnav');
+burger.onclick=()=>{document.body.classList.toggle('mopen');mnav.classList.toggle('open');};
+mnav.querySelectorAll('a').forEach(a=>a.onclick=()=>{document.body.classList.remove('mopen');mnav.classList.remove('open');});
+
+/* ---------- marquee ---------- */
+(function(){
+  const tk=document.getElementById('tk');tk.innerHTML+=tk.innerHTML;
+  if(!RM) gsap.to(tk,{x:()=>-tk.scrollWidth/2,duration:34,ease:'none',repeat:-1});
+})();
+
+/* ---------- scroll reveals ---------- */
+gsap.utils.toArray('section .rv, footer .rv').forEach(el=>{
+  gsap.to(el,{opacity:1,y:0,duration:1.1,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 88%'}});
+});
+gsap.utils.toArray('.hairline').forEach(el=>{
+  gsap.to(el,{scaleX:1,duration:1.2,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%'}});
+});
+gsap.utils.toArray('.acts .dr, .sphere2').forEach(el=>{
+  if(el.classList.contains('dr')) gsap.to(el,{strokeDashoffset:0,duration:2,ease:'power2.inOut',
+    scrollTrigger:{trigger:el.closest('.act')||el,start:'top 75%'}});
+});
+/* act visuals gentle parallax */
+if(!RM) gsap.utils.toArray('.act .vis').forEach(v=>{
+  gsap.fromTo(v,{y:46},{y:-46,ease:'none',scrollTrigger:{trigger:v,start:'top bottom',end:'bottom top',scrub:1.2}});
+});
+/* stats */
+gsap.utils.toArray('.stat').forEach((st,i)=>{
+  ScrollTrigger.create({trigger:st,start:'top 85%',once:true,onEnter:()=>{
+    st.classList.add('on');
+    const n=st.querySelector('[data-cnt]');const end=+n.dataset.cnt;
+    gsap.fromTo(n,{textContent:0},{textContent:end,duration:1.6,delay:i*.12,ease:'power2.out',snap:{textContent:1}});
+  }});
+});
+/* academy progress */
+ScrollTrigger.create({trigger:'#progFill',start:'top 85%',once:true,
+  onEnter:()=>gsap.to('#progFill',{width:'72%',duration:1.6,ease:'power3.inOut',delay:.4})});
+/* CTA sphere slow rotate */
+if(!RM) gsap.to('.sphere2',{rotation:360,duration:120,ease:'none',repeat:-1,transformOrigin:'center'});
+</script>
+</body>
+</html>
