@@ -41,14 +41,13 @@ em{font-style:italic;color:var(--brass-b)}
 /* ===== THE FILM (fixed procedural canvas) ===== */
 #film{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* grain */
-body::after{content:"";position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:80;opacity:.05;
+/* grain — static tile (animated grain repaints the whole screen; static reads the same) */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.045;
  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
- animation:grain 9s steps(10) infinite}
-@keyframes grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-3%,-4%)}30%{transform:translate(4%,2%)}50%{transform:translate(-2%,5%)}70%{transform:translate(5%,-3%)}90%{transform:translate(-4%,1%)}}
+ background-size:300px 300px}
 
 /* cursor halo */
-#halo{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;pointer-events:none;z-index:1;
+#halo{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;will-change:transform;border-radius:50%;pointer-events:none;z-index:1;
  background:radial-gradient(circle,rgba(194,151,74,.07),rgba(194,151,74,.02) 45%,transparent 68%);opacity:0}
 
 /* ===== BEARING HUD ===== */
@@ -122,7 +121,7 @@ body.mopen .burger span:nth-child(3){top:20px;transform:rotate(-45deg)}
 .hero .scr span{font-family:var(--mono);font-size:9px;letter-spacing:.3em;text-transform:uppercase}
 
 /* marquee */
-.marq{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(10,17,32,.55);backdrop-filter:blur(4px)}
+.marq{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0;overflow:hidden;background:rgba(10,17,32,.72)}
 .marq .tk{display:flex;gap:0;width:max-content;will-change:transform}
 .marq span{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mut2);padding:0 34px;white-space:nowrap}
 .marq span::after{content:"✦";color:var(--brass);margin-left:64px;font-size:9px;vertical-align:2px}
@@ -141,7 +140,7 @@ section{position:relative;z-index:2}
 
 /* thesis stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:70px}
-.stat{background:rgba(10,17,32,.85);backdrop-filter:blur(3px);padding:38px 30px;position:relative;overflow:hidden}
+.stat{background:rgba(10,17,32,.93);padding:38px 30px;position:relative;overflow:hidden}
 .stat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--brass);transform:scaleY(0);transform-origin:top;transition:transform .8s .2s}
 .stat.on::before{transform:scaleY(1)}
 .stat .v{font-family:var(--disp);font-size:clamp(38px,4vw,56px);color:var(--brass-b);line-height:1;font-weight:300}
@@ -167,7 +166,7 @@ section{position:relative;z-index:2}
 
 /* comparison */
 .cmp{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:64px}
-.ccol{border:1px solid var(--line);border-radius:18px;padding:36px 32px;background:rgba(12,19,34,.8);backdrop-filter:blur(4px);display:flex;flex-direction:column;transition:transform .4s,border-color .4s}
+.ccol{border:1px solid var(--line);border-radius:18px;padding:36px 32px;background:rgba(12,19,34,.92);display:flex;flex-direction:column;transition:transform .4s,border-color .4s}
 .ccol .who{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut2)}
 .ccol h4{font-family:var(--disp);font-weight:400;font-size:27px;margin-top:14px;color:var(--mut)}
 .ccol p{margin-top:16px;color:var(--mut2);font-size:15px;font-weight:300;line-height:1.6}
@@ -189,7 +188,7 @@ section{position:relative;z-index:2}
 .mrow h4{font-family:var(--disp);font-weight:400;font-size:clamp(23px,2.4vw,30px)}
 .mrow p{color:var(--mut);font-weight:300;font-size:16px}
 .mrow p b{color:var(--ivory);font-weight:500}
-.comp-strip{margin-top:60px;border:1px solid rgba(95,160,145,.3);border-radius:16px;padding:26px 32px;display:flex;gap:22px;align-items:center;background:rgba(95,160,145,.07);backdrop-filter:blur(3px);flex-wrap:wrap}
+.comp-strip{margin-top:60px;border:1px solid rgba(95,160,145,.3);border-radius:16px;padding:26px 32px;display:flex;gap:22px;align-items:center;background:rgba(95,160,145,.07);flex-wrap:wrap}
 .comp-strip svg{width:30px;height:30px;color:var(--teal);flex:none}
 .comp-strip p{color:var(--mut);font-size:15px;font-weight:300}
 .comp-strip b{color:var(--ivory);font-weight:500}
@@ -232,7 +231,7 @@ section{position:relative;z-index:2}
 .ctaS .mail a:hover{color:var(--brass-b)}
 
 /* footer */
-footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:54px 0 44px;background:rgba(7,12,23,.92);backdrop-filter:blur(6px)}
+footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:54px 0 44px;background:rgba(7,12,23,.96)}
 footer .in{display:flex;justify-content:space-between;gap:30px;align-items:flex-start;flex-wrap:wrap}
 footer .brand b{font-size:16px}
 footer .cols{display:flex;gap:70px;flex-wrap:wrap}
@@ -259,7 +258,7 @@ footer .base{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);d
   .acad .grid{grid-template-columns:1fr}
   .screen{transform:none}
   #hud{display:none}
-  #hudchip{display:flex;position:fixed;left:14px;bottom:14px;z-index:70;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mut2);background:rgba(7,12,23,.72);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:999px;padding:8px 14px;pointer-events:none;opacity:0}
+  #hudchip{display:flex;position:fixed;left:14px;bottom:14px;z-index:70;align-items:center;gap:10px;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mut2);background:rgba(7,12,23,.88);border:1px solid var(--line);border-radius:999px;padding:8px 14px;pointer-events:none;opacity:0}
   #hudchip b{color:var(--brass-b);font-weight:500}
 }
 @media (max-width:560px){
@@ -610,7 +609,7 @@ if(!RM && typeof Lenis!=='undefined'){
 const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
 (function(){
   const c=document.getElementById('film'),x=c.getContext('2d');
-  let W,H,DPR,stars=[],railPts=[],constel=[],glow;
+  let W,H,DPR,stars=[],railPts=[],constel=[],glow;const GC={sky:{},fog:{},vig:null};
   const rand=(a,b)=>a+Math.random()*(b-a);
 
   function makeGlow(){ // pre-rendered sprite: soft brass glow (cheap on mobile)
@@ -620,13 +619,13 @@ const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
     gx.fillStyle=gr;gx.fillRect(0,0,64,64);return g;
   }
   function size(){
-    DPR=Math.min(devicePixelRatio||1,MOB?1.5:1.75);
+    DPR=Math.min(devicePixelRatio||1,MOB?1.25:1.5);
     W=c.width=innerWidth*DPR;H=c.height=innerHeight*DPR;
     c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';
-    const N=Math.round(Math.min(MOB?150:260,W*H/14000));
+    const N=Math.round(Math.min(MOB?110:190,W*H/16000));
     stars=Array.from({length:N},()=>({x:Math.random()*W,y:Math.random()*H,r:rand(.3,1.25)*DPR,a:rand(.15,.8),tw:rand(.004,.02),ph:rand(0,6.28),d:rand(.2,1)}));
-    railPts=Array.from({length:MOB?38:64},()=>({x:Math.random()*W,y:Math.random()*H,t:Math.random()}));
-    constel=Array.from({length:MOB?16:26},(_, i)=>({a:i/(MOB?16:26)*6.28+rand(-.2,.2),r:rand(.12,.42),ph:rand(0,6.28)}));
+    railPts=Array.from({length:MOB?26:44},()=>({x:Math.random()*W,y:Math.random()*H,t:Math.random()}));GC.sky={};GC.fog={};GC.vig=null;GC.dg={};
+    constel=Array.from({length:MOB?14:22},(_, i)=>({a:i/(MOB?14:22)*6.28+rand(-.2,.2),r:rand(.12,.42),ph:rand(0,6.28)}));
     glow=makeGlow();
   }
   size();addEventListener('resize',size);
@@ -635,17 +634,25 @@ const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
   addEventListener('pointermove',e=>{px=e.clientX/innerWidth-.5;py=e.clientY/innerHeight-.5;},{passive:true});
 
   const lerp=(a,b,t)=>a+(b-a)*t, S=(a,b,t)=>{const u=Math.min(1,Math.max(0,(t-a)/(b-a)));return u*u*(3-2*u)};
-  let t=0;
+  let t=0,lastSig='',idle=0,hidden=document.hidden;
+  document.addEventListener('visibilitychange',()=>{hidden=document.hidden;if(!hidden){idle=0;requestAnimationFrame(draw);}});
+  const sig=()=>FILM.p.toFixed(3)+FILM.fog.toFixed(2)+FILM.meridian.toFixed(2)+FILM.build.toFixed(2)+FILM.rails.toFixed(2)+FILM.scale.toFixed(2)+FILM.dawn.toFixed(2)+px.toFixed(2)+py.toFixed(2);
 
   function draw(){
+    if(hidden) return;                       /* stops the loop; visibilitychange restarts it */
+    const s2=sig();
+    if(s2===lastSig){idle++;}else{idle=0;lastSig=s2;}
+    if(RM && t>5) return;                    /* reduced motion: settle a static frame, then stop */
+    if(idle>90 && (t%3)){t++;requestAnimationFrame(draw);return;}  /* idle: twinkle at ~20fps */
     t+=1;
     const F=FILM, cx=W/2;
     /* sky base: night -> dawn */
-    const dawn=F.dawn;
-    const sky=x.createLinearGradient(0,0,0,H);
-    sky.addColorStop(0,`rgba(${7+dawn*26},${12+dawn*17},${23+dawn*18},1)`);
-    sky.addColorStop(.6,`rgba(${7+dawn*14},${12+dawn*8},${23+dawn*6},1)`);
-    sky.addColorStop(1,`rgba(${10+dawn*44},${15+dawn*26},${26+dawn*10},1)`);
+    const dawn=F.dawn, dq=Math.round(dawn*32);
+    let sky=GC.sky[dq];
+    if(!sky){sky=x.createLinearGradient(0,0,0,H);const d2=dq/32;
+      sky.addColorStop(0,`rgba(${7+d2*26|0},${12+d2*17|0},${23+d2*18|0},1)`);
+      sky.addColorStop(.6,`rgba(${7+d2*14|0},${12+d2*8|0},${23+d2*6|0},1)`);
+      sky.addColorStop(1,`rgba(${10+d2*44|0},${15+d2*26|0},${26+d2*10|0},1)`);GC.sky[dq]=sky;}
     x.fillStyle=sky;x.fillRect(0,0,W,H);
 
     /* stars — rise as you ascend (world moves down), parallax to cursor */
@@ -661,8 +668,9 @@ const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
 
     /* fog — thick at drift, burns off */
     if(F.fog>0.01){
-      const fg=x.createLinearGradient(0,H*.45,0,H);
-      fg.addColorStop(0,'rgba(10,16,30,0)');fg.addColorStop(1,`rgba(14,21,38,${.85*F.fog})`);
+      const fq=Math.round(F.fog*24);let fg=GC.fog[fq];
+      if(!fg){fg=x.createLinearGradient(0,H*.45,0,H);
+        fg.addColorStop(0,'rgba(10,16,30,0)');fg.addColorStop(1,`rgba(14,21,38,${(.85*fq/24).toFixed(3)})`);GC.fog[fq]=fg;}
       x.fillStyle=fg;x.fillRect(0,H*.45,W,H*.55);
     }
 
@@ -735,8 +743,9 @@ const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
 
     /* DAWN + polar star */
     if(dawn>0.01){
-      const dg=x.createRadialGradient(cx,H*.1,0,cx,H*.1,H*.9);
-      dg.addColorStop(0,`rgba(221,184,119,${.20*dawn})`);dg.addColorStop(.4,`rgba(194,151,74,${.07*dawn})`);dg.addColorStop(1,'rgba(0,0,0,0)');
+      if(!GC.dg)GC.dg={};let dg=GC.dg[dq];
+      if(!dg){dg=x.createRadialGradient(cx,H*.1,0,cx,H*.1,H*.9);const d3=dq/32;
+        dg.addColorStop(0,`rgba(221,184,119,${(.20*d3).toFixed(3)})`);dg.addColorStop(.4,`rgba(194,151,74,${(.07*d3).toFixed(3)})`);dg.addColorStop(1,'rgba(0,0,0,0)');GC.dg[dq]=dg;}
       x.fillStyle=dg;x.fillRect(0,0,W,H);
       const ps=18*DPR*dawn;
       x.drawImage(glow,cx-ps,H*.12-ps,ps*2,ps*2);
@@ -744,18 +753,14 @@ const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
       x.beginPath();x.moveTo(cx-ps*1.4,H*.12);x.lineTo(cx+ps*1.4,H*.12);x.moveTo(cx,H*.12-ps*1.4);x.lineTo(cx,H*.12+ps*1.4);x.stroke();
     }
 
-    /* vignette */
-    const v=x.createRadialGradient(cx,H*.5,H*.25,cx,H*.5,H*.95);
-    v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(4,7,14,.5)');
-    x.fillStyle=v;x.fillRect(0,0,W,H);
+    /* vignette (cached) */
+    if(!GC.vig){GC.vig=x.createRadialGradient(cx,H*.5,H*.25,cx,H*.5,H*.95);
+      GC.vig.addColorStop(0,'rgba(0,0,0,0)');GC.vig.addColorStop(1,'rgba(4,7,14,.5)');}
+    x.fillStyle=GC.vig;x.fillRect(0,0,W,H);
 
     requestAnimationFrame(draw);
   }
-  if(RM){ /* static complete frame for reduced motion */
-    Object.assign(FILM,{p:1,fog:0,meridian:1,build:1,rails:1,scale:1,dawn:.8});
-    let once=0; const so=()=>{if(once++<3)requestAnimationFrame(so);draw2();};
-    function draw2(){t+=1;} /* draw once via normal loop start below */
-  }
+  if(RM) Object.assign(FILM,{p:1,fog:0,meridian:1,build:1,rails:1,scale:1,dawn:.8});
   requestAnimationFrame(draw);
 })();
 
@@ -770,7 +775,7 @@ window.addEventListener('load',()=>{
 });
 if(!RM){
   gsap.timeline({scrollTrigger:{trigger:'.hero',start:'top top',end:'+=130%',scrub:.6,pin:true,anticipatePin:1}})
-    .to('#beat1',{opacity:0,scale:1.12,filter:'blur(8px)',ease:'power1.in',duration:.42},0)
+    .to('#beat1',{opacity:0,scale:1.1,ease:'power1.in',duration:.42},0)
     .to('.hero .scr',{opacity:0,duration:.12},0)
     .fromTo('#beat2',{opacity:0,y:60},{opacity:1,y:0,ease:'power2.out',duration:.4},.38)
     .set('#beat2',{pointerEvents:'auto'},.5);
