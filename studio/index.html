@@ -615,7 +615,7 @@ if(!RM && typeof Lenis!=='undefined'){
 }
 
 /* ================= THE FILM — procedural ascent, scrubbed by scroll ================= */
-const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
+const FILM={p:0,fog:1,meridian:0,build:1,rails:0,scale:0,dawn:0,vel:0};/* sphere present from the first frame (fades in via #film) */
 (function(){
   const c=document.getElementById('film'),x=c.getContext('2d');
   let W,H,DPR,stars=[],railPts=[],constel=[],glow;const GC={sky:{},fog:{},vig:null};
@@ -796,7 +796,9 @@ const FILM={p:0,fog:1,meridian:0,build:0,rails:0,scale:0,dawn:0,vel:0};
 /* ================= LOADER + HERO (two pinned beats) ================= */
 window.addEventListener('load',()=>{
   const tl=gsap.timeline();
-  tl.to('#loader',{opacity:0,duration:.6,delay:RM?0:1.3,ease:'power2',onComplete:()=>document.getElementById('loader').remove()})
+  if(!RM) tl.from('#film',{opacity:0,duration:2.2,ease:'power2.out'},.7);/* the sphere + sky fade in as the intro */
+  tl.to('#loader',{opacity:0,duration:.6,delay:RM?0:1.3,ease:'power2',onComplete:()=>document.getElementById('loader').remove()},0)
+    .to('.wm span',{opacity:1,y:0,scale:1,filter:'blur(0px)',duration:1.2,ease:'power4.out',stagger:.07},'-=.25')
     .to('.wm span',{opacity:1,y:0,scale:1,filter:'blur(0px)',duration:1.2,ease:'power4.out',stagger:.07},'-=.25')
     .to('.hero .tag',{opacity:1,duration:1,ease:'power2'},'-=.5')
     .to('.hero .scr',{opacity:1,duration:.8},'-=.4');
