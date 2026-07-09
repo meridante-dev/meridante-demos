@@ -26,7 +26,7 @@ jobs:
         run: |
           git config user.name "meridante-autopilot"
           git config user.email "autopilot@meridante.local"
-          git add _clients.json index.html autopilot/_seen.json autopilot/logs || true
+          git add -f _clients.json index.html autopilot/_seen.json autopilot/logs || true
           if git diff --cached --quiet; then
             echo "No new leads this run."
           else
