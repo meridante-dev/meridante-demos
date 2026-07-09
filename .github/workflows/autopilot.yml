@@ -1,0 +1,36 @@
+name: Leads on Autopilot
+on:
+  schedule:
+    - cron: '30 6 * * *'      # every day 06:30 UTC — free, runs in GitHub's cloud (off your machine)
+  workflow_dispatch:           # manual "run now" button
+permissions:
+  contents: write
+concurrency:
+  group: autopilot
+  cancel-in-progress: false
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free deps
+        run: pip install requests beautifulsoup4
+      - name: Hunt leads (6 shifts, all free)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}   # free Groq tier; if unset, template emails are used
+        run: python autopilot/run.py
+      - name: Commit new leads to the cockpit
+        run: |
+          git config user.name "meridante-autopilot"
+          git config user.email "autopilot@meridante.local"
+          git add _clients.json index.html autopilot/_seen.json autopilot/logs || true
+          if git diff --cached --quiet; then
+            echo "No new leads this run."
+          else
+            git commit -m "Autopilot: new leads ($(date -u +%F))"
+            git push
+            echo "New leads committed — the cockpit redeploys on its next Pages cron (<=20 min)."
+          fi

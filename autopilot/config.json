@@ -1,0 +1,35 @@
+{
+  "target_new_per_run": 6,
+  "fetch_cap": 45,
+  "overpass_endpoints": [
+    "https://overpass-api.de/api/interpreter",
+    "https://overpass.kumi.systems/api/interpreter"
+  ],
+  "groq_model": "llama-3.3-70b-versatile",
+  "areas": [
+    {"city": "Faro",            "country": "Portugal",   "lang": "PT", "lat": 37.0194, "lon": -7.9304},
+    {"city": "Lagos",           "country": "Portugal",   "lang": "PT", "lat": 37.1028, "lon": -8.6742},
+    {"city": "Portimão",        "country": "Portugal",   "lang": "PT", "lat": 37.1366, "lon": -8.5379},
+    {"city": "Loulé",           "country": "Portugal",   "lang": "PT", "lat": 37.1378, "lon": -8.0227},
+    {"city": "Luxembourg",      "country": "Luxembourg", "lang": "FR", "lat": 49.6116, "lon": 6.1319},
+    {"city": "Esch-sur-Alzette","country": "Luxembourg", "lang": "FR", "lat": 49.4958, "lon": 5.9806},
+    {"city": "Antwerpen",       "country": "Belgium",    "lang": "NL", "lat": 51.2194, "lon": 4.4025},
+    {"city": "Gent",            "country": "Belgium",    "lang": "NL", "lat": 51.0543, "lon": 3.7174},
+    {"city": "Amsterdam",       "country": "Netherlands","lang": "NL", "lat": 52.3676, "lon": 4.9041},
+    {"city": "Rotterdam",       "country": "Netherlands","lang": "NL", "lat": 51.9244, "lon": 4.4777},
+    {"city": "Málaga",          "country": "Spain",      "lang": "ES", "lat": 36.7213, "lon": -4.4214},
+    {"city": "Sevilla",         "country": "Spain",      "lang": "ES", "lat": 37.3891, "lon": -5.9845}
+  ],
+  "niches": [
+    {"key": "restaurant",  "filter": "[\"amenity\"=\"restaurant\"]",       "sector": {"PT": "Restaurante", "FR": "Restaurant", "NL": "Restaurant", "ES": "Restaurante"}},
+    {"key": "cafe",        "filter": "[\"amenity\"=\"cafe\"]",             "sector": {"PT": "Café", "FR": "Café", "NL": "Café", "ES": "Cafetería"}},
+    {"key": "hairdresser", "filter": "[\"shop\"=\"hairdresser\"]",         "sector": {"PT": "Cabeleireiro", "FR": "Coiffeur", "NL": "Kapper", "ES": "Peluquería"}},
+    {"key": "beauty",      "filter": "[\"shop\"=\"beauty\"]",             "sector": {"PT": "Instituto de beleza", "FR": "Institut de beauté", "NL": "Schoonheidssalon", "ES": "Centro de belleza"}},
+    {"key": "estate",      "filter": "[\"office\"=\"estate_agent\"]",      "sector": {"PT": "Imobiliária", "FR": "Agence immobilière", "NL": "Makelaar", "ES": "Inmobiliaria"}},
+    {"key": "dentist",     "filter": "[\"amenity\"=\"dentist\"]",          "sector": {"PT": "Clínica dentária", "FR": "Cabinet dentaire", "NL": "Tandarts", "ES": "Clínica dental"}},
+    {"key": "guesthouse",  "filter": "[\"tourism\"=\"guest_house\"]",      "sector": {"PT": "Alojamento local", "FR": "Maison d'hôtes", "NL": "Gastenverblijf", "ES": "Casa de huéspedes"}},
+    {"key": "lawyer",      "filter": "[\"office\"=\"lawyer\"]",            "sector": {"PT": "Escritório de advocacia", "FR": "Cabinet d'avocats", "NL": "Advocatenkantoor", "ES": "Bufete de abogados"}},
+    {"key": "car_repair",  "filter": "[\"shop\"=\"car_repair\"]",          "sector": {"PT": "Oficina auto", "FR": "Garage auto", "NL": "Autogarage", "ES": "Taller mecánico"}},
+    {"key": "gym",         "filter": "[\"leisure\"=\"fitness_centre\"]",   "sector": {"PT": "Ginásio", "FR": "Salle de sport", "NL": "Sportschool", "ES": "Gimnasio"}}
+  ]
+}
