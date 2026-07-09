@@ -61,12 +61,15 @@ def overpass(area, niche):
 );
 out center tags 160;"""
     for ep in CFG["overpass_endpoints"]:
-        try:
-            r = requests.post(ep, data={"data": q}, headers={"User-Agent": UA}, timeout=90)
-            if r.status_code == 200:
-                return r.json().get("elements", [])
-        except Exception as e:
-            print("overpass err", ep, e)
+        for attempt in range(2):
+            try:
+                r = requests.post(ep, data={"data": q}, headers={"User-Agent": UA}, timeout=90)
+                if r.status_code == 200:
+                    els = r.json().get("elements", [])
+                    if els: return els
+                time.sleep(4)
+            except Exception as e:
+                print("overpass err", ep, e); time.sleep(3)
     return []
 
 # ---------- 6. open-source tech: fetch + HTML->text + weakness ----------
@@ -74,7 +77,7 @@ def fetch(url):
     if not url: return None, ""
     if "://" not in url: url = "http://" + url
     try:
-        r = requests.get(url, headers={"User-Agent": UA}, timeout=14, allow_redirects=True)
+        r = requests.get(url, headers={"User-Agent": UA}, timeout=8, allow_redirects=True)
         return r, r.text or ""
     except Exception:
         return None, ""
@@ -184,53 +187,57 @@ def gmail_link(to, su, body):
 def main():
     doy = datetime.date.today().timetuple().tm_yday
     areas, niches = CFG["areas"], CFG["niches"]
-    area = areas[doy % len(areas)]
-    niche = niches[(doy // len(areas)) % len(niches)]
-    sector = niche["sector"].get(area["lang"], niche["key"])
-    print(f"AUTOPILOT {datetime.date.today()} :: {area['city']} ({area['country']}) / {niche['key']}")
+    combos = [(areas[k % len(areas)], niches[(k // len(areas)) % len(niches)]) for k in range(len(areas)*len(niches))]
+    start = doy % len(combos)
+    order = combos[start:] + combos[:start]
+    print(f"AUTOPILOT {datetime.date.today()} :: starting slice {order[0][0]['city']}/{order[0][1]['key']}")
 
     seen = load_seen()
-    elements = overpass(area, niche)
-    print("overpass candidates:", len(elements))
-    new_leads, fetches = [], 0
-    for el in elements:
-        if len(new_leads) >= CFG["target_new_per_run"] or fetches >= CFG["fetch_cap"]:
+    t0 = time.time()
+    new_leads, fetches, tried = [], 0, []
+    for area, niche in order:
+        if len(new_leads) >= CFG["target_new_per_run"] or fetches >= CFG["fetch_cap"] or len(tried) >= 6 or time.time()-t0 > 330:
             break
-        tags = el.get("tags", {})
-        name = (tags.get("name") or "").strip()
-        if not name or norm_name(name) in seen["names"]:
-            continue
-        website = tags.get("website") or tags.get("contact:website") or ""
-        dom = domain_of(website)
-        if dom and dom in seen["domains"]:
-            continue
-        # fetch the site (or none)
-        html, status, site_text = "", "NO-SITE", ""
-        if website:
-            fetches += 1
-            resp, html = fetch(website)
-            status = classify_site(resp, html)
-            if status == "MODERN":     # already has a good site -> not our prospect
+        sector = niche["sector"].get(area["lang"], niche["key"])
+        els = overpass(area, niche)
+        tried.append(f"{area['city']}/{niche['key']}={len(els)}")
+        print(f"slice {area['city']} / {niche['key']} :: {len(els)} candidates")
+        time.sleep(2)  # polite to the free Overpass endpoint
+        for el in els:
+            if len(new_leads) >= CFG["target_new_per_run"] or fetches >= CFG["fetch_cap"]:
+                break
+            tags = el.get("tags", {})
+            name = (tags.get("name") or "").strip()
+            if not name or norm_name(name) in seen["names"]:
                 continue
-            site_text = html_to_text(html)
-        # verified public email (from site or OSM) — strict, never invented
-        email = find_email(tags, html, dom)
-        if not email or email in seen["emails"]:
-            continue
-        # write the outreach (Groq, truthful; template fallback)
-        owner, subj, body = write_email(name, tags.get("addr:city") or area["city"], sector, area["lang"], status, site_text)
-        lead = {
-            "id": (norm_name(name)[:40] or "lead") + "-ap" + str(abs(hash(email)) % 9999),
-            "batch": "Autopilot", "country": area["country"], "company": name, "sector": sector,
-            "city": tags.get("addr:city") or area["city"], "status": status,
-            "website": website, "email": email, "lang": area["lang"],
-            "subject": subj, "body": body, "gmail": gmail_link(email, subj, body),
-        }
-        new_leads.append(lead)
-        seen["emails"].add(email.lower()); seen["names"].add(norm_name(name))
-        if dom: seen["domains"].add(dom)
-        print("  + lead:", name, "|", status, "|", email)
-        time.sleep(0.4)
+            website = tags.get("website") or tags.get("contact:website") or ""
+            dom = domain_of(website)
+            if dom and dom in seen["domains"]:
+                continue
+            html, status, site_text = "", "NO-SITE", ""
+            if website:
+                fetches += 1
+                resp, html = fetch(website)
+                status = classify_site(resp, html)
+                if status == "MODERN":          # already has a good site -> not our prospect
+                    continue
+                site_text = html_to_text(html)
+            email = find_email(tags, html, dom)   # verified public email only, never invented
+            if not email or email in seen["emails"]:
+                continue
+            owner, subj, body = write_email(name, tags.get("addr:city") or area["city"], sector, area["lang"], status, site_text)
+            lead = {
+                "id": (norm_name(name)[:40] or "lead") + "-ap" + str(abs(hash(email)) % 9999),
+                "batch": "Autopilot", "country": area["country"], "company": name, "sector": sector,
+                "city": tags.get("addr:city") or area["city"], "status": status,
+                "website": website, "email": email, "lang": area["lang"],
+                "subject": subj, "body": body, "gmail": gmail_link(email, subj, body),
+            }
+            new_leads.append(lead)
+            seen["emails"].add(email.lower()); seen["names"].add(norm_name(name))
+            if dom: seen["domains"].add(dom)
+            print("  + lead:", name, "|", status, "|", email)
+            time.sleep(0.4)
 
     # append to the cockpit
     if new_leads:
@@ -238,19 +245,18 @@ def main():
         data += new_leads
         json.dump(data, open(CLIENTS, "w"), ensure_ascii=False, indent=0)
         save_seen(seen)
-        # rebuild the dashboard so the console shows the new leads
         if os.path.exists(os.path.join(ROOT, "_build_dashboard.py")):
             subprocess.run([sys.executable, "_build_dashboard.py"], cwd=ROOT, check=False)
 
     # run digest / log (shift 5)
     os.makedirs(os.path.join(HERE, "logs"), exist_ok=True)
     log = [f"# Autopilot run — {datetime.date.today()}",
-           f"- Slice: **{area['city']}, {area['country']}** / {niche['key']} ({sector})",
-           f"- Overpass candidates scanned: {len(elements)} · sites fetched: {fetches}",
+           f"- Slices tried: {', '.join(tried)}",
+           f"- Sites fetched: {fetches}",
            f"- New qualified leads: **{len(new_leads)}**", "",
-           "| Company | Status | Email |", "|---|---|---|"]
+           "| Company | Country | Status | Email |", "|---|---|---|---|"]
     for l in new_leads:
-        log.append(f"| {l['company']} | {l['status']} | {l['email']} |")
+        log.append(f"| {l['company']} | {l['country']} | {l['status']} | {l['email']} |")
     open(os.path.join(HERE, "logs", f"{datetime.date.today()}.md"), "w").write("\n".join(log) + "\n")
     print(f"DONE — {len(new_leads)} new leads appended.")
 
