@@ -1,7 +1,9 @@
 name: Leads on Autopilot
 on:
   schedule:
-    - cron: '30 6 * * *'      # every day 06:30 UTC — free, runs in GitHub's cloud (off your machine)
+    # Monday to Friday only — two morning batches so the pipeline fills reliably
+    - cron: '15 6 * * 1-5'     # 06:15 UTC (~07:15 Lisbon) — first batch
+    - cron: '15 8 * * 1-5'     # 08:15 UTC (~09:15 Lisbon) — second batch, fresh slice
   workflow_dispatch:           # manual "run now" button
 permissions:
   contents: write

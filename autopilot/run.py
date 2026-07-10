@@ -185,10 +185,11 @@ def gmail_link(to, su, body):
 
 # ---------- main (goal mode: loop until N new leads) ----------
 def main():
-    doy = datetime.date.today().timetuple().tm_yday
+    now = datetime.datetime.utcnow()
+    doy = now.timetuple().tm_yday
     areas, niches = CFG["areas"], CFG["niches"]
     combos = [(areas[k % len(areas)], niches[(k // len(areas)) % len(niches)]) for k in range(len(areas)*len(niches))]
-    start = doy % len(combos)
+    start = (doy * 7 + now.hour) % len(combos)   # different slice each run/day
     order = combos[start:] + combos[:start]
     print(f"AUTOPILOT {datetime.date.today()} :: starting slice {order[0][0]['city']}/{order[0][1]['key']}")
 
