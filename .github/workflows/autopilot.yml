@@ -36,3 +36,13 @@ jobs:
             git push
             echo "New leads committed — the cockpit redeploys on its next Pages cron (<=20 min)."
           fi
+      - name: Daily digest email (after the day's last batch, or on manual runs)
+        # fires on the 08:15 batch + manual runs — one clean summary per day
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '15 8 * * 1-5'
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}                 # optional: real HTML email
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }} # optional: Gmail app password
+          DIGEST_TO: meridante.pt@gmail.com
+          DIGEST_TOKEN: ${{ secrets.DIGEST_TOKEN }}             # fallback: private-inbox issue → GitHub emails it
+          DIGEST_REPO: meridante-dev/meridante-inbox
+        run: python autopilot/digest.py

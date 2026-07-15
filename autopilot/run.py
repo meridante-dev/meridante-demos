@@ -258,7 +258,11 @@ def main():
            "| Company | Country | Status | Email |", "|---|---|---|---|"]
     for l in new_leads:
         log.append(f"| {l['company']} | {l['country']} | {l['status']} | {l['email']} |")
-    open(os.path.join(HERE, "logs", f"{datetime.date.today()}.md"), "w").write("\n".join(log) + "\n")
+    open(os.path.join(HERE, "logs", f"{datetime.date.today()}.md"), "a").write("\n".join(log) + "\n\n")
+    # per-day id ledger for the digest email (append-only, survives the 2nd batch)
+    with open(os.path.join(HERE, "logs", f"{datetime.date.today()}-ids.txt"), "a") as fh:
+        for l in new_leads:
+            fh.write(l["id"] + "\n")
     print(f"DONE — {len(new_leads)} new leads appended.")
 
 if __name__ == "__main__":
