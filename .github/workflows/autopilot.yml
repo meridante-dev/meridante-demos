@@ -3,10 +3,13 @@ on:
   schedule:
     # Monday to Friday, 4 batches/day (times in Lisbon summer = UTC+1; drift +1h in winter WET).
     # Each batch hunts a different city×niche slice (run.py rotates by day+hour) → ~4× the coverage.
-    - cron: '15 6 * * 1-5'     # 07:15 Lisbon — batch 1
-    - cron: '15 8 * * 1-5'     # 09:15 Lisbon — batch 2
-    - cron: '0 12 * * 1-5'     # 13:00 Lisbon — batch 3
-    - cron: '30 15 * * 1-5'    # 16:30 Lisbon — batch 4 (+ daily digest email)
+    - cron: '15 6 * * 1-5'     # 07:15 Lisbon — morning 1
+    - cron: '15 7 * * 1-5'     # 08:15 Lisbon — morning 2
+    - cron: '15 8 * * 1-5'     # 09:15 Lisbon — morning 3
+    - cron: '15 9 * * 1-5'     # 10:15 Lisbon — morning 4
+    - cron: '15 10 * * 1-5'    # 11:15 Lisbon — morning 5 (each a fresh slice: rotation is hour-keyed)
+    - cron: '0 12 * * 1-5'     # 13:00 Lisbon — afternoon 1
+    - cron: '30 15 * * 1-5'    # 16:30 Lisbon — afternoon 2 (+ daily digest email)
   workflow_dispatch:           # manual "run now" button
     inputs:
       send_digest:
