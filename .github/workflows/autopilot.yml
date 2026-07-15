@@ -30,7 +30,8 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install free deps
-        run: pip install requests beautifulsoup4
+        # requests/bs4 = hunting; websockets/pillow = the digest's website-mockup render (headless Chrome ships on the runner)
+        run: pip install requests beautifulsoup4 websockets pillow
       - name: Hunt leads (6 shifts, all free)
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}   # free Groq tier; if unset, template emails are used
@@ -64,8 +65,9 @@ jobs:
         # Scheduled 16:30 batch always digests; manual runs only when send_digest=true (no inbox spam).
         if: always() && (github.event.schedule == '30 15 * * 1-5' || github.event.inputs.send_digest == 'true')
         env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}                 # optional: real HTML email
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }} # optional: Gmail app password
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}                 # set this + app password → real HTML email WITH mockup PNGs attached
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }} # Gmail app password (only you can create it)
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}             # mockup copy (falls back to templates if unset)
           DIGEST_TO: meridante.pt@gmail.com
           DIGEST_TOKEN: ${{ secrets.DIGEST_TOKEN }}             # fallback: private-inbox issue → GitHub emails it
           DIGEST_REPO: meridante-dev/meridante-inbox
