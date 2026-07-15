@@ -34,14 +34,26 @@ jobs:
           git add -f _clients.json index.html autopilot/_seen.json autopilot/logs || true
           if git diff --cached --quiet; then
             echo "No new leads this run."
-          else
-            git commit -m "Autopilot: new leads ($(date -u +%F))"
-            git push
+            exit 0
+          fi
+          git commit -m "Autopilot: new leads ($(date -u +%F_%H%MZ))"
+          # rebase-and-retry: 4 batches/day + manual runs race on master, so a plain push loses.
+          pushed=0
+          for i in 1 2 3 4 5; do
+            if git push; then pushed=1; break; fi
+            echo "push rejected (attempt $i) — rebasing on remote…"
+            git pull --rebase --autostash origin master || true
+            sleep $((i * 3))
+          done
+          if [ "$pushed" = "1" ]; then
             echo "New leads committed — the cockpit redeploys on its next Pages cron (<=20 min)."
+          else
+            echo "::warning::push still failing after retries; leads are local only this run (next batch re-syncs)."
           fi
       - name: Daily digest email (after the day's last batch, or on manual runs)
-        # fires on the 16:30 Lisbon batch + manual runs — one clean summary covering all 4 batches
-        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 15 * * 1-5'
+        # fires on the 16:30 Lisbon batch + manual runs — one clean summary covering all 4 batches.
+        # always() so a transient push race in the commit step never costs the digest.
+        if: always() && (github.event_name == 'workflow_dispatch' || github.event.schedule == '30 15 * * 1-5')
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}                 # optional: real HTML email
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }} # optional: Gmail app password
