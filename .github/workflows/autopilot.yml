@@ -1,9 +1,12 @@
 name: Leads on Autopilot
 on:
   schedule:
-    # Monday to Friday only — two morning batches so the pipeline fills reliably
-    - cron: '15 6 * * 1-5'     # 06:15 UTC (~07:15 Lisbon) — first batch
-    - cron: '15 8 * * 1-5'     # 08:15 UTC (~09:15 Lisbon) — second batch, fresh slice
+    # Monday to Friday, 4 batches/day (times in Lisbon summer = UTC+1; drift +1h in winter WET).
+    # Each batch hunts a different city×niche slice (run.py rotates by day+hour) → ~4× the coverage.
+    - cron: '15 6 * * 1-5'     # 07:15 Lisbon — batch 1
+    - cron: '15 8 * * 1-5'     # 09:15 Lisbon — batch 2
+    - cron: '0 12 * * 1-5'     # 13:00 Lisbon — batch 3
+    - cron: '30 15 * * 1-5'    # 16:30 Lisbon — batch 4 (+ daily digest email)
   workflow_dispatch:           # manual "run now" button
 permissions:
   contents: write
@@ -37,8 +40,8 @@ jobs:
             echo "New leads committed — the cockpit redeploys on its next Pages cron (<=20 min)."
           fi
       - name: Daily digest email (after the day's last batch, or on manual runs)
-        # fires on the 08:15 batch + manual runs — one clean summary per day
-        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '15 8 * * 1-5'
+        # fires on the 16:30 Lisbon batch + manual runs — one clean summary covering all 4 batches
+        if: github.event_name == 'workflow_dispatch' || github.event.schedule == '30 15 * * 1-5'
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}                 # optional: real HTML email
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }} # optional: Gmail app password
