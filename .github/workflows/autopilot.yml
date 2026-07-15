@@ -8,6 +8,11 @@ on:
     - cron: '0 12 * * 1-5'     # 13:00 Lisbon — batch 3
     - cron: '30 15 * * 1-5'    # 16:30 Lisbon — batch 4 (+ daily digest email)
   workflow_dispatch:           # manual "run now" button
+    inputs:
+      send_digest:
+        description: 'Also send the digest email after this run?'
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -53,7 +58,8 @@ jobs:
       - name: Daily digest email (after the day's last batch, or on manual runs)
         # fires on the 16:30 Lisbon batch + manual runs — one clean summary covering all 4 batches.
         # always() so a transient push race in the commit step never costs the digest.
-        if: always() && (github.event_name == 'workflow_dispatch' || github.event.schedule == '30 15 * * 1-5')
+        # Scheduled 16:30 batch always digests; manual runs only when send_digest=true (no inbox spam).
+        if: always() && (github.event.schedule == '30 15 * * 1-5' || github.event.inputs.send_digest == 'true')
         env:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}                 # optional: real HTML email
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }} # optional: Gmail app password
