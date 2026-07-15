@@ -9,3 +9,7 @@ parodontologieboechout-ap2445
 polikliniektandheelkundegent-ap222
 dentcheck-ap645
 dentartflora-ap4839
+koningortho-ap9759
+tandartsenpraktijkkoninginneweg-ap3045
+mondzorgpraktijkjansteen-ap5281
+tandheelkundeaemstelwijck-ap8516
