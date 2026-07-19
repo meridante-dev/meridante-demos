@@ -68,8 +68,14 @@ SECTORS = {
                           ("Estética e Higiene", "Cuidado suave que mantiene tu sonrisa radiante.")],
                    "PT": [("Implantes", "Substituições fixas e naturais que duram."),
                           ("Ortodontia", "Alinhadores e aparelhos discretos para todas as idades."),
-                          ("Estética e Higiene", "Cuidado suave que mantém o sorriso radiante.")]},
-        "sector": {"EN": "Dental Clinic", "ES": "Clínica Dental", "PT": "Clínica Dentária", "FR": "Cabinet Dentaire"},
+                          ("Estética e Higiene", "Cuidado suave que mantém o sorriso radiante.")],
+                   "FR": [("Implants", "Des remplacements fixes et naturels qui durent."),
+                          ("Orthodontie", "Aligneurs et bagues discrets, à tout âge."),
+                          ("Esthétique & Hygiène", "Des soins doux qui gardent le sourire éclatant.")],
+                   "NL": [("Implantaten", "Vaste, natuurlijke oplossingen die blijven."),
+                          ("Orthodontie", "Discrete beugels en aligners, elke leeftijd."),
+                          ("Esthetiek & Hygiëne", "Zachte zorg voor een stralende lach.")]},
+        "sector": {"EN": "Dental Clinic", "ES": "Clínica Dental", "PT": "Clínica Dentária", "FR": "Cabinet Dentaire", "NL": "Tandartspraktijk"},
     },
     "restaurant": {
         "fonts": ("Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600", "Jost:wght@300;400;500;600",
@@ -159,27 +165,92 @@ SECTORS = {
                    "PT": [("Quartos", "Tranquilos, luminosos, para abrandar."),
                           ("Mesa", "Pequeno-almoço local, honesto e generoso."),
                           ("O Lugar", "Os bons recantos, de quem vive aqui.")]},
-        "sector": {"EN": "Guesthouse", "ES": "Casa de Huéspedes", "PT": "Alojamento", "FR": "Maison d'Hôtes"},
+        "sector": {"EN": "Guesthouse", "ES": "Casa de Huéspedes", "PT": "Alojamento", "FR": "Maison d'Hôtes", "NL": "Gastenverblijf"},
+    },
+    "lawyer": {
+        "fonts": ("Cormorant+Garamond:wght@500;600", "Jost:wght@300;400;500",
+                  "'Cormorant Garamond',Georgia,serif", "'Jost',system-ui,sans-serif"),
+        "vars": {"bg": "#f4f4f2", "bg2": "#e9e9e4", "ink": "#1c2530", "ink2": "#586170",
+                 "accent": "#8a6d3b", "accent2": "#b08d55", "dark": "#141b24", "line": "rgba(28,37,48,.12)"},
+        "hero": ["law office interior professional", "lawyer meeting handshake office"],
+        "gallery": ["law books library shelves", "modern office desk minimal", "classical columns building"],
+        "labels": {"EN": [("Counsel", "Clear advice, in plain language."),
+                          ("Representation", "Steady, prepared, in your corner."),
+                          ("Discretion", "Your matter, handled with care.")],
+                   "FR": [("Conseil", "Un avis clair, en langage simple."),
+                          ("Représentation", "Solide, préparé, à vos côtés."),
+                          ("Discrétion", "Votre dossier, traité avec soin.")],
+                   "NL": [("Advies", "Helder advies, in gewone taal."),
+                          ("Vertegenwoordiging", "Vast, voorbereid, aan uw zijde."),
+                          ("Discretie", "Uw zaak, met zorg behandeld.")],
+                   "PT": [("Aconselhamento", "Conselho claro, em linguagem simples."),
+                          ("Representação", "Firme, preparado, ao seu lado."),
+                          ("Discrição", "O seu caso, tratado com cuidado.")]},
+        "sector": {"EN": "Law Firm", "FR": "Cabinet d'Avocats", "NL": "Advocatenkantoor", "PT": "Escritório de Advocacia", "ES": "Bufete de Abogados"},
+    },
+    "gym": {
+        "fonts": ("Archivo:wght@600;700;800", "Jost:wght@300;400;500",
+                  "'Archivo',system-ui,sans-serif", "'Jost',system-ui,sans-serif"),
+        "vars": {"bg": "#14161a", "bg2": "#1d2026", "ink": "#f2f1ee", "ink2": "#a7abb3",
+                 "accent": "#c7642f", "accent2": "#e08a4f", "dark": "#0d0f12", "line": "rgba(242,241,238,.12)"},
+        "hero": ["modern gym interior dark", "athlete training weights gym"],
+        "gallery": ["dumbbells rack gym", "fitness group class", "person stretching workout"],
+        "labels": {"EN": [("Train", "Coaching that meets you where you are."),
+                          ("Strength", "Programmes built for real progress."),
+                          ("Community", "People who show up for each other.")],
+                   "FR": [("S'entraîner", "Un coaching adapté à votre niveau."),
+                          ("Force", "Des programmes pour de vrais progrès."),
+                          ("Communauté", "Des gens présents les uns pour les autres.")],
+                   "NL": [("Trainen", "Coaching op jouw niveau."),
+                          ("Kracht", "Programma's voor echte vooruitgang."),
+                          ("Community", "Mensen die er voor elkaar zijn.")],
+                   "PT": [("Treinar", "Treino adaptado ao seu nível."),
+                          ("Força", "Programas para progresso real."),
+                          ("Comunidade", "Pessoas presentes umas para as outras.")]},
+        "sector": {"EN": "Fitness Studio", "FR": "Salle de Sport", "NL": "Sportschool", "PT": "Ginásio", "ES": "Gimnasio"},
     },
 }
 # keyword -> sector key (multilingual-ish, matched against the lead 'sector' text)
+# canonical niche key (from the autopilot config, stored on the lead) → theme. EXACT, language-proof.
+NICHE2THEME = {
+    "restaurant": "restaurant", "cafe": "restaurant", "hairdresser": "hair", "beauty": "beauty",
+    "estate": "estate", "dentist": "dental", "guesthouse": "guesthouse",
+    "lawyer": "lawyer", "gym": "gym", "car_repair": "neutral",
+}
+# fallback keyword map for LEGACY leads (no niche field) — multilingual EN/ES/PT/FR/NL.
 KEYMAP = [
     ("dental", "dental"), ("dentist", "dental"), ("dentária", "dental"), ("dentaria", "dental"),
     ("odont", "dental"), ("clínica dental", "dental"),
+    ("dentaire", "dental"), ("tandarts", "dental"), ("tandheelkun", "dental"), ("tandheelkundig", "dental"),
+    ("ortho", "dental"), ("orthodont", "dental"), ("parodont", "dental"), ("kaakchirurg", "dental"), ("implantol", "dental"),
     ("restaur", "restaurant"), ("tasca", "restaurant"), ("bistro", "restaurant"), ("marisq", "restaurant"),
+    ("brasserie", "restaurant"), ("eetcaf", "restaurant"), ("trattoria", "restaurant"), ("pizz", "restaurant"),
     ("cafe", "restaurant"), ("café", "restaurant"), ("cervej", "restaurant"),
     ("cabelei", "hair"), ("peluqu", "hair"), ("hair", "hair"), ("coiff", "hair"), ("barb", "hair"),
+    ("kapper", "hair"), ("kapsalon", "hair"), ("kapster", "hair"), ("friseur", "hair"),
     ("imobil", "estate"), ("inmobil", "estate"), ("estate", "estate"), ("immo", "estate"),
-    ("beaut", "beauty"), ("belleza", "beauty"), ("estét", "beauty"), ("estet", "beauty"), ("spa", "beauty"),
+    ("makelaar", "estate"), ("makelaardij", "estate"), ("vastgoed", "estate"),
+    ("beaut", "beauty"), ("belleza", "beauty"), ("beauté", "beauty"), ("estét", "beauty"), ("estet", "beauty"),
+    ("esthé", "beauty"), ("esthe", "beauty"), ("schoonheid", "beauty"), ("kosmet", "beauty"), ("spa", "beauty"), ("wellness", "beauty"),
     ("guest", "guesthouse"), ("aloj", "guesthouse"), ("huésp", "guesthouse"), ("hotel", "guesthouse"),
-    ("hostel", "guesthouse"), ("hôtes", "guesthouse"),
+    ("hostel", "guesthouse"), ("hôtes", "guesthouse"), ("gasten", "guesthouse"), ("logies", "guesthouse"),
+    ("advoca", "lawyer"), ("avocat", "lawyer"), ("abogad", "lawyer"), ("lawyer", "lawyer"), ("law firm", "lawyer"),
+    ("notari", "lawyer"), ("juridi", "lawyer"), ("advogad", "lawyer"),
+    ("gym", "gym"), ("fitness", "gym"), ("ginás", "gym"), ("sportschool", "gym"), ("salle de sport", "gym"),
+    ("gimnas", "gym"), ("crossfit", "gym"), ("pilates", "gym"), ("yoga", "gym"),
 ]
 
 def theme_for(lead):
+    # 1) exact niche from the pipeline (preferred — never mis-guesses on a foreign-language name)
+    nk = str(lead.get("niche", "")).lower().strip()
+    if nk in NICHE2THEME:
+        key = NICHE2THEME[nk]
+        return key, SECTORS.get(key, NEUTRAL)
+    # 2) legacy fallback: keyword-match sector + company
     s = (str(lead.get("sector", "")) + " " + str(lead.get("company", ""))).lower()
     for kw, key in KEYMAP:
         if kw in s:
-            return key, SECTORS[key]
+            return key, SECTORS.get(key, NEUTRAL)
     return "neutral", NEUTRAL
 
 # ---------------------------------------------------------------- images

@@ -230,6 +230,7 @@ def main():
             lead = {
                 "id": (norm_name(name)[:40] or "lead") + "-ap" + str(abs(hash(email)) % 9999),
                 "batch": "Autopilot", "country": area["country"], "company": name, "sector": sector,
+                "niche": niche["key"],   # canonical niche → exact, language-proof theming downstream
                 "city": tags.get("addr:city") or area["city"], "status": status,
                 "website": website, "email": email, "lang": area["lang"],
                 "subject": subj, "body": body, "gmail": gmail_link(email, subj, body),
