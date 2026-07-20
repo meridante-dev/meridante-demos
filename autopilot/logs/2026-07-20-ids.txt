@@ -9,3 +9,5 @@ heinzperformance-ap2155
 garagepitou-ap7369
 volckaert-ap1814
 demoerloose-ap1054
+southboutiquegym-ap8256
+gymfminisfit-ap6352
