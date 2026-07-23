@@ -10,3 +10,8 @@ restaurantehexagonesteakhousebygilbertog-ap6809
 mardfora-ap509
 bistroitaliano-ap1301
 restaurantef-ap7368
+bickstuff-ap5120
+maybenotbobs-ap6496
+lunikshishalounge-ap1854
+kicheneck-ap1462
+ilcherubino-ap3102
