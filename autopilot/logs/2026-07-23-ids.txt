@@ -26,3 +26,9 @@ rockhalcaf-ap1997
 gaa-ap8029
 casapomodoro-ap2003
 chezamadao-ap5760
+cafmaxwell-ap9862
+cafrestaurantdauphine-ap2027
+thebreakfastclub-ap9067
+vermeer-ap9396
+goldcoast-ap22
+dsa-ap1015
