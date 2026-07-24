@@ -27,3 +27,9 @@ espaciot-ap1799
 contenedor-ap5616
 mesncincojotas-ap9545
 gottangrillsevilla-ap3020
+beluga-ap9664
+restaurantelosbravos-ap6975
+tabernamatahambre-ap2341
+cortijodepepe-ap9826
+caad-ap766
+lacuevade1900-ap5980
