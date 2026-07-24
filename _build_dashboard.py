@@ -360,9 +360,11 @@ function card(c){ const st=STATE[c.id]||{}; const sent=st.sent;
    <div class=body>
      <div><h3>${esc(c.company)}</h3><div class=meta>${esc(c.sector)} · ${esc(c.city)} <span class=b>· ${esc(c.batch)}</span></div></div>
      ${cur}
-     <div class=email><span class=v>${esc(c.email)}</span><button class=cp onclick='copy(${JSON.stringify(c.email)},this)'>Copy</button></div>
+     ${c.email?`<div class=email><span class=v>${esc(c.email)}</span><button class=cp onclick='copy(${JSON.stringify(c.email)},this)'>Copy</button></div>`:''}
+     ${c.wa?`<div class=email><span class=v>${esc(c.whatsapp||'WhatsApp')}</span><a class=cp style="background:#1f9d55;color:#fff;border:1px solid #1f9d55;text-decoration:none" href="${esc(c.wa)}" target=_blank rel=noopener title="Open WhatsApp with a ready message">✆ Chat</a></div>`:''}
      <div class=actions>
-       <button class="btn primary" onclick="gmail('${c.id}')" title="Creates a Gmail draft (meridante.pt@gmail.com) — email + mockup shown inline and attached, ready to review &amp; send">${MAIL} Open in Gmail</button>
+       ${c.email?`<button class="btn primary" onclick="gmail('${c.id}')" title="Creates a Gmail draft (meridante.pt@gmail.com) — email + mockup shown inline and attached, ready to review &amp; send">${MAIL} Open in Gmail</button>`:''}
+       ${c.wa?`<a class="btn" style="background:#1f9d55;color:#fff;border:1px solid #1f9d55" href="${esc(c.wa)}" target=_blank rel=noopener title="WhatsApp with a ready first message">✆ Open WhatsApp</a>`:''}
      </div>
      <div class=actions>
        <button class=btn onclick='copy(${JSON.stringify(draft)},this)'>Copy draft</button>

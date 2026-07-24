@@ -17,6 +17,8 @@ import os, re, json, time, subprocess, datetime, urllib.parse, sys
 import requests
 from bs4 import BeautifulSoup
 
+import sys as _sys; _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import wa  # WhatsApp extraction toolkit (same dir)
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)                      # the cockpit repo root (holds _clients.json)
 CFG  = json.load(open(os.path.join(HERE, "config.json")))
@@ -235,6 +237,11 @@ def main():
                 "website": website, "email": email, "lang": area["lang"],
                 "subject": subj, "body": body, "gmail": gmail_link(email, subj, body),
             }
+            _wa = wa.wa_from(tags, html, area["country"])   # capture WhatsApp when public
+            if _wa:
+                lead["whatsapp"] = "+" + _wa[0]
+                lead["wa"] = wa.wa_link(_wa[0], area["lang"], name)
+                lead["wa_src"] = _wa[1]
             new_leads.append(lead)
             seen["emails"].add(email.lower()); seen["names"].add(norm_name(name))
             if dom: seen["domains"].add(dom)
