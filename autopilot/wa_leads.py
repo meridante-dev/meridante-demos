@@ -32,6 +32,11 @@ def main():
     areas = [x for x in run.CFG["areas"] if x["lang"] in langs]
     niches = {n["key"]: n for n in run.CFG["niches"]}
     order = [(ar, niches[k]) for k in WA_NICHES if k in niches for ar in areas]
+    # rotate territory by day + hour so each cron run scans fresh ground (dedup handles overlap)
+    if order:
+        now = datetime.datetime.utcnow()
+        off = (now.timetuple().tm_yday * 7 + now.hour) % len(order)
+        order = order[off:] + order[:off]
 
     data, wa_seen, name_seen = existing_index()
     seen = run.load_seen()
@@ -132,6 +137,12 @@ def main():
         data += found
         json.dump(data, open(CLIENTS, "w"), ensure_ascii=False, indent=0)
         run.save_seen(seen)
+        # feed the daily digest: append IDs to today's ledger (so they get a mockup + email too)
+        led = os.path.join(HERE, "logs", f"{datetime.date.today()}-ids.txt")
+        os.makedirs(os.path.dirname(led), exist_ok=True)
+        with open(led, "a") as fh:
+            for l in found:
+                fh.write(l["id"] + "\n")
         import subprocess
         if os.path.exists(os.path.join(ROOT, "_build_dashboard.py")):
             subprocess.run([sys.executable, "_build_dashboard.py"], cwd=ROOT, check=False)

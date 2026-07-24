@@ -36,6 +36,12 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}   # free Groq tier; if unset, template emails are used
         run: python autopilot/run.py
+      - name: WhatsApp sweep (no-site "potato" businesses reachable on WhatsApp — NL/PT)
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        # modest target per run; territory rotates by day+hour; feeds the same ledger + digest.
+        # never fails the job (WhatsApp is a bonus channel on top of the email hunt).
+        run: python autopilot/wa_leads.py --target 6 --langs NL,PT --budget 200 || true
       - name: Commit new leads to the cockpit
         run: |
           git config user.name "meridante-autopilot"
