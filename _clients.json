@@ -17848,5 +17848,24 @@
 "whatsapp": "+34636147574",
 "wa": "https://wa.me/34636147574?text=Hi%2C%20I%27m%20Jo%C3%A3o%20from%20Meridante.%20I%20help%20local%20businesses%20with%20a%20stronger%2C%20more%20modern%20website.%20May%20I%20show%20you%20a%20quick%2C%20no-obligation%20example%20of%20what%20Taberna%20de%20Pitita%27s%20site%20could%20look%20like%3F",
 "wa_src": "osm:phone"
+},
+{
+"id": "korinehairstylist-wa4558",
+"batch": "WhatsApp",
+"country": "Portugal",
+"company": "Korine Hairstylist",
+"sector": "Cabeleireiro",
+"niche": "hairdresser",
+"city": "Almancil",
+"status": "TEMPLATE-BASIC",
+"website": "http://www.korinehairstylist.com/",
+"email": "",
+"lang": "PT",
+"whatsapp": "+351919460688",
+"wa": "https://wa.me/351919460688?text=Ol%C3%A1%2C%20sou%20o%20Jo%C3%A3o%20da%20Meridante.%20Ajudo%20neg%C3%B3cios%20locais%20a%20terem%20um%20site%20mais%20forte%20e%20moderno.%20Posso%20mostrar-lhe%2C%20sem%20compromisso%2C%20um%20exemplo%20de%20como%20poderia%20ficar%20o%20site%20da%20Korine%20Hairstylist%3F",
+"wa_src": "osm:phone",
+"subject": "",
+"body": "",
+"gmail": ""
 }
 ]
