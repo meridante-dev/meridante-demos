@@ -6,3 +6,9 @@ beideminettsdpp-ap395
 mycaff-ap3355
 terrasadschelde-ap8025
 barstark-ap842
+stalles-ap5342
+westerpaviljoen-ap5619
+babbels-ap4105
+lebkovsons-ap7328
+maisonsjokola-ap5897
+hetwittehuis-ap6730
