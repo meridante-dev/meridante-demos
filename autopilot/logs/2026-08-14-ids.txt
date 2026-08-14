@@ -23,3 +23,4 @@ whocares-ap9770
 redefinedbarbers-ap8251
 hethaartheater-ap227
 kappersakademie-ap7460
+foxkappers-ap5923
