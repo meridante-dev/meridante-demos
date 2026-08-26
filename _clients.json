@@ -19608,5 +19608,40 @@
 "subject": "",
 "body": "",
 "gmail": ""
+},
+{
+"id": "doceocho-ap5380",
+"batch": "Autopilot",
+"country": "Spain",
+"company": "Doceocho",
+"sector": "Gimnasio",
+"niche": "gym",
+"city": "Sevilla",
+"status": "BROKEN",
+"website": "https://doceocho.es/",
+"email": "doceochosevilla@gmail.com",
+"lang": "ES",
+"subject": "Una idea para Doceocho",
+"body": "Hola,\n\nMe llamo João, del estudio Meridante. Diseñamos webs y herramientas online para negocios locales.\n\nVuestra web actual no hace justicia a vuestro trabajo. Si le apetece, le preparo una pequeña maqueta de cómo podría quedar, sin compromiso.\n\nUn cordial saludo,\nJoão · Meridante\nmeridante.pt@gmail.com",
+"gmail": "https://mail.google.com/mail/?view=cm&fs=1&to=doceochosevilla%40gmail.com&su=Una+idea+para+Doceocho&body=Hola%2C%0A%0AMe+llamo+Jo%C3%A3o%2C+del+estudio+Meridante.+Dise%C3%B1amos+webs+y+herramientas+online+para+negocios+locales.%0A%0AVuestra+web+actual+no+hace+justicia+a+vuestro+trabajo.+Si+le+apetece%2C+le+preparo+una+peque%C3%B1a+maqueta+de+c%C3%B3mo+podr%C3%ADa+quedar%2C+sin+compromiso.%0A%0AUn+cordial+saludo%2C%0AJo%C3%A3o+%C2%B7+Meridante%0Ameridante.pt%40gmail.com&authuser=meridante.pt%40gmail.com"
+},
+{
+"id": "losremediospilatesstudio-ap9753",
+"batch": "Autopilot",
+"country": "Spain",
+"company": "Los Remedios Pilates Studio",
+"sector": "Gimnasio",
+"niche": "gym",
+"city": "Sevilla",
+"status": "BROKEN",
+"website": "https://pilates-trainingcenter.com/los-remedios-pilates-studio/",
+"email": "info@pilates-trainingcenter.com",
+"lang": "ES",
+"subject": "Una idea para Los Remedios Pilates Studio",
+"body": "Hola,\n\nMe llamo João, del estudio Meridante. Diseñamos webs y herramientas online para negocios locales.\n\nVuestra web actual no hace justicia a vuestro trabajo. Si le apetece, le preparo una pequeña maqueta de cómo podría quedar, sin compromiso.\n\nUn cordial saludo,\nJoão · Meridante\nmeridante.pt@gmail.com",
+"gmail": "https://mail.google.com/mail/?view=cm&fs=1&to=info%40pilates-trainingcenter.com&su=Una+idea+para+Los+Remedios+Pilates+Studio&body=Hola%2C%0A%0AMe+llamo+Jo%C3%A3o%2C+del+estudio+Meridante.+Dise%C3%B1amos+webs+y+herramientas+online+para+negocios+locales.%0A%0AVuestra+web+actual+no+hace+justicia+a+vuestro+trabajo.+Si+le+apetece%2C+le+preparo+una+peque%C3%B1a+maqueta+de+c%C3%B3mo+podr%C3%ADa+quedar%2C+sin+compromiso.%0A%0AUn+cordial+saludo%2C%0AJo%C3%A3o+%C2%B7+Meridante%0Ameridante.pt%40gmail.com&authuser=meridante.pt%40gmail.com",
+"whatsapp": "+34656699884",
+"wa": "https://wa.me/34656699884?text=Hi%2C%20I%27m%20Jo%C3%A3o%20from%20Meridante.%20I%20help%20local%20businesses%20with%20a%20stronger%2C%20more%20modern%20website.%20May%20I%20show%20you%20a%20quick%2C%20no-obligation%20example%20of%20what%20Los%20Remedios%20Pilates%20Studio%27s%20site%20could%20look%20like%3F",
+"wa_src": "osm:phone"
 }
 ]
